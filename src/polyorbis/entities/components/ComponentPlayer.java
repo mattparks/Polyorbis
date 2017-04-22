@@ -34,7 +34,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 	private float charge1;
 	private float charge2;
 	private float charge3;
-	private int selectedChange;
+	private int selectedCharge;
 
 	private KeyButton inputSelect1;
 	private KeyButton inputSelect2;
@@ -67,12 +67,12 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 
 		this.experience = 0;
 		this.survivalTime = 0.0f;
-		this.health = 1.0f;
+		this.health = 0.6f;
 
 		this.charge1 = 1.0f;
 		this.charge2 = 0.5f;
 		this.charge3 = 0.2f;
-		this.selectedChange = 1;
+		this.selectedCharge = 1;
 
 		this.inputSelect1 = new KeyButton(GLFW_KEY_1);
 		this.inputSelect2 = new KeyButton(GLFW_KEY_2);
@@ -117,11 +117,11 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 		survivalTime += Framework.getDelta();
 
 		if (inputSelect1.wasDown()) {
-			selectedChange = 1;
+			selectedCharge = 1;
 		} else if (inputSelect2.wasDown()) {
-			selectedChange = 2;
+			selectedCharge = 2;
 		} else if (inputSelect3.wasDown()) {
-			selectedChange = 3;
+			selectedCharge = 3;
 		}
 
 		// Normalizes angles and limits Y rotation to make movement easier.
@@ -171,6 +171,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 
 	public void modifyHealth(float change) {
 		this.health += change;
+		this.health = Maths.clamp(health, 0.0f, 1.0f);
 	}
 
 	public float getCharge1() {
@@ -197,8 +198,8 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 		this.charge3 += c3;
 	}
 
-	public int getSelectedChange() {
-		return selectedChange;
+	public int getSelectedCharge() {
+		return selectedCharge;
 	}
 
 	@Override

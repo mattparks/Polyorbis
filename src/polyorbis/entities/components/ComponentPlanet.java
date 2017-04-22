@@ -39,10 +39,7 @@ public class ComponentPlanet extends IComponentEntity implements IComponentEdito
 			spawnEntities = new Entity[spawnRotations.length];
 
 			for (int i = 0; i < spawnRotations.length; i++) {
-				Entity e = new InstanceSpawn(FlounderEntities.getEntities(), new Vector3f(), new Vector3f());
-				Vector3f.rotate(new Vector3f(0.0f, getEntity().getScale() + SPAWN_HEIGHT, 0.0f), spawnRotations[i], e.getPosition());
-				e.getRotation().set(0.0f, spawnRotations[i].y, spawnRotations[i].z + 90.0f);
-				e.setMoved();
+				Entity e = new InstanceSpawn(FlounderEntities.getEntities(), spawnRotations[i], getEntity().getScale() + SPAWN_HEIGHT);
 				spawnEntities[i] = e;
 			}
 		}

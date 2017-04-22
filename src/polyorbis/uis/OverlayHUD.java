@@ -12,7 +12,6 @@ package polyorbis.uis;
 import flounder.fonts.*;
 import flounder.guis.*;
 import flounder.maths.*;
-import flounder.maths.Timer;
 import flounder.maths.vectors.*;
 import flounder.resources.*;
 import flounder.textures.*;
@@ -77,7 +76,7 @@ public class OverlayHUD extends ScreenObject {
 				this.statusPower2.persentage = player.getCharge2();
 				this.statusPower3.persentage = player.getCharge3();
 
-				switch (player.getSelectedChange()) {
+				switch (player.getSelectedCharge()) {
 					case 1:
 						this.statusPower1.progress.getColourOffset().set(0.2f, 1.0f, 0.2f);
 						this.statusPower2.progress.getColourOffset().set(0.8f, 0.8f, 0.8f);
