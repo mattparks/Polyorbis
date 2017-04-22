@@ -30,7 +30,7 @@ public class InstancePlanet extends Entity {
 						new Vector3f(0.0f, 157.6f, 59.8f),
 				}
 		);
-		new ComponentModel(this, 5.0f, false, MODEL, TEXTURE, 1);
+		new ComponentModel(this, 6.0f, false, MODEL, TEXTURE, 1);
 		new ComponentSurface(this, 1.0f, 0.0f, false, false);
 	}
 }
