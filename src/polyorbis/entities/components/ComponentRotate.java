@@ -3,7 +3,6 @@ package polyorbis.entities.components;
 import flounder.entities.*;
 import flounder.framework.*;
 import flounder.helpers.*;
-import flounder.logger.*;
 import flounder.maths.vectors.*;
 
 import javax.swing.*;

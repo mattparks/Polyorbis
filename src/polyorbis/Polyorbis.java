@@ -7,8 +7,8 @@ import flounder.helpers.*;
 import flounder.profiling.*;
 import flounder.resources.*;
 import flounder.textures.*;
-import polyorbis.camera.*;
 import org.lwjgl.glfw.*;
+import polyorbis.camera.*;
 
 public class Polyorbis extends Framework {
 	public static void main(String[] args) {

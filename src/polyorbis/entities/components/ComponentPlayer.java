@@ -108,13 +108,20 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 		currentSpeedUp += PLAYER_GRAVITY * Framework.getDelta();
 		currentRadius += currentSpeedUp;
 
+		// Collision with the planet.
 		if (currentRadius < planetRadius + PLAYER_HEIGHT) {
 			currentRadius = planetRadius + PLAYER_HEIGHT;
 			currentSpeedUp = 0.0f;
 		}
 
 		// Updates attacks, health, experience and survival time.
-		survivalTime += Framework.getDelta();
+		if (survivalTime == 0.0f) {
+			if (currentSpeedY != 0.0f || currentSpeedZ != 0.0f || currentSpeedUp != 0.0f) {
+				survivalTime += Framework.getDelta();
+			}
+		} else {
+			survivalTime += Framework.getDelta();
+		}
 
 		if (inputSelect1.wasDown()) {
 			selectedCharge = 1;
@@ -133,16 +140,18 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 		float rx = as * 15.0f * (float) (Math.sin(0.25 * 15.0f * Framework.getTimeSec()) - Math.sin(1.2 * 15.0f * Framework.getTimeSec()) + Math.cos(0.5 * 15.0f * Framework.getTimeSec()));
 		float rz = as * 15.0f * (float) (Math.cos(0.25 * 15.0f * Framework.getTimeSec()) - Math.cos(1.2 * 15.0f * Framework.getTimeSec()) + Math.sin(0.5 * 15.0f * Framework.getTimeSec()));
 
+		// Moves and rotates the player.
 		Vector3f.rotate(new Vector3f(0.0f, currentRadius, 0.0f), new Vector3f(0.0f, currentY, currentZ), getEntity().getPosition());
 		getEntity().getRotation().set(rx, currentY, currentZ + rz);
 		getEntity().setMoved();
 
-	//	Vector3f dd = Vector3f.rotate(new Vector3f(0.0f, currentRadius, 0.0f), new Vector3f(0.0f, currentY, currentZ), null);
-	//	Vector3f.subtract(dd, getEntity().getPosition(), dd);
-	//	Vector3f dr = new Vector3f(rx, currentY, currentZ + rz);
-	//	Vector3f.subtract(dr, getEntity().getRotation(), dr);
-	//	getEntity().move(dd, dr);
-	//	getEntity().setMoved();
+		// A system like this would be used in flat terrain to do collision. But due to the simple nature of the game this is skipped.
+		//	Vector3f dd = Vector3f.rotate(new Vector3f(0.0f, currentRadius, 0.0f), new Vector3f(0.0f, currentY, currentZ), null);
+		//	Vector3f.subtract(dd, getEntity().getPosition(), dd);
+		//	Vector3f dr = new Vector3f(rx, currentY, currentZ + rz);
+		//	Vector3f.subtract(dr, getEntity().getRotation(), dr);
+		//	getEntity().move(dd, dr);
+		//	getEntity().setMoved();
 	}
 
 	public float getCurrentY() {

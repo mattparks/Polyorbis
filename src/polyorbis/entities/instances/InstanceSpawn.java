@@ -2,8 +2,6 @@ package polyorbis.entities.instances;
 
 import flounder.entities.*;
 import flounder.entities.components.*;
-import flounder.lights.*;
-import flounder.maths.*;
 import flounder.maths.vectors.*;
 import flounder.models.*;
 import flounder.resources.*;
@@ -20,7 +18,7 @@ public class InstanceSpawn extends Entity {
 		new ComponentSpawn(this, rotation, radius);
 		new ComponentModel(this, 0.18f, MODEL, TEXTURE, 1);
 		new ComponentSurface(this, 1.0f, 0.0f, false, false);
-	//	new ComponentLight(this, new Vector3f(0.0f, 0.0f, 0.0f), new Colour(0.243f, 0.812f, 0.631f), new Attenuation(1.0f, 0.02f, 2.0f));
+		//	new ComponentLight(this, new Vector3f(0.0f, 0.0f, 0.0f), new Colour(0.243f, 0.812f, 0.631f), new Attenuation(1.0f, 0.02f, 2.0f));
 		new ComponentCollision(this);
 	}
 }

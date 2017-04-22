@@ -24,7 +24,7 @@ public class InstancePlayer extends Entity {
 		new ComponentPlayer(this);
 		new ComponentModel(this, 0.2f, MODEL, TEXTURE, 1);
 		new ComponentSurface(this, 1.0f, 0.0f, false, false);
-	//	new ComponentParticles(this, Arrays.asList(TEMPLATES), new SpawnPoint(), new Vector3f(), 2.0f, 0.5f, 0.0f);
+		//	new ComponentParticles(this, Arrays.asList(TEMPLATES), new SpawnPoint(), new Vector3f(), 2.0f, 0.5f, 0.0f);
 		new ComponentCollision(this);
 	}
 }

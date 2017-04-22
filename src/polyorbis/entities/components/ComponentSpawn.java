@@ -6,6 +6,7 @@ import flounder.helpers.*;
 import flounder.maths.*;
 import flounder.maths.vectors.*;
 import polyorbis.entities.instances.*;
+import polyorbis.world.*;
 
 import javax.swing.*;
 import java.util.*;
@@ -35,13 +36,19 @@ public class ComponentSpawn extends IComponentEntity implements IComponentEditor
 		this.radius = radius;
 
 		this.spawned = new ArrayList<>();
-		this.targetTime = Framework.getTimeSec() + Maths.randomInRange(3.0f, 5.0f);
+		this.targetTime = -1;
 	}
+
 	@Override
 	public void update() {
 		spawned.removeIf(entity -> entity == null || entity.isRemoved());
 
-		if (Framework.getTimeSec() - targetTime > 0.0f) {
+		// After waiting for the player to make the first move...
+		if (targetTime == -1.0f && ((ComponentPlayer) PolyWorld.getEntityPlayer().getComponent(ComponentPlayer.class)).getSurvivalTime() != 0.0f) {
+			this.targetTime = Framework.getTimeSec() + Maths.randomInRange(3.0f, 5.0f);
+		}
+
+		if (targetTime != -1.0f && Framework.getTimeSec() - targetTime > 0.0f) {
 			this.targetTime = Framework.getTimeSec() + Maths.randomInRange(3.0f, 10.0f); // TODO: Increase frequency with player XP.
 
 			switch ((int) Maths.randomInRange(0.0f, 0.0f)) {

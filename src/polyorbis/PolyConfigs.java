@@ -8,8 +8,8 @@ import flounder.profiling.*;
 import flounder.resources.*;
 import flounder.shadows.*;
 import flounder.textures.*;
-import polyorbis.post.*;
 import org.lwjgl.glfw.*;
+import polyorbis.post.*;
 
 /**
  * A class that contains a bunch of config references.

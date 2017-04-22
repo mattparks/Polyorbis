@@ -1,12 +1,3 @@
-/*
- * Copyright (C) 2017, Equilibrium Games - All Rights Reserved
- *
- * This source file is part of New Kosmos
- *
- * Unauthorized copying of this file, via any medium is strictly prohibited
- * Proprietary and confidential
- */
-
 package polyorbis.uis;
 
 import flounder.fonts.*;
@@ -67,38 +58,38 @@ public class OverlayHUD extends ScreenObject {
 	@Override
 	public void updateObject() {
 		if (updateText) {
-		if (PolyWorld.getEntityPlayer() != null) {
-			ComponentPlayer player = (ComponentPlayer) PolyWorld.getEntityPlayer().getComponent(ComponentPlayer.class);
+			if (PolyWorld.getEntityPlayer() != null) {
+				ComponentPlayer player = (ComponentPlayer) PolyWorld.getEntityPlayer().getComponent(ComponentPlayer.class);
 
-			if (player != null) {
-				this.statusHealth.persentage = player.getHealth();
-				this.statusPower1.persentage = player.getCharge1();
-				this.statusPower2.persentage = player.getCharge2();
-				this.statusPower3.persentage = player.getCharge3();
+				if (player != null) {
+					this.statusHealth.persentage = player.getHealth();
+					this.statusPower1.persentage = player.getCharge1();
+					this.statusPower2.persentage = player.getCharge2();
+					this.statusPower3.persentage = player.getCharge3();
 
-				switch (player.getSelectedCharge()) {
-					case 1:
-						this.statusPower1.progress.getColourOffset().set(0.2f, 1.0f, 0.2f);
-						this.statusPower2.progress.getColourOffset().set(0.8f, 0.8f, 0.8f);
-						this.statusPower3.progress.getColourOffset().set(0.8f, 0.8f, 0.8f);
-						break;
-					case 2:
-						this.statusPower1.progress.getColourOffset().set(0.8f, 0.8f, 0.8f);
-						this.statusPower2.progress.getColourOffset().set(0.2f, 1.0f, 0.2f);
-						this.statusPower3.progress.getColourOffset().set(0.8f, 0.8f, 0.8f);
-						break;
-					case 3:
-						this.statusPower1.progress.getColourOffset().set(0.8f, 0.8f, 0.8f);
-						this.statusPower2.progress.getColourOffset().set(0.8f, 0.8f, 0.8f);
-						this.statusPower3.progress.getColourOffset().set(0.2f, 1.0f, 0.2f);
-						break;
-				}
+					switch (player.getSelectedCharge()) {
+						case 1:
+							this.statusPower1.progress.getColourOffset().set(0.2f, 1.0f, 0.2f);
+							this.statusPower2.progress.getColourOffset().set(0.8f, 0.8f, 0.8f);
+							this.statusPower3.progress.getColourOffset().set(0.8f, 0.8f, 0.8f);
+							break;
+						case 2:
+							this.statusPower1.progress.getColourOffset().set(0.8f, 0.8f, 0.8f);
+							this.statusPower2.progress.getColourOffset().set(0.2f, 1.0f, 0.2f);
+							this.statusPower3.progress.getColourOffset().set(0.8f, 0.8f, 0.8f);
+							break;
+						case 3:
+							this.statusPower1.progress.getColourOffset().set(0.8f, 0.8f, 0.8f);
+							this.statusPower2.progress.getColourOffset().set(0.8f, 0.8f, 0.8f);
+							this.statusPower3.progress.getColourOffset().set(0.2f, 1.0f, 0.2f);
+							break;
+					}
 
 					this.textScore.setText("Score: " + PolyWorld.calculateScore(player.getExperience(), player.getSurvivalTime()));
 					this.textTime.setText("Time: " + Maths.roundToPlace(player.getSurvivalTime(), 2));
 
+				}
 			}
-		}
 			this.updateText = false;
 		}
 	}

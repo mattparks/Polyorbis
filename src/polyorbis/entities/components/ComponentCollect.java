@@ -31,7 +31,7 @@ public class ComponentCollect extends IComponentEntity implements IComponentEdit
 		}
 
 		if (PolyWorld.getEntityPlayer().getCollider().intersects(getEntity().getCollider()).isIntersection()) {
-		//	((ComponentPlayer) PolyWorld.getEntityPlayer().getComponent(ComponentPlayer.class)).modifyHealth(health);
+			//	((ComponentPlayer) PolyWorld.getEntityPlayer().getComponent(ComponentPlayer.class)).modifyHealth(health);
 			collected.action((ComponentPlayer) PolyWorld.getEntityPlayer().getComponent(ComponentPlayer.class));
 			getEntity().forceRemove();
 		}
