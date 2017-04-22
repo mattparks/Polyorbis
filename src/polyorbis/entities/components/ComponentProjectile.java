@@ -16,7 +16,7 @@ public class ComponentProjectile extends IComponentEntity implements IComponentE
 	private Vector3f direction;
 	private float timeout;
 
-	private float startTime;
+	private float spentTime;
 
 	/**
 	 * Creates a new ComponentProjectile.
@@ -39,7 +39,7 @@ public class ComponentProjectile extends IComponentEntity implements IComponentE
 
 		this.timeout = timeout;
 
-		this.startTime = Framework.getTimeSec();
+		this.spentTime = 0.0f;
 	}
 
 	@Override
@@ -49,7 +49,9 @@ public class ComponentProjectile extends IComponentEntity implements IComponentE
 			return;
 		}
 
-		if (Framework.getTimeSec() - (startTime + timeout) > 0.0f) {
+		spentTime += Framework.getDelta();
+
+		if (spentTime > timeout) {
 			getEntity().forceRemove();
 		}
 
