@@ -2,10 +2,13 @@ package polyorbis.entities.components;
 
 import flounder.entities.*;
 import flounder.helpers.*;
+import flounder.maths.*;
 
 import javax.swing.*;
 
 public class ComponentEnemy extends IComponentEntity implements IComponentEditor {
+	private float health;
+
 	/**
 	 * Creates a new ComponentEnemy.
 	 *
@@ -15,8 +18,26 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 		super(entity);
 	}
 
+	public ComponentEnemy(Entity entity, float health) {
+		super(entity);
+
+		this.health = health;
+	}
+
 	@Override
 	public void update() {
+		if (health <= 0.0f) {
+			getEntity().forceRemove();
+		}
+	}
+
+	public float getHealth() {
+		return health;
+	}
+
+	public void modifyHealth(float change) {
+		this.health += change;
+		this.health = Maths.clamp(this.health, 0.0f, 1.0f);
 	}
 
 	@Override

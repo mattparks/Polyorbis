@@ -14,6 +14,7 @@ public class ComponentProjectile extends IComponentEntity implements IComponentE
 
 	private float damage;
 	private Vector3f direction;
+	private float deviation;
 	private float timeout;
 
 	private float spentTime;
@@ -27,16 +28,15 @@ public class ComponentProjectile extends IComponentEntity implements IComponentE
 		super(entity);
 	}
 
-	public ComponentProjectile(Entity entity, Vector3f rotation, float radius, float damage, Vector3f direction, float timeout) {
+	public ComponentProjectile(Entity entity, Vector3f rotation, float radius, float damage, Vector3f direction, float deviation, float timeout) {
 		super(entity);
 
 		this.rotation = rotation;
 		this.radius = radius;
 
 		this.damage = damage;
-
 		this.direction = direction;
-
+		this.deviation = deviation;
 		this.timeout = timeout;
 
 		this.spentTime = 0.0f;
@@ -66,6 +66,7 @@ public class ComponentProjectile extends IComponentEntity implements IComponentE
 			}
 		}
 
+		// TODO: deviation
 		Vector3f.add(rotation, new Vector3f(direction).scale(360.0f * Framework.getDelta()), rotation);
 		Vector3f.rotate(new Vector3f(0.0f, radius, 0.0f), rotation, getEntity().getPosition());
 		getEntity().setMoved();

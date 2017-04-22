@@ -151,8 +151,21 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 					charge1 = Maths.clamp(charge1, 0.0f, 1.0f);
 					break;
 				case 2:
+					if (charge2 > 0.0f) {
+						new InstanceProjectile2(FlounderEntities.getEntities(), new Vector3f(0.0f, currentY, currentZ), currentRadius, new Vector3f(0.0f, currentSpeedY + 0.03f, currentSpeedZ));
+					}
+
+					charge2 -= 0.10f;
+					charge2 = Maths.clamp(charge2, 0.0f, 1.0f);
 					break;
 				case 3:
+					if (charge3 > 0.0f) {
+						// TODO: Send out a large amount of particles in all directions!
+						new InstanceProjectile3(FlounderEntities.getEntities(), new Vector3f(0.0f, currentY, currentZ), currentRadius, new Vector3f(0.0f, currentSpeedY + 0.03f, currentSpeedZ));
+					}
+
+					charge3 -= 0.10f;
+					charge3 = Maths.clamp(charge3, 0.0f, 1.0f);
 					break;
 			}
 		}
@@ -206,7 +219,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 
 	public void modifyHealth(float change) {
 		this.health += change;
-		this.health = Maths.clamp(health, 0.0f, 1.0f);
+		this.health = Maths.clamp(this.health, 0.0f, 1.0f);
 	}
 
 	public float getCharge1() {
@@ -215,7 +228,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 
 	public void addCharge1(float c1) {
 		this.charge1 += c1;
-		this.charge1 = Maths.clamp(charge1, 0.0f, 1.0f);
+		this.charge1 = Maths.clamp(this.charge1, 0.0f, 1.0f);
 	}
 
 	public float getCharge2() {
@@ -224,7 +237,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 
 	public void addCharge2(float c2) {
 		this.charge2 += c2;
-		this.charge2 = Maths.clamp(charge2, 0.0f, 1.0f);
+		this.charge2 = Maths.clamp(this.charge2, 0.0f, 1.0f);
 	}
 
 	public float getCharge3() {
@@ -233,7 +246,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 
 	public void addCharge3(float c3) {
 		this.charge3 += c3;
-		this.charge3 = Maths.clamp(charge3, 0.0f, 1.0f);
+		this.charge3 = Maths.clamp(this.charge3, 0.0f, 1.0f);
 	}
 
 	public int getSelectedCharge() {

@@ -126,7 +126,8 @@ public class OverlayHUD extends ScreenObject {
 
 		@Override
 		public void updateObject() {
-			progress.setSelectedRow((int) Math.floor(persentage * Math.pow(progress.getTexture().getNumberOfRows(), 2)) - 1);
+			progress.setSelectedRow((int) Math.floor(persentage * (Math.pow(progress.getTexture().getNumberOfRows(), 2) - 1)));
+			progress.setVisible(persentage != 0.0f);
 		}
 
 		@Override
