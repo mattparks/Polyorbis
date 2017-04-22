@@ -22,9 +22,9 @@ public class OverlayDebug extends ScreenObject {
 		super(parent, new Vector2f(0.5f, 0.5f), new Vector2f(1.0f, 1.0f));
 		super.setInScreenCoords(false);
 
-		fpsText = createStatus("FPS: 0", 0.01f);
-		upsText = createStatus("UPS: 0", 0.04f);
-		rotationText = createStatus("ROTATION: [0, 0, 0]", 0.07f);
+		fpsText = createStatus("FPS: 0", 0.10f);
+		upsText = createStatus("UPS: 0", 0.13f);
+		rotationText = createStatus("ROTATION: [0, 0, 0]", 0.16f);
 
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {

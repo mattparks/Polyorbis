@@ -90,6 +90,10 @@ public class PolyWorld extends Module {
 		return INSTANCE.dayFactor;
 	}
 
+	public static int calculateScore(int experience, float survivalTime) {
+		return experience + (int) (0.321f * survivalTime); // TODO: Calculate better!
+	}
+
 	@Override
 	public Module getInstance() {
 		return INSTANCE;

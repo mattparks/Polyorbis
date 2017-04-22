@@ -11,6 +11,7 @@ public class PolyGuis extends GuiMaster {
 	// private static final Colour COLOUR_PRIMARY = new Colour(0.0824f, 0.396f, 0.753f); // Water Blue.
 
 	private OverlayDebug overlayDebug;
+	private OverlayHUD overlayHUD;
 
 	public PolyGuis() {
 		super();
@@ -19,8 +20,10 @@ public class PolyGuis extends GuiMaster {
 	@Override
 	public void init() {
 		this.overlayDebug = new OverlayDebug(FlounderGuis.getContainer());
+		this.overlayHUD = new OverlayHUD(FlounderGuis.getContainer());
 
 		this.overlayDebug.setAlphaDriver(new ConstantDriver(1.0f));
+		this.overlayHUD.setAlphaDriver(new ConstantDriver(1.0f));
 
 		FlounderGuis.getSelector().initJoysticks(0, 0, 1, 0, 1);
 	}

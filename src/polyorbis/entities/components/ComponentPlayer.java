@@ -27,6 +27,18 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 	private float currentSpeedZ;
 	private float currentSpeedUp;
 
+	private int experience;
+	private float survivalTime;
+	private float health;
+
+	private float charge1;
+	private float charge2;
+	private float charge3;
+	private int selectedChange;
+
+	private KeyButton inputSelect1;
+	private KeyButton inputSelect2;
+	private KeyButton inputSelect3;
 	private IAxis inputY;
 	private IAxis inputZ;
 	private IButton inputJump;
@@ -53,6 +65,18 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 		this.currentSpeedZ = 0.0f;
 		this.currentSpeedUp = 0.0f;
 
+		this.experience = 0;
+		this.survivalTime = 0.0f;
+		this.health = 1.0f;
+
+		this.charge1 = 1.0f;
+		this.charge2 = 0.5f;
+		this.charge3 = 0.2f;
+		this.selectedChange = 1;
+
+		this.inputSelect1 = new KeyButton(GLFW_KEY_1);
+		this.inputSelect2 = new KeyButton(GLFW_KEY_2);
+		this.inputSelect3 = new KeyButton(GLFW_KEY_3);
 		this.inputY = new CompoundAxis(new ButtonAxis(leftKeyButtons, rightKeyButtons), new JoystickAxis(0, 0));
 		this.inputZ = new CompoundAxis(new ButtonAxis(downKeyButtons, upKeyButtons), new JoystickAxis(0, 1));
 		this.inputJump = new CompoundButton(jumpButtons, new JoystickButton(0, 0));
@@ -60,6 +84,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 
 	@Override
 	public void update() {
+		// Calculate speeds.
 		float planetRadius = PolyWorld.getEntityPlanet() == null ? 0.0f : PolyWorld.getEntityPlanet().getScale();
 
 		if (inputY.getAmount() == 0.0f) {
@@ -76,9 +101,9 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 			currentSpeedZ = Maths.clamp(currentSpeedZ, -PLAYER_SPEED, PLAYER_SPEED);
 		}
 
+		// Move player current positions.
 		currentY += currentSpeedY;
 		currentZ += currentSpeedZ;
-
 		currentSpeedUp = (inputJump.isDown() && currentSpeedUp == 0.0f && currentRadius <= planetRadius + PLAYER_HEIGHT) ? PLAYER_JUMP : currentSpeedUp;
 		currentSpeedUp += PLAYER_GRAVITY * Framework.getDelta();
 		currentRadius += currentSpeedUp;
@@ -86,6 +111,17 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 		if (currentRadius < planetRadius + PLAYER_HEIGHT) {
 			currentRadius = planetRadius + PLAYER_HEIGHT;
 			currentSpeedUp = 0.0f;
+		}
+
+		// Updates attacks, health, experience and survival time.
+		survivalTime += Framework.getDelta();
+
+		if (inputSelect1.wasDown()) {
+			selectedChange = 1;
+		} else if (inputSelect2.wasDown()) {
+			selectedChange = 2;
+		} else if (inputSelect3.wasDown()) {
+			selectedChange = 3;
 		}
 
 		// Normalizes angles and limits Y rotation to make movement easier.
@@ -115,6 +151,54 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 
 	public float getCurrentZ() {
 		return currentZ;
+	}
+
+	public int getExperience() {
+		return experience;
+	}
+
+	public void addExperience(int xp) {
+		this.experience += xp;
+	}
+
+	public float getSurvivalTime() {
+		return survivalTime;
+	}
+
+	public float getHealth() {
+		return health;
+	}
+
+	public void modifyHealth(float change) {
+		this.health += change;
+	}
+
+	public float getCharge1() {
+		return charge1;
+	}
+
+	public void addCharge1(float c1) {
+		this.charge1 += c1;
+	}
+
+	public float getCharge2() {
+		return charge2;
+	}
+
+	public void addCharge2(float c2) {
+		this.charge2 += c2;
+	}
+
+	public float getCharge3() {
+		return charge3;
+	}
+
+	public void addCharge3(float c3) {
+		this.charge3 += c3;
+	}
+
+	public int getSelectedChange() {
+		return selectedChange;
 	}
 
 	@Override
