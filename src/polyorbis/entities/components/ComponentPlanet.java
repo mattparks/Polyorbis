@@ -1,6 +1,7 @@
 package polyorbis.entities.components;
 
 import flounder.entities.*;
+import flounder.guis.*;
 import flounder.helpers.*;
 import flounder.maths.vectors.*;
 import polyorbis.entities.instances.*;
@@ -35,6 +36,11 @@ public class ComponentPlanet extends IComponentEntity implements IComponentEdito
 
 	@Override
 	public void update() {
+		// Do not update on paused.
+		if (FlounderGuis.getGuiMaster() == null || FlounderGuis.getGuiMaster().isGamePaused()) {
+			return;
+		}
+
 		if (spawnEntities == null) {
 			spawnEntities = new Entity[spawnRotations.length];
 

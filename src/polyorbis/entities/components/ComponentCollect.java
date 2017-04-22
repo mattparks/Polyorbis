@@ -1,6 +1,7 @@
 package polyorbis.entities.components;
 
 import flounder.entities.*;
+import flounder.guis.*;
 import flounder.helpers.*;
 import polyorbis.world.*;
 
@@ -26,6 +27,11 @@ public class ComponentCollect extends IComponentEntity implements IComponentEdit
 
 	@Override
 	public void update() {
+		// Do not update on paused.
+		if (FlounderGuis.getGuiMaster() == null || FlounderGuis.getGuiMaster().isGamePaused()) {
+			return;
+		}
+
 		if (PolyWorld.getEntityPlayer().getCollider() == null || getEntity().getCollider() == null) {
 			return;
 		}

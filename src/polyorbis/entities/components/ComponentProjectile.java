@@ -1,12 +1,22 @@
 package polyorbis.entities.components;
 
 import flounder.entities.*;
+import flounder.framework.*;
+import flounder.guis.*;
 import flounder.helpers.*;
+import flounder.maths.vectors.*;
 
 import javax.swing.*;
 
 public class ComponentProjectile extends IComponentEntity implements IComponentEditor {
+	private Vector3f rotation;
+	private float radius;
+
 	private float damage;
+	private Vector3f direction;
+	private float timeout;
+
+	private float startTime;
 
 	/**
 	 * Creates a new ComponentProjectile.
@@ -17,18 +27,46 @@ public class ComponentProjectile extends IComponentEntity implements IComponentE
 		super(entity);
 	}
 
-	public ComponentProjectile(Entity entity, float damage) {
+	public ComponentProjectile(Entity entity, Vector3f rotation, float radius, float damage, Vector3f direction, float timeout) {
 		super(entity);
 
+		this.rotation = rotation;
+		this.radius = radius;
+
 		this.damage = damage;
+
+		this.direction = direction;
+
+		this.timeout = timeout;
+
+		this.startTime = Framework.getTimeSec();
 	}
 
 	@Override
 	public void update() {
-	}
+		// Do not update on paused.
+		if (FlounderGuis.getGuiMaster() == null || FlounderGuis.getGuiMaster().isGamePaused()) {
+			return;
+		}
 
-	public float getDamage() {
-		return damage;
+		if (Framework.getTimeSec() - (startTime + timeout) > 0.0f) {
+			getEntity().forceRemove();
+		}
+
+		for (Entity entity : FlounderEntities.getEntities().getAll()) {
+			if (entity != null) {
+				ComponentEnemy enemy = (ComponentEnemy) entity.getComponent(ComponentEnemy.class);
+
+				if (enemy != null && entity.getCollider() != null && getEntity().getCollider() != null && getEntity().getCollider().intersects(entity.getCollider()).isIntersection()) {
+					getEntity().forceRemove();
+					//	enemy.modifyHealth(damage); // TODO
+				}
+			}
+		}
+
+		Vector3f.add(rotation, new Vector3f(direction).scale(360.0f * Framework.getDelta()), rotation);
+		Vector3f.rotate(new Vector3f(0.0f, radius, 0.0f), rotation, getEntity().getPosition());
+		getEntity().setMoved();
 	}
 
 	@Override

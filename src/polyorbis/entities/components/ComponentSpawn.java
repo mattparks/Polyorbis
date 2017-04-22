@@ -2,6 +2,7 @@ package polyorbis.entities.components;
 
 import flounder.entities.*;
 import flounder.framework.*;
+import flounder.guis.*;
 import flounder.helpers.*;
 import flounder.maths.*;
 import flounder.maths.vectors.*;
@@ -41,6 +42,11 @@ public class ComponentSpawn extends IComponentEntity implements IComponentEditor
 
 	@Override
 	public void update() {
+		// Do not update on paused.
+		if (FlounderGuis.getGuiMaster() == null || FlounderGuis.getGuiMaster().isGamePaused()) {
+			return;
+		}
+
 		spawned.removeIf(entity -> entity == null || entity.isRemoved());
 
 		// After waiting for the player to make the first move...

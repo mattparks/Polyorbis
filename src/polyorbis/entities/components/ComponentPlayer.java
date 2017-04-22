@@ -2,10 +2,12 @@ package polyorbis.entities.components;
 
 import flounder.entities.*;
 import flounder.framework.*;
+import flounder.guis.*;
 import flounder.helpers.*;
 import flounder.inputs.*;
 import flounder.maths.*;
 import flounder.maths.vectors.*;
+import polyorbis.entities.instances.*;
 import polyorbis.world.*;
 
 import javax.swing.*;
@@ -42,6 +44,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 	private IAxis inputY;
 	private IAxis inputZ;
 	private IButton inputJump;
+	private MouseButton inputFire;
 
 	/**
 	 * Creates a new ComponentPlayer.
@@ -80,10 +83,16 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 		this.inputY = new CompoundAxis(new ButtonAxis(leftKeyButtons, rightKeyButtons), new JoystickAxis(0, 0));
 		this.inputZ = new CompoundAxis(new ButtonAxis(downKeyButtons, upKeyButtons), new JoystickAxis(0, 1));
 		this.inputJump = new CompoundButton(jumpButtons, new JoystickButton(0, 0));
+		this.inputFire = new MouseButton(GLFW_MOUSE_BUTTON_LEFT);
 	}
 
 	@Override
 	public void update() {
+		// Do not update on paused.
+		if (FlounderGuis.getGuiMaster() == null || FlounderGuis.getGuiMaster().isGamePaused()) {
+			return;
+		}
+
 		// Calculate speeds.
 		float planetRadius = PolyWorld.getEntityPlanet() == null ? 0.0f : PolyWorld.getEntityPlanet().getScale();
 
@@ -129,6 +138,23 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 			selectedCharge = 2;
 		} else if (inputSelect3.wasDown()) {
 			selectedCharge = 3;
+		}
+
+		if (inputFire.wasDown()) {
+			switch (selectedCharge) {
+				case 1:
+					if (charge1 > 0.0f) {
+						new InstanceProjectile1(FlounderEntities.getEntities(), new Vector3f(0.0f, currentY, currentZ), currentRadius, new Vector3f(0.0f, currentSpeedY + 0.03f, currentSpeedZ));
+					}
+
+					charge1 -= 0.05f;
+					charge1 = Maths.clamp(charge1, 0.0f, 1.0f);
+					break;
+				case 2:
+					break;
+				case 3:
+					break;
+			}
 		}
 
 		// Normalizes angles and limits Y rotation to make movement easier.
@@ -189,6 +215,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 
 	public void addCharge1(float c1) {
 		this.charge1 += c1;
+		this.charge1 = Maths.clamp(charge1, 0.0f, 1.0f);
 	}
 
 	public float getCharge2() {
@@ -197,6 +224,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 
 	public void addCharge2(float c2) {
 		this.charge2 += c2;
+		this.charge2 = Maths.clamp(charge2, 0.0f, 1.0f);
 	}
 
 	public float getCharge3() {
@@ -205,6 +233,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 
 	public void addCharge3(float c3) {
 		this.charge3 += c3;
+		this.charge3 = Maths.clamp(charge3, 0.0f, 1.0f);
 	}
 
 	public int getSelectedCharge() {

@@ -17,7 +17,12 @@ public class InstanceHealth extends Entity {
 
 	public InstanceHealth(ISpatialStructure<Entity> structure, Vector3f position, Vector3f rotation) {
 		super(structure, position, rotation);
-		new ComponentCollect(this, pc -> pc.modifyHealth(0.1f));
+		new ComponentCollect(this, pc -> {
+			pc.modifyHealth(0.1f);
+			pc.addCharge1(0.20f);
+			pc.addCharge2(0.10f);
+			pc.addCharge3(0.05f);
+		});
 		new ComponentRotate(this, new Vector3f(0.0f, 1.0f, 1.0f), 0.4f);
 		new ComponentModel(this, 0.18f, MODEL, TEXTURE, 1);
 		new ComponentSurface(this, 1.0f, 0.0f, false, false);

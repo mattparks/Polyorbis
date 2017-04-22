@@ -2,6 +2,7 @@ package polyorbis.entities.components;
 
 import flounder.entities.*;
 import flounder.framework.*;
+import flounder.guis.*;
 import flounder.helpers.*;
 import flounder.maths.vectors.*;
 
@@ -29,6 +30,11 @@ public class ComponentRotate extends IComponentEntity implements IComponentEdito
 
 	@Override
 	public void update() {
+		// Do not update on paused.
+		if (FlounderGuis.getGuiMaster() == null || FlounderGuis.getGuiMaster().isGamePaused()) {
+			return;
+		}
+
 		Vector3f.add(getEntity().getRotation(), new Vector3f(axis).scale(speed * 360.0f * Framework.getDelta()), getEntity().getRotation());
 		getEntity().setMoved();
 	}
