@@ -117,6 +117,34 @@ public class PolyWorld extends Module {
 		return INSTANCE.dayFactor;
 	}
 
+	public static void fireProjectile(Vector3f rotation, float radius, int type, Vector2f direction, boolean playerSpawned) {
+		switch (type) {
+			case 1:
+				new InstanceProjectile1(FlounderEntities.getEntities(), new Vector3f(rotation), radius, new Vector3f(0.0f, direction.x, direction.y), playerSpawned);
+				break;
+			case 2:
+				new InstanceProjectile2(FlounderEntities.getEntities(), new Vector3f(rotation), radius, new Vector3f(0.0f, direction.x, direction.y), playerSpawned);
+				break;
+			case 3:
+				float amount = 28.0f;
+
+				for (int i = 0; i < amount; i++) {
+					float theta = 360.0f * ((float) i / amount);
+					Vector2f d = new Vector2f();
+					Vector2f.rotate(new Vector2f(1.0f, 0.0f), theta, d);
+
+					// Fixes any zero vectors.
+					if (d.isZero()) {
+						d.x += 0.03f;
+					}
+
+					d.normalize();
+					new InstanceProjectile3(FlounderEntities.getEntities(), new Vector3f(rotation), radius, new Vector3f(0.0f, d.x, d.y), true);
+				}
+				break;
+		}
+	}
+
 	public static int calculateScore(Entity player) {
 		if (player == null) {
 			return -1;

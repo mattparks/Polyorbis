@@ -9,6 +9,7 @@ import flounder.maths.vectors.*;
 import polyorbis.world.*;
 
 import javax.swing.*;
+import java.util.*;
 
 public class ComponentProjectile extends IComponentEntity implements IComponentEditor {
 	private Vector3f rotation;
@@ -19,6 +20,8 @@ public class ComponentProjectile extends IComponentEntity implements IComponentE
 	private float deviation;
 	private float randomness;
 	private float timeout;
+
+	private boolean playerSpawned;
 
 	private float spentTime;
 
@@ -31,7 +34,7 @@ public class ComponentProjectile extends IComponentEntity implements IComponentE
 		super(entity);
 	}
 
-	public ComponentProjectile(Entity entity, Vector3f rotation, float radius, float damage, Vector3f direction, float deviation, float timeout) {
+	public ComponentProjectile(Entity entity, Vector3f rotation, float radius, float damage, Vector3f direction, float deviation, float timeout, boolean playerSpawned) {
 		super(entity);
 
 		this.rotation = rotation;
@@ -42,6 +45,8 @@ public class ComponentProjectile extends IComponentEntity implements IComponentE
 		this.deviation = deviation;
 		this.randomness = Maths.randomInRange(0.0f, 10.0f);
 		this.timeout = timeout;
+
+		this.playerSpawned = playerSpawned;
 
 		this.spentTime = 0.0f;
 	}
@@ -59,18 +64,25 @@ public class ComponentProjectile extends IComponentEntity implements IComponentE
 			getEntity().remove();
 		}
 
-		ComponentPlayer player = PolyWorld.getEntityPlayer() == null ? null : (ComponentPlayer) PolyWorld.getEntityPlayer().getComponent(ComponentPlayer.class);
+		ComponentPlayer realPlayer = PolyWorld.getEntityPlayer() == null ? null : (ComponentPlayer) PolyWorld.getEntityPlayer().getComponent(ComponentPlayer.class);
 
-		for (Entity entity : FlounderEntities.getEntities().getAll()) {
+		for (Entity entity : new ArrayList<>(FlounderEntities.getEntities().getAll())) {
 			if (entity != null) {
 				ComponentEnemy enemy = (ComponentEnemy) entity.getComponent(ComponentEnemy.class);
+				ComponentPlayer player = (ComponentPlayer) entity.getComponent(ComponentPlayer.class);
 
-				if (enemy != null && entity.getCollider() != null && getEntity().getCollider() != null && getEntity().getCollider().intersects(entity.getCollider()).isIntersection()) {
-					getEntity().forceRemove();
-					enemy.modifyHealth(damage);
+				if (entity.getCollider() != null && getEntity().getCollider() != null && getEntity().getCollider().intersects(entity.getCollider()).isIntersection()) {
+					if (enemy != null && playerSpawned) {
+						enemy.modifyHealth(damage);
 
-					if (player != null) {
-						player.addExperience(5);
+						if (realPlayer != null) {
+							realPlayer.addExperience(5);
+						}
+
+						getEntity().remove();
+					} else if (player != null && !playerSpawned) {
+						player.modifyHealth(damage + 0.3f);
+						getEntity().remove();
 					}
 				}
 			}

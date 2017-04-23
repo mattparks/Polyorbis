@@ -58,9 +58,9 @@ public class ComponentSpawn extends IComponentEntity implements IComponentEditor
 			this.targetTime = Framework.getTimeSec() + Maths.randomInRange(3.0f, 10.0f); // TODO: Increase frequency with player XP.
 			int current = 0;
 
-			switch ((int) Maths.randomInRange(0.0f, 2.0f)) {
+			switch ((int) Maths.randomInRange(0.0f, 3.0f)) {
 				case 0:
-					// Spawns new health if there are currently less than 3 in the world from this spawn.
+					// Spawns new health if there are currently less than 1 in the world from this spawn.
 					for (Entity entity : spawned) {
 						if (!entity.isRemoved() && entity instanceof InstanceHealth) {
 							current++;
@@ -74,7 +74,21 @@ public class ComponentSpawn extends IComponentEntity implements IComponentEditor
 
 					break;
 				case 1:
-					// Spawns new health if there are currently less than 3 in the world from this spawn.
+					// Spawns new ammo if there are currently less than 1 in the world from this spawn.
+					for (Entity entity : spawned) {
+						if (!entity.isRemoved() && entity instanceof InstanceAmmo) {
+							current++;
+						}
+					}
+
+					if (current < 1) {
+						Entity e = new InstanceAmmo(FlounderEntities.getEntities(), randomEntityRotation(), radius);
+						spawned.add(e);
+					}
+
+					break;
+				case 2:
+					// Spawns a new enemy if there are currently less than 2 in the world from this spawn.
 					for (Entity entity : spawned) {
 						if (!entity.isRemoved() && entity instanceof InstanceEnemy1) {
 							current++;
@@ -87,7 +101,6 @@ public class ComponentSpawn extends IComponentEntity implements IComponentEditor
 					}
 
 					break;
-				// TODO: Spawn power refills, health, and enemies.
 			}
 		}
 	}

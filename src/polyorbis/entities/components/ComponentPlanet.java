@@ -54,8 +54,10 @@ public class ComponentPlanet extends IComponentEntity implements IComponentEdito
 		}
 
 		// Reorder atmosphere to be the last rendered.
-		FlounderEntities.getEntities().remove(atmosphere);
-		FlounderEntities.getEntities().add(atmosphere);
+		if (atmosphere != null) {
+			FlounderEntities.getEntities().remove(atmosphere);
+			FlounderEntities.getEntities().add(atmosphere);
+		}
 	}
 
 	public Entity getStar() {

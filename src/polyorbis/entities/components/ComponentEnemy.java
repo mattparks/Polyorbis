@@ -3,11 +3,13 @@ package polyorbis.entities.components;
 import flounder.entities.*;
 import flounder.framework.*;
 import flounder.helpers.*;
+import flounder.logger.*;
 import flounder.maths.*;
 import flounder.maths.vectors.*;
 import polyorbis.world.*;
 
 import javax.swing.*;
+import java.util.*;
 
 public class ComponentEnemy extends IComponentEntity implements IComponentEditor {
 	private static final float SPEED = 0.8f;
@@ -41,6 +43,33 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 
 		this.health = health * Maths.randomInRange(0.6f, 1.0f);
 		this.killed = false;
+
+	/*	java.util.Timer timer = new java.util.Timer();
+		timer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				if (!killed) {
+					Vector2f playerRotation = PolyWorld.getEntityPlayer() == null ? null : ((ComponentPlayer) PolyWorld.getEntityPlayer().getComponent(ComponentPlayer.class)).getRotation();
+					if (playerRotation == null) {
+						return;
+					}
+					Vector2f thisRotation = new Vector2f(rotation.y, rotation.z);
+					Vector2f direction = Vector2f.subtract(thisRotation, playerRotation, null);
+				//	FlounderLogger.log(direction.lengthSquared());
+					if (direction.lengthSquared() / Math.pow(360.0, 2.0) > 0.01f) {
+						return;
+					}
+					if (direction.isZero()) {
+						direction.x += 0.03f;
+					}
+					direction.scale(1.0f / 360.0f);
+					direction.normalize();
+					PolyWorld.fireProjectile(new Vector3f(rotation), radius, 1, direction, false);
+				} else {
+					this.cancel();
+				}
+			}
+		}, 0, 2000);*/
 	}
 
 	@Override
@@ -50,6 +79,8 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 
 			getEntity().remove();
 			killed = true;
+
+		//	PolyWorld.fireProjectile(new Vector3f(rotation), radius, 3, new Vector2f(0.03f, 0.0f), false);
 
 			if (player != null) {
 				player.addExperience(15);

@@ -18,7 +18,7 @@ public class InstancePlanet extends Entity {
 		TEXTURE.setHasAlpha(true);
 		new ComponentPlanet(this,
 				new InstanceSun(FlounderEntities.getEntities(), new Vector3f(-100.0f, -100.0f, -100.0f), new Vector3f()),
-				new InstanceAtmosphere(FlounderEntities.getEntities(), new Vector3f(), new Vector3f()),
+				null, //	new InstanceAtmosphere(FlounderEntities.getEntities(), new Vector3f(), new Vector3f()),
 				new Entity[]{
 						new InstanceMoon1(FlounderEntities.getEntities(), new Vector3f(10.0f, -20.0f, -10.0f), new Vector3f()),
 						new InstanceMoon2(FlounderEntities.getEntities(), new Vector3f(18.0f, 26.0f, 18.0f), new Vector3f()),
