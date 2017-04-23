@@ -21,7 +21,7 @@ public class InstancePlayer extends Entity {
 		new ComponentPlayer(this);
 		new ComponentModel(this, 0.23f, MODEL, TEXTURE, 1);
 		((ComponentModel) getComponent(ComponentModel.class)).setColourOffset(COLOUR_OFFSET);
-		new ComponentSurface(this, 1.0f, 0.0f, false, false);
+		new ComponentSurface(this, 1.0f, 0.0f, false, false, true);
 		new ComponentCollision(this);
 		new ComponentRemoveFade(this);
 	}

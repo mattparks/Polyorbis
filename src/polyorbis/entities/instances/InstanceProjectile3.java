@@ -32,7 +32,7 @@ public class InstanceProjectile3 extends Entity {
 		new ComponentRotate(this, rotation, radius, new Vector3f(0.3f, 1.0f, 1.0f), 0.8f);
 		new ComponentModel(this, 0.1f, MODEL, TEXTURE, 1);
 		new ComponentGlow(this, TEXTURE_GLOW);
-		new ComponentSurface(this, 1.0f, 0.0f, false, false);
+		new ComponentSurface(this, 1.0f, 0.0f, false, false, true);
 		new ComponentCollision(this);
 		new ComponentParticles(this, Arrays.asList(TEMPLATES), new SpawnPoint(), new Vector3f(), 5.0f, 0.5f, 0.0f);
 		new ComponentRemoveFade(this);

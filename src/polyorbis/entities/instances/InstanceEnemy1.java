@@ -23,7 +23,7 @@ public class InstanceEnemy1 extends Entity {
 			pc.modifyHealth(-0.3f);
 		});
 		new ComponentModel(this, 0.13f, MODEL, TEXTURE, 1);
-		new ComponentSurface(this, 1.0f, 0.0f, false, false);
+		new ComponentSurface(this, 1.0f, 0.0f, false, false, true);
 		new ComponentLight(this, new Vector3f(0.0f, 0.0f, 0.0f), new Colour(0.812f, 0.243f, 0.131f), new Attenuation(1.0f, 0.02f, 2.0f));
 		new ComponentGlow(this, TEXTURE_GLOW);
 		new ComponentCollision(this);

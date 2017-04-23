@@ -19,7 +19,7 @@ public class InstanceMoon3 extends Entity {
 		new ComponentCelestial(this);
 		new ComponentModel(this, 0.4f, MODEL, TEXTURE, 1);
 		new ComponentGlow(this, TEXTURE_GLOW);
-		new ComponentSurface(this, 1.0f, 0.0f, false, false);
+		new ComponentSurface(this, 1.0f, 0.0f, false, false, true);
 		//	new ComponentLight(this, new Vector3f(0.0f, 0.0f, 0.0f), new Colour(PolyWorld.MOON_COLOUR), new Attenuation(1.0f, 0.0f, 0.0f));
 	}
 }
