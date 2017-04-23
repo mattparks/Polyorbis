@@ -19,6 +19,7 @@ public class InstancePlayer extends Entity {
 		new ComponentModel(this, 0.2f, MODEL, TEXTURE, 1);
 		new ComponentSurface(this, 1.0f, 0.0f, false, false);
 		new ComponentCollision(this);
+		new ComponentRemoveFade(this);
 	}
 }
 

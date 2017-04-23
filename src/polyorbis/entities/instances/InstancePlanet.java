@@ -15,6 +15,7 @@ public class InstancePlanet extends Entity {
 
 	public InstancePlanet(ISpatialStructure<Entity> structure, Vector3f position, Vector3f rotation) {
 		super(structure, position, rotation);
+		TEXTURE.setHasAlpha(true);
 		new ComponentPlanet(this,
 				new InstanceSun(FlounderEntities.getEntities(), new Vector3f(-100.0f, -100.0f, -100.0f), new Vector3f()),
 				new Entity[]{

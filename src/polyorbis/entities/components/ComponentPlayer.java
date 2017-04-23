@@ -100,8 +100,17 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 
 		// Kill the player!
 		if (health <= 0.0f) {
-			PolyWorld.setEndGameData(new PlayData(experience, survivalTime, kills));
+			fireProjectile(3, new Vector2f(0.03f, 0.0f));
 			getEntity().remove();
+			new java.util.Timer().schedule(
+					new java.util.TimerTask() {
+						@Override
+						public void run() {
+							PolyWorld.setEndGameData(new PlayData(experience, survivalTime, kills));
+						}
+					},
+					3000
+			);
 			return;
 		}
 
@@ -173,49 +182,11 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 				direction.x += 0.03f;
 			}
 
+			// Normalize speeds into directions.
 			direction.normalize();
 
 			// Fire a type of selected particle.
-			switch (selectedCharge) {
-				case 1:
-					if (charge1 > 0.0f) {
-						new InstanceProjectile1(FlounderEntities.getEntities(), new Vector3f(0.0f, currentY, currentZ), currentRadius, new Vector3f(0.0f, direction.x, direction.y), true);
-					}
-
-					charge1 -= 0.08f;
-					charge1 = Maths.clamp(charge1, 0.0f, 1.0f);
-					break;
-				case 2:
-					if (charge2 > 0.0f) {
-						new InstanceProjectile2(FlounderEntities.getEntities(), new Vector3f(0.0f, currentY, currentZ), currentRadius, new Vector3f(0.0f, direction.x, direction.y), true);
-					}
-
-					charge2 -= 0.09f;
-					charge2 = Maths.clamp(charge2, 0.0f, 1.0f);
-					break;
-				case 3:
-					if (charge3 > 0.0f) {
-						float amount = 32.0f;
-
-						for (int i = 0; i < amount; i++) {
-							float theta = 360.0f * ((float) i / amount);
-							Vector2f d = new Vector2f();
-							Vector2f.rotate(new Vector2f(1.0f, 0.0f), theta, d);
-
-							// Fixes any zero vectors.
-							if (d.isZero()) {
-								d.x += 0.03f;
-							}
-
-							d.normalize();
-							new InstanceProjectile3(FlounderEntities.getEntities(), new Vector3f(0.0f, currentY, currentZ), currentRadius, new Vector3f(0.0f, d.x, d.y), true);
-						}
-					}
-
-					charge3 -= 0.20f;
-					charge3 = Maths.clamp(charge3, 0.0f, 1.0f);
-					break;
-			}
+			fireProjectile(selectedCharge, direction);
 		}
 
 		// Normalizes angles and limits Y rotation to make movement easier.
@@ -239,6 +210,49 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 		//	Vector3f.subtract(dr, getEntity().getRotation(), dr);
 		//	getEntity().move(dd, dr);
 		//	getEntity().setMoved();
+	}
+
+	private void fireProjectile(int type, Vector2f direction) {
+		switch (type) {
+			case 1:
+				if (charge1 > 0.0f) {
+					new InstanceProjectile1(FlounderEntities.getEntities(), new Vector3f(0.0f, currentY, currentZ), currentRadius, new Vector3f(0.0f, direction.x, direction.y), true);
+				}
+
+				charge1 -= 0.08f;
+				charge1 = Maths.clamp(charge1, 0.0f, 1.0f);
+				break;
+			case 2:
+				if (charge2 > 0.0f) {
+					new InstanceProjectile2(FlounderEntities.getEntities(), new Vector3f(0.0f, currentY, currentZ), currentRadius, new Vector3f(0.0f, direction.x, direction.y), true);
+				}
+
+				charge2 -= 0.09f;
+				charge2 = Maths.clamp(charge2, 0.0f, 1.0f);
+				break;
+			case 3:
+				if (charge3 > 0.0f) {
+					float amount = 32.0f;
+
+					for (int i = 0; i < amount; i++) {
+						float theta = 360.0f * ((float) i / amount);
+						Vector2f d = new Vector2f();
+						Vector2f.rotate(new Vector2f(1.0f, 0.0f), theta, d);
+
+						// Fixes any zero vectors.
+						if (d.isZero()) {
+							d.x += 0.03f;
+						}
+
+						d.normalize();
+						new InstanceProjectile3(FlounderEntities.getEntities(), new Vector3f(0.0f, currentY, currentZ), currentRadius, new Vector3f(0.0f, d.x, d.y), true);
+					}
+				}
+
+				charge3 -= 0.20f;
+				charge3 = Maths.clamp(charge3, 0.0f, 1.0f);
+				break;
+		}
 	}
 
 	public float getCurrentY() {
