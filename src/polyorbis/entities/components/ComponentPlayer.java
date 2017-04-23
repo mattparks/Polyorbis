@@ -16,7 +16,7 @@ import javax.swing.*;
 import static org.lwjgl.glfw.GLFW.*;
 
 public class ComponentPlayer extends IComponentEntity implements IComponentEditor {
-	private static final float PLAYER_HEIGHT = 0.15f;
+	private static final float PLAYER_HEIGHT = 0.22f;
 	private static final float PLAYER_ACCELERATION = 10.0f;
 	private static final float PLAYER_SPEED = 1.2f;
 	private static final float PLAYER_JUMP = 0.06f;

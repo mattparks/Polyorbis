@@ -10,6 +10,7 @@ import flounder.shadows.*;
 import flounder.textures.*;
 import org.lwjgl.glfw.*;
 import polyorbis.post.*;
+import polyorbis.world.*;
 
 /**
  * A class that contains a bunch of config references.
@@ -48,10 +49,15 @@ public class PolyConfigs {
 	public static final ConfigData CAMERA_SENSITIVITY = CONFIG_MAIN.getData(ConfigSection.CONTROLS, "cameraSensitivity", 1.0f); // Reference set in camera.
 	public static final ConfigData CAMERA_REANGLE = CONFIG_MAIN.getData(ConfigSection.CONTROLS, "cameraReangle", GLFW.GLFW_MOUSE_BUTTON_RIGHT); // Reference set in camera.
 
+	// Save configs.
+	private static final Config CONFIG_SAVE = new Config(new MyFile(Framework.getRoamingFolder(), "saves", "save.conf"));
+	public static final ConfigData SAVE_HIGHSCORE = CONFIG_SAVE.getData(ConfigSection.WORLD, "highScore", 0, PolyWorld::getHighsore);
+
 	/**
 	 * Saves the configs when closing the game.
 	 */
 	public static void saveAllConfigs() {
 		CONFIG_MAIN.save();
+		CONFIG_SAVE.save();
 	}
 }

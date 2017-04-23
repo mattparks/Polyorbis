@@ -57,6 +57,7 @@ public class PolyWorld extends Module {
 		this.dayFactor = 0.0f;
 
 		this.endGameData = null;
+		this.highsore = PolyConfigs.SAVE_HIGHSCORE.getInteger();
 
 		FlounderShadows.setBrightnessBoost(PolyConfigs.BRIGHTNESS_BOOST.getFloat());
 		FlounderShadows.setShadowSize(PolyConfigs.SHADOWMAP_SIZE.getInteger());
@@ -65,7 +66,7 @@ public class PolyWorld extends Module {
 		FlounderShadows.setShadowDarkness(PolyConfigs.SHADOWMAP_DARKNESS.getFloat());
 		FlounderSkybox.setCubemap(TextureFactory.newBuilder().setCubemap(SKYBOX_TEXTURE_FILES).create());
 		FlounderShadows.setShadowBoxOffset(20.0f);
-		FlounderShadows.setShadowBoxDistance(30.0f);
+		FlounderShadows.setShadowBoxDistance(38.0f);
 
 		reset();
 	}

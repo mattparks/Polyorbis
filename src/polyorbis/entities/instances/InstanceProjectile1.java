@@ -30,9 +30,9 @@ public class InstanceProjectile1 extends Entity {
 			new ComponentCollect(this, pc -> pc.modifyHealth(-0.4f)); // Entity damage - 0.3.
 		}
 
-		new ComponentProjectile(this, rotation, radius, -0.7f, direction.normalize().scale(0.3f), 0.4f, 2.5f);
+		new ComponentProjectile(this, rotation, radius, -0.7f, direction.normalize().scale(0.3f), 0.420f, 1.7f);
 		new ComponentRotate(this, rotation, radius, new Vector3f(0.3f, 1.0f, 1.0f), 0.7f);
-		new ComponentModel(this, 0.11f, MODEL, TEXTURE, 1);
+		new ComponentModel(this, 0.1f, MODEL, TEXTURE, 1);
 		new ComponentGlow(this, TEXTURE_GLOW);
 		new ComponentSurface(this, 1.0f, 0.0f, false, false);
 		new ComponentLight(this, new Vector3f(0.0f, 0.0f, 0.0f), new Colour(0.898f, 1.0f, 0.04f), new Attenuation(1.0f, 0.02f, 2.0f));

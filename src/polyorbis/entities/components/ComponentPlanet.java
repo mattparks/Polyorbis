@@ -9,10 +9,13 @@ import polyorbis.entities.instances.*;
 import javax.swing.*;
 
 public class ComponentPlanet extends IComponentEntity implements IComponentEditor {
+	private static final float CLOUD_HEIGHT = 8.0f;
 	private static final float SPAWN_HEIGHT = 0.1f;
 
 	private Entity star;
 	private Entity[] moons;
+	private Entity atmosphere;
+
 	private Vector3f[] spawnRotations;
 	private Entity[] spawnEntities;
 
@@ -25,11 +28,12 @@ public class ComponentPlanet extends IComponentEntity implements IComponentEdito
 		super(entity);
 	}
 
-	public ComponentPlanet(Entity entity, Entity star, Entity[] moons, Vector3f[] spawnRotations) {
+	public ComponentPlanet(Entity entity, Entity star, Entity[] moons, Entity atmosphere, Vector3f[] spawnRotations) {
 		super(entity);
 
 		this.star = star;
 		this.moons = moons;
+		this.atmosphere = atmosphere;
 		this.spawnRotations = spawnRotations;
 		this.spawnEntities = null;
 	}
@@ -85,14 +89,24 @@ public class ComponentPlanet extends IComponentEntity implements IComponentEdito
 
 	@Override
 	public void dispose() {
-		star.forceRemove();
-
-		for (Entity moon : moons) {
-			moon.forceRemove();
+		if (star != null) {
+			star.forceRemove();
 		}
 
-		for (Entity spawn : spawnEntities) {
-			spawn.forceRemove();
+		if (moons != null) {
+			for (Entity moon : moons) {
+				moon.forceRemove();
+			}
+		}
+
+		if (spawnEntities != null) {
+			for (Entity spawn : spawnEntities) {
+				spawn.forceRemove();
+			}
+		}
+
+		if (atmosphere != null) {
+			atmosphere.forceRemove();
 		}
 	}
 }
