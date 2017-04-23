@@ -1,11 +1,11 @@
 package polyorbis.entities.components;
 
+import flounder.devices.*;
 import flounder.entities.*;
 import flounder.framework.*;
 import flounder.guis.*;
 import flounder.helpers.*;
 import flounder.inputs.*;
-import flounder.logger.*;
 import flounder.maths.*;
 import flounder.maths.vectors.*;
 import polyorbis.entities.instances.*;
@@ -19,8 +19,8 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 	private static final float PLAYER_HEIGHT = 0.15f;
 	private static final float PLAYER_ACCELERATION = 10.0f;
 	private static final float PLAYER_SPEED = 1.2f;
-	private static final float PLAYER_JUMP = 0.12f;
-	private static final float PLAYER_GRAVITY = -0.5f;
+	private static final float PLAYER_JUMP = 0.06f;
+	private static final float PLAYER_GRAVITY = -0.3f;
 
 	private float currentY;
 	private float currentZ;
@@ -39,13 +39,14 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 	private float charge3;
 	private int selectedCharge;
 
+	private IButton inputSelectCycle;
 	private KeyButton inputSelect1;
 	private KeyButton inputSelect2;
 	private KeyButton inputSelect3;
 	private IAxis inputY;
 	private IAxis inputZ;
 	private IButton inputJump;
-	private MouseButton inputFire;
+	private IButton inputFire;
 
 	/**
 	 * Creates a new ComponentPlayer.
@@ -78,13 +79,14 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 		this.charge3 = 0.2f;
 		this.selectedCharge = 1;
 
+		this.inputSelectCycle = new CompoundButton(new KeyButton(GLFW_KEY_Q), new KeyButton(GLFW_KEY_E), new JoystickButton(0, 1));
 		this.inputSelect1 = new KeyButton(GLFW_KEY_1);
 		this.inputSelect2 = new KeyButton(GLFW_KEY_2);
 		this.inputSelect3 = new KeyButton(GLFW_KEY_3);
 		this.inputY = new CompoundAxis(new ButtonAxis(leftKeyButtons, rightKeyButtons), new JoystickAxis(0, 0));
 		this.inputZ = new CompoundAxis(new ButtonAxis(downKeyButtons, upKeyButtons), new JoystickAxis(0, 1));
 		this.inputJump = new CompoundButton(jumpButtons, new JoystickButton(0, 0));
-		this.inputFire = new MouseButton(GLFW_MOUSE_BUTTON_LEFT);
+		this.inputFire = new CompoundButton(new MouseButton(GLFW_MOUSE_BUTTON_LEFT), new JoystickButton(0, 5)); // TODO: Use real trigger.
 	}
 
 	@Override
@@ -139,13 +141,34 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 			selectedCharge = 2;
 		} else if (inputSelect3.wasDown()) {
 			selectedCharge = 3;
+		} else if (inputSelectCycle.wasDown()) {
+			selectedCharge++;
+
+			if (selectedCharge > 3) {
+				selectedCharge = 1;
+			}
 		}
 
 		if (inputFire.wasDown()) {
+			// Gets the projectile direction based off of the position.
+			Vector2f direction = new Vector2f(currentSpeedY, currentSpeedZ);
+
+			// Calculates the direction from the mouse click position.
+			if (!FlounderJoysticks.isConnected(0)) {
+				direction.set((FlounderMouse.getPositionX() * 2.0f - 1.0f) + 0.03f, FlounderMouse.getPositionY() * 2.0f - 1.0f);
+				direction.y /= FlounderDisplay.getAspectRatio();
+				direction.normalize();
+			}
+
+			// Fixes any zero vectors.
+			if (direction.isZero()) {
+				direction.x += 0.03f;
+			}
+
 			switch (selectedCharge) {
 				case 1:
 					if (charge1 > 0.0f) {
-						new InstanceProjectile1(FlounderEntities.getEntities(), new Vector3f(0.0f, currentY, currentZ), currentRadius, new Vector3f(0.0f, currentSpeedY + 0.03f, currentSpeedZ), true);
+						new InstanceProjectile1(FlounderEntities.getEntities(), new Vector3f(0.0f, currentY, currentZ), currentRadius, new Vector3f(0.0f, direction.x, direction.y), true);
 					}
 
 					charge1 -= 0.08f;
@@ -153,7 +176,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 					break;
 				case 2:
 					if (charge2 > 0.0f) {
-						new InstanceProjectile2(FlounderEntities.getEntities(), new Vector3f(0.0f, currentY, currentZ), currentRadius, new Vector3f(0.0f, currentSpeedY + 0.03f, currentSpeedZ), true);
+						new InstanceProjectile2(FlounderEntities.getEntities(), new Vector3f(0.0f, currentY, currentZ), currentRadius, new Vector3f(0.0f, direction.x, direction.y), true);
 					}
 
 					charge2 -= 0.09f;
@@ -161,15 +184,20 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 					break;
 				case 3:
 					if (charge3 > 0.0f) {
-						float amount = 25.0f;
+						float amount = 32.0f;
 
 						for (int i = 0; i < amount; i++) {
 							float theta = 360.0f * ((float) i / amount);
-							Vector2f direction = new Vector2f();
-							Vector2f.rotate(new Vector2f(1.0f, 0.0f), theta, direction);
-							direction.normalize();
-							FlounderLogger.log(direction);
-							new InstanceProjectile3(FlounderEntities.getEntities(), new Vector3f(0.0f, currentY, currentZ), currentRadius, new Vector3f(0.0f, direction.x + 0.03f, direction.y), true);
+							Vector2f d = new Vector2f();
+							Vector2f.rotate(new Vector2f(1.0f, 0.0f), theta, d);
+
+							// Fixes any zero vectors.
+							if (d.isZero()) {
+								d.x += 0.03f;
+							}
+
+							d.normalize();
+							new InstanceProjectile3(FlounderEntities.getEntities(), new Vector3f(0.0f, currentY, currentZ), currentRadius, new Vector3f(0.0f, d.x, d.y), true);
 						}
 					}
 

@@ -27,7 +27,7 @@ public class PolyCamera extends Camera {
 	// Defines the strength of motion from the joysick.
 	private static final float INFLUENCE_OF_JOYSTICK_DY = 4.5f;
 	private static final float INFLUENCE_OF_JOYSTICK_DX = 4.5f;
-	private static final float INFLUENCE_OF_JOYSTICK_ZOOM = 10.0f;
+	private static final float INFLUENCE_OF_JOYSTICK_ZOOM = 0.1f;
 
 	// Defines the strength of motion from the mouse.
 	private static final float INFLUENCE_OF_MOUSE_DY = 10000.0f;
@@ -40,7 +40,7 @@ public class PolyCamera extends Camera {
 
 	private static final float MAX_ANGLE_OF_ELEVATION = 90.0f;
 	private static final float MIN_ANGLE_OF_ELEVATION = -90.0f;
-	private static final float MINIMUM_ZOOM = 7.0f;
+	private static final float MINIMUM_ZOOM = 2.0f;
 	private static final float MAXIMUM_ZOOM = 15.0f;
 	private static final float NORMAL_ZOOM = 8.0f;
 

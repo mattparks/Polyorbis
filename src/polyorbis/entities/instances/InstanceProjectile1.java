@@ -27,17 +27,17 @@ public class InstanceProjectile1 extends Entity {
 		super(structure, Vector3f.rotate(new Vector3f(0.0f, radius, 0.0f), rotation, null), new Vector3f(0.0f, rotation.y, rotation.z));
 
 		if (!playerSpawned) {
-			new ComponentCollect(this, pc -> pc.modifyHealth(-0.7f));
+			new ComponentCollect(this, pc -> pc.modifyHealth(-0.4f)); // Entity damage - 0.3.
 		}
 
-		new ComponentProjectile(this, rotation, radius, -0.7f, direction.normalize().scale(0.3f), 0.08f, 2.5f);
+		new ComponentProjectile(this, rotation, radius, -0.7f, direction.normalize().scale(0.3f), 0.4f, 2.5f);
 		new ComponentRotate(this, rotation, radius, new Vector3f(0.3f, 1.0f, 1.0f), 0.7f);
 		new ComponentModel(this, 0.11f, MODEL, TEXTURE, 1);
 		new ComponentGlow(this, TEXTURE_GLOW);
 		new ComponentSurface(this, 1.0f, 0.0f, false, false);
 		new ComponentLight(this, new Vector3f(0.0f, 0.0f, 0.0f), new Colour(0.898f, 1.0f, 0.04f), new Attenuation(1.0f, 0.02f, 2.0f));
 		new ComponentCollision(this);
-		new ComponentParticles(this, Arrays.asList(TEMPLATES), new SpawnPoint(), new Vector3f(), 2.0f, 0.5f, 0.0f);
+		new ComponentParticles(this, Arrays.asList(TEMPLATES), new SpawnPoint(), new Vector3f(), 12.0f, 0.5f, 0.0f);
 		new ComponentRemoveFade(this);
 	}
 }
