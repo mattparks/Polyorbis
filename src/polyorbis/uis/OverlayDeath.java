@@ -24,6 +24,8 @@ public class OverlayDeath extends ScreenObject {
 		float yPosition = 0.30f;
 		float ySpacing = 0.07f;
 
+		// TODO: Show score.
+
 		// Restart.
 		GuiButtonText exitToMenu = new GuiButtonText(this, new Vector2f(0.5f, yPosition += 1.2f * ySpacing), "Restart", GuiAlign.CENTRE);
 		exitToMenu.addLeftListener(new ScreenListener() {

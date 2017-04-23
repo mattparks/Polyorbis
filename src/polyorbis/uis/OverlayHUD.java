@@ -74,26 +74,26 @@ public class OverlayHUD extends ScreenObject {
 				ComponentPlayer player = (ComponentPlayer) PolyWorld.getEntityPlayer().getComponent(ComponentPlayer.class);
 
 				if (player != null) {
-					this.statusHealth.persentage = player.getHealth();
-					this.statusPower1.persentage = player.getCharge1();
-					this.statusPower2.persentage = player.getCharge2();
-					this.statusPower3.persentage = player.getCharge3();
+					this.statusHealth.changePersentage(player.getHealth());
+					this.statusPower1.changePersentage(player.getCharge1());
+					this.statusPower2.changePersentage(player.getCharge2());
+					this.statusPower3.changePersentage(player.getCharge3());
 
 					switch (player.getSelectedCharge()) {
 						case 1:
-							this.statusPower1.progress.getColourOffset().set(POWER1_ENABLED);
-							this.statusPower2.progress.getColourOffset().set(POWER_DISABLED);
-							this.statusPower3.progress.getColourOffset().set(POWER_DISABLED);
+							this.statusPower1.setColour(POWER1_ENABLED);
+							this.statusPower2.setColour(POWER_DISABLED);
+							this.statusPower3.setColour(POWER_DISABLED);
 							break;
 						case 2:
-							this.statusPower1.progress.getColourOffset().set(POWER_DISABLED);
-							this.statusPower2.progress.getColourOffset().set(POWER2_ENABLED);
-							this.statusPower3.progress.getColourOffset().set(POWER_DISABLED);
+							this.statusPower1.setColour(POWER_DISABLED);
+							this.statusPower2.setColour(POWER2_ENABLED);
+							this.statusPower3.setColour(POWER_DISABLED);
 							break;
 						case 3:
-							this.statusPower1.progress.getColourOffset().set(POWER_DISABLED);
-							this.statusPower2.progress.getColourOffset().set(POWER_DISABLED);
-							this.statusPower3.progress.getColourOffset().set(POWER3_ENABLED);
+							this.statusPower1.setColour(POWER_DISABLED);
+							this.statusPower2.setColour(POWER_DISABLED);
+							this.statusPower3.setColour(POWER3_ENABLED);
 							break;
 					}
 
@@ -102,7 +102,7 @@ public class OverlayHUD extends ScreenObject {
 					int previousHighscore = (int) Float.parseFloat(this.textHighscore.getTextString().substring(12));
 					this.textHighscore.setText("High Score: " + PolyWorld.getHighsore());
 					if (previousHighscore != PolyWorld.getHighsore()) {
-						this.textHighscore.setScaleDriver(new BounceDriver(1.2f, 1.4f, 0.5f));
+						this.textHighscore.setScaleDriver(new BounceDriver(1.2f, 1.4f, 0.8f));
 					}
 				}
 			}
@@ -138,6 +138,29 @@ public class OverlayHUD extends ScreenObject {
 			this.mainIcon.setInScreenCoords(false);
 
 			this.persentage = 0.0f;
+		}
+
+		private void changePersentage(float newPer) {
+			if (persentage != newPer) {
+				bounce();
+			}
+
+			this.persentage = newPer;
+		}
+
+		private void setColour(Colour newColour) {
+			if (progress.getColourOffset().lengthSquared() > newColour.lengthSquared()) {
+				bounce();
+			}
+
+			this.progress.getColourOffset().set(newColour);
+		}
+
+		private void bounce() {
+			this.background.setScaleDriver(new BounceDriver(1.0f, 1.2f, 0.8f));
+			this.foreground.setScaleDriver(new BounceDriver(1.0f, 1.2f, 0.8f));
+			this.progress.setScaleDriver(new BounceDriver(1.0f, 1.2f, 0.8f));
+			this.mainIcon.setScaleDriver(new BounceDriver(1.0f, 1.2f, 0.8f));
 		}
 
 		@Override

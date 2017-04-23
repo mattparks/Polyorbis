@@ -42,7 +42,7 @@ public class PolyWorld extends Module {
 	private float dayFactor;
 
 	private PlayData endGameData;
-	private float highsore;
+	private int highsore;
 
 	public PolyWorld() {
 		super(ModuleUpdate.UPDATE_PRE, PROFILE_TAB_NAME, FlounderEntities.class);
@@ -77,7 +77,7 @@ public class PolyWorld extends Module {
 		Vector3f.rotate(LIGHT_DIRECTION, FlounderSkybox.getRotation().set(0.0f, dayFactor * 360.0f, 0.0f), FlounderShadows.getLightPosition());
 		FlounderSkybox.setBlendFactor(1.0f);
 
-		float score = calculateScore(entityPlayer);
+		int score = calculateScore(entityPlayer);
 
 		if (score > highsore) {
 			highsore = score;
@@ -131,7 +131,7 @@ public class PolyWorld extends Module {
 	}
 
 	public static int calculateScore(int experience, float survivalTime) {
-		return experience + (int) (0.1862f * survivalTime); // TODO: Calculate better!
+		return experience + (int) (0.1862f * survivalTime);
 	}
 
 	public static PlayData getEndGameData() {
@@ -142,7 +142,7 @@ public class PolyWorld extends Module {
 		INSTANCE.endGameData = lastData;
 	}
 
-	public static float getHighsore() {
+	public static int getHighsore() {
 		return INSTANCE.highsore;
 	}
 

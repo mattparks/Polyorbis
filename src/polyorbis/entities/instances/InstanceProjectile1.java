@@ -20,7 +20,7 @@ public class InstanceProjectile1 extends Entity {
 	private static final TextureObject TEXTURE = TextureFactory.newBuilder().setFile(new MyFile(FlounderEntities.ENTITIES_FOLDER, "projectile1", "diffuse.png")).setNumberOfRows(1).create();
 	private static final TextureObject TEXTURE_GLOW = TextureFactory.newBuilder().setFile(new MyFile(FlounderEntities.ENTITIES_FOLDER, "projectile1", "glow.png")).setNumberOfRows(1).create();
 	private static final ParticleType[] TEMPLATES = new ParticleType[]{
-			new ParticleType("yellow", TextureFactory.newBuilder().setFile(new MyFile(FlounderParticles.PARTICLES_FOLDER, "yellowParticle.png")).setNumberOfRows(4).create(), 1.2f, 0.10f)
+			new ParticleType("yellow", TextureFactory.newBuilder().setFile(new MyFile(FlounderParticles.PARTICLES_FOLDER, "yellowParticle.png")).setNumberOfRows(4).create(), 1.24f, 0.10f)
 	};
 
 	public InstanceProjectile1(ISpatialStructure<Entity> structure, Vector3f rotation, float radius, Vector3f direction, boolean playerSpawned) {

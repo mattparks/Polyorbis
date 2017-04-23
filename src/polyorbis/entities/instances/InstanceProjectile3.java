@@ -18,7 +18,7 @@ public class InstanceProjectile3 extends Entity {
 	private static final TextureObject TEXTURE = TextureFactory.newBuilder().setFile(new MyFile(FlounderEntities.ENTITIES_FOLDER, "projectile3", "diffuse.png")).setNumberOfRows(1).create();
 	private static final TextureObject TEXTURE_GLOW = TextureFactory.newBuilder().setFile(new MyFile(FlounderEntities.ENTITIES_FOLDER, "projectile3", "glow.png")).setNumberOfRows(1).create();
 	private static final ParticleType[] TEMPLATES = new ParticleType[]{
-			new ParticleType("red", TextureFactory.newBuilder().setFile(new MyFile(FlounderParticles.PARTICLES_FOLDER, "redParticle.png")).setNumberOfRows(4).create(), 1.2f, 0.10f)
+			new ParticleType("red", TextureFactory.newBuilder().setFile(new MyFile(FlounderParticles.PARTICLES_FOLDER, "redParticle.png")).setNumberOfRows(4).create(), 0.8f, 0.10f)
 	};
 
 	public InstanceProjectile3(ISpatialStructure<Entity> structure, Vector3f rotation, float radius, Vector3f direction, boolean playerSpawned) {
