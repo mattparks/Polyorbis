@@ -1,6 +1,7 @@
 package polyorbis.entities.components;
 
 import flounder.entities.*;
+import flounder.entities.components.*;
 import flounder.framework.*;
 import flounder.guis.*;
 import flounder.helpers.*;
@@ -52,7 +53,7 @@ public class ComponentProjectile extends IComponentEntity implements IComponentE
 		spentTime += Framework.getDelta();
 
 		if (spentTime > timeout) {
-			getEntity().forceRemove();
+			getEntity().remove();
 		}
 
 		for (Entity entity : FlounderEntities.getEntities().getAll()) {

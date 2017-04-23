@@ -69,8 +69,7 @@ public class ComponentSpawn extends IComponentEntity implements IComponentEditor
 					}
 
 					if (current < 1) {
-						Entity e = new InstanceHealth(FlounderEntities.getEntities(), new Vector3f(), new Vector3f());
-						entityRotate(e, 0.0f);
+						Entity e = new InstanceHealth(FlounderEntities.getEntities(), randomEntityRotation(), radius);
 						spawned.add(e);
 					}
 
@@ -80,11 +79,8 @@ public class ComponentSpawn extends IComponentEntity implements IComponentEditor
 		}
 	}
 
-	private void entityRotate(Entity entity, float addedHeight) {
-		Vector3f rotationEntity = new Vector3f(rotation.x + (SPAWN_VARIATION * Maths.randomInRange(-1.0f, 1.0f)), rotation.y + (SPAWN_VARIATION * Maths.randomInRange(-1.0f, 1.0f)), rotation.z + (SPAWN_VARIATION * Maths.randomInRange(-1.0f, 1.0f)));
-		entity.setPosition(Vector3f.rotate(new Vector3f(0.0f, radius + addedHeight, 0.0f), rotationEntity, null));
-		entity.setRotation(new Vector3f(0.0f, rotationEntity.y, rotationEntity.z));
-		entity.setMoved();
+	private Vector3f randomEntityRotation() {
+		return new Vector3f(rotation.x + (SPAWN_VARIATION * Maths.randomInRange(-1.0f, 1.0f)), rotation.y + (SPAWN_VARIATION * Maths.randomInRange(-1.0f, 1.0f)), rotation.z + (SPAWN_VARIATION * Maths.randomInRange(-1.0f, 1.0f)));
 	}
 
 	@Override

@@ -23,17 +23,22 @@ public class InstanceProjectile1 extends Entity {
 			new ParticleType("yellow", TextureFactory.newBuilder().setFile(new MyFile(FlounderParticles.PARTICLES_FOLDER, "yellowParticle.png")).setNumberOfRows(4).create(), 1.2f, 0.10f)
 	};
 
-	public InstanceProjectile1(ISpatialStructure<Entity> structure, Vector3f rotation, float radius, Vector3f direction) {
+	public InstanceProjectile1(ISpatialStructure<Entity> structure, Vector3f rotation, float radius, Vector3f direction, boolean playerSpawned) {
 		super(structure, Vector3f.rotate(new Vector3f(0.0f, radius, 0.0f), rotation, null), new Vector3f(0.0f, rotation.y, rotation.z));
-		//	new ComponentCollect(this, pc -> pc.modifyHealth(-0.3f));
-		new ComponentProjectile(this, rotation, radius, -0.7f, direction.normalize().scale(0.3f), 0.08f, 3.0f);
-		new ComponentRotate(this, new Vector3f(0.3f, 1.0f, 1.0f), 0.8f);
+
+		if (!playerSpawned) {
+			new ComponentCollect(this, pc -> pc.modifyHealth(-0.7f));
+		}
+
+		new ComponentProjectile(this, rotation, radius, -0.7f, direction.normalize().scale(0.3f), 0.08f, 2.5f);
+		new ComponentRotate(this, rotation, radius, new Vector3f(0.3f, 1.0f, 1.0f), 0.7f);
 		new ComponentModel(this, 0.11f, MODEL, TEXTURE, 1);
 		new ComponentGlow(this, TEXTURE_GLOW);
 		new ComponentSurface(this, 1.0f, 0.0f, false, false);
 		new ComponentLight(this, new Vector3f(0.0f, 0.0f, 0.0f), new Colour(0.898f, 1.0f, 0.04f), new Attenuation(1.0f, 0.02f, 2.0f));
 		new ComponentCollision(this);
 		new ComponentParticles(this, Arrays.asList(TEMPLATES), new SpawnPoint(), new Vector3f(), 2.0f, 0.5f, 0.0f);
+		new ComponentRemoveFade(this);
 	}
 }
 

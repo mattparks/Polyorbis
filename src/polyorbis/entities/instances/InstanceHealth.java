@@ -15,19 +15,20 @@ public class InstanceHealth extends Entity {
 	private static final ModelObject MODEL = ModelFactory.newBuilder().setFile(new MyFile(FlounderEntities.ENTITIES_FOLDER, "health", "model.obj")).create();
 	private static final TextureObject TEXTURE = TextureFactory.newBuilder().setFile(new MyFile(FlounderEntities.ENTITIES_FOLDER, "health", "diffuse.png")).setNumberOfRows(1).create();
 
-	public InstanceHealth(ISpatialStructure<Entity> structure, Vector3f position, Vector3f rotation) {
-		super(structure, position, rotation);
+	public InstanceHealth(ISpatialStructure<Entity> structure, Vector3f rotation, float radius) {
+		super(structure, Vector3f.rotate(new Vector3f(0.0f, radius, 0.0f), rotation, null), new Vector3f(0.0f, rotation.y, rotation.z));
 		new ComponentCollect(this, pc -> {
 			pc.modifyHealth(0.1f);
 			pc.addCharge1(0.20f);
-			pc.addCharge2(0.10f);
-			pc.addCharge3(0.05f);
+			pc.addCharge2(0.15f);
+			pc.addCharge3(0.10f);
 		});
-		new ComponentRotate(this, new Vector3f(0.0f, 1.0f, 1.0f), 0.4f);
+		new ComponentRotate(this, rotation, radius, new Vector3f(0.0f, 1.0f, 1.0f), 0.4f);
 		new ComponentModel(this, 0.18f, MODEL, TEXTURE, 1);
 		new ComponentSurface(this, 1.0f, 0.0f, false, false);
 		new ComponentLight(this, new Vector3f(0.0f, 0.0f, 0.0f), new Colour(0.812f, 0.243f, 0.131f), new Attenuation(1.0f, 0.02f, 2.0f));
 		new ComponentCollision(this);
+		new ComponentRemoveFade(this);
 	}
 }
 

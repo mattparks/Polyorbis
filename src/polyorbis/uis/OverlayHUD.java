@@ -12,6 +12,11 @@ import polyorbis.world.*;
 import java.util.*;
 
 public class OverlayHUD extends ScreenObject {
+	private static final Colour POWER_DISABLED = new Colour(0.8f, 0.8f, 0.8f);
+	private static final Colour POWER1_ENABLED = new Colour(0.9f, 1.0f, 0.1f);
+	private static final Colour POWER2_ENABLED = new Colour(0.1f, 0.2f, 1.0f);
+	private static final Colour POWER3_ENABLED = new Colour(1.0f, 0.1f, 0.2f);
+
 	private TextureObject hudTexture;
 	private TextureObject hudProgress;
 
@@ -69,19 +74,19 @@ public class OverlayHUD extends ScreenObject {
 
 					switch (player.getSelectedCharge()) {
 						case 1:
-							this.statusPower1.progress.getColourOffset().set(0.2f, 1.0f, 0.2f);
-							this.statusPower2.progress.getColourOffset().set(0.8f, 0.8f, 0.8f);
-							this.statusPower3.progress.getColourOffset().set(0.8f, 0.8f, 0.8f);
+							this.statusPower1.progress.getColourOffset().set(POWER1_ENABLED);
+							this.statusPower2.progress.getColourOffset().set(POWER_DISABLED);
+							this.statusPower3.progress.getColourOffset().set(POWER_DISABLED);
 							break;
 						case 2:
-							this.statusPower1.progress.getColourOffset().set(0.8f, 0.8f, 0.8f);
-							this.statusPower2.progress.getColourOffset().set(0.2f, 1.0f, 0.2f);
-							this.statusPower3.progress.getColourOffset().set(0.8f, 0.8f, 0.8f);
+							this.statusPower1.progress.getColourOffset().set(POWER_DISABLED);
+							this.statusPower2.progress.getColourOffset().set(POWER2_ENABLED);
+							this.statusPower3.progress.getColourOffset().set(POWER_DISABLED);
 							break;
 						case 3:
-							this.statusPower1.progress.getColourOffset().set(0.8f, 0.8f, 0.8f);
-							this.statusPower2.progress.getColourOffset().set(0.8f, 0.8f, 0.8f);
-							this.statusPower3.progress.getColourOffset().set(0.2f, 1.0f, 0.2f);
+							this.statusPower1.progress.getColourOffset().set(POWER_DISABLED);
+							this.statusPower2.progress.getColourOffset().set(POWER_DISABLED);
+							this.statusPower3.progress.getColourOffset().set(POWER3_ENABLED);
 							break;
 					}
 

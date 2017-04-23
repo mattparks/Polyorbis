@@ -5,6 +5,7 @@ import flounder.framework.*;
 import flounder.guis.*;
 import flounder.helpers.*;
 import flounder.inputs.*;
+import flounder.logger.*;
 import flounder.maths.*;
 import flounder.maths.vectors.*;
 import polyorbis.entities.instances.*;
@@ -144,27 +145,35 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 			switch (selectedCharge) {
 				case 1:
 					if (charge1 > 0.0f) {
-						new InstanceProjectile1(FlounderEntities.getEntities(), new Vector3f(0.0f, currentY, currentZ), currentRadius, new Vector3f(0.0f, currentSpeedY + 0.03f, currentSpeedZ));
+						new InstanceProjectile1(FlounderEntities.getEntities(), new Vector3f(0.0f, currentY, currentZ), currentRadius, new Vector3f(0.0f, currentSpeedY + 0.03f, currentSpeedZ), true);
 					}
 
-					charge1 -= 0.05f;
+					charge1 -= 0.08f;
 					charge1 = Maths.clamp(charge1, 0.0f, 1.0f);
 					break;
 				case 2:
 					if (charge2 > 0.0f) {
-						new InstanceProjectile2(FlounderEntities.getEntities(), new Vector3f(0.0f, currentY, currentZ), currentRadius, new Vector3f(0.0f, currentSpeedY + 0.03f, currentSpeedZ));
+						new InstanceProjectile2(FlounderEntities.getEntities(), new Vector3f(0.0f, currentY, currentZ), currentRadius, new Vector3f(0.0f, currentSpeedY + 0.03f, currentSpeedZ), true);
 					}
 
-					charge2 -= 0.10f;
+					charge2 -= 0.09f;
 					charge2 = Maths.clamp(charge2, 0.0f, 1.0f);
 					break;
 				case 3:
 					if (charge3 > 0.0f) {
-						// TODO: Send out a large amount of particles in all directions!
-						new InstanceProjectile3(FlounderEntities.getEntities(), new Vector3f(0.0f, currentY, currentZ), currentRadius, new Vector3f(0.0f, currentSpeedY + 0.03f, currentSpeedZ));
+						float amount = 25.0f;
+
+						for (int i = 0; i < amount; i++) {
+							float theta = 360.0f * ((float) i / amount);
+							Vector2f direction = new Vector2f();
+							Vector2f.rotate(new Vector2f(1.0f, 0.0f), theta, direction);
+							direction.normalize();
+							FlounderLogger.log(direction);
+							new InstanceProjectile3(FlounderEntities.getEntities(), new Vector3f(0.0f, currentY, currentZ), currentRadius, new Vector3f(0.0f, direction.x + 0.03f, direction.y), true);
+						}
 					}
 
-					charge3 -= 0.10f;
+					charge3 -= 0.20f;
 					charge3 = Maths.clamp(charge3, 0.0f, 1.0f);
 					break;
 			}

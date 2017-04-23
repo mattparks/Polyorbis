@@ -9,6 +9,9 @@ import flounder.maths.vectors.*;
 import javax.swing.*;
 
 public class ComponentRotate extends IComponentEntity implements IComponentEditor {
+	private Vector3f rotation;
+	private float radius;
+
 	private Vector3f axis;
 	private float speed;
 
@@ -21,8 +24,11 @@ public class ComponentRotate extends IComponentEntity implements IComponentEdito
 		super(entity);
 	}
 
-	public ComponentRotate(Entity entity, Vector3f axis, float speed) {
+	public ComponentRotate(Entity entity, Vector3f rotation, float radius, Vector3f axis, float speed) {
 		super(entity);
+
+		this.rotation = rotation;
+		this.radius = radius;
 
 		this.axis = axis;
 		this.speed = speed;
