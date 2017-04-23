@@ -98,12 +98,12 @@ public class PolyRenderer extends RendererMaster {
 		Camera camera = FlounderCamera.getCamera();
 		OpenGlUtils.prepareNewRenderParse(0.0f, 0.0f, 0.0f);
 
+		particleRenderer.render(clipPlane, camera);
+
 		skyboxRenderer.render(clipPlane, camera);
 		entitiesRenderer.render(clipPlane, camera);
 
 		boundingRenderer.render(clipPlane, camera);
-
-		particleRenderer.render(clipPlane, camera);
 	}
 
 	private void renderPost(boolean isPaused, float blurFactor) {

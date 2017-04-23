@@ -18,13 +18,13 @@ public class InstancePlanet extends Entity {
 		TEXTURE.setHasAlpha(true);
 		new ComponentPlanet(this,
 				new InstanceSun(FlounderEntities.getEntities(), new Vector3f(-100.0f, -100.0f, -100.0f), new Vector3f()),
+				new InstanceAtmosphere(FlounderEntities.getEntities(), new Vector3f(), new Vector3f()),
 				new Entity[]{
 						new InstanceMoon1(FlounderEntities.getEntities(), new Vector3f(10.0f, -20.0f, -10.0f), new Vector3f()),
 						new InstanceMoon2(FlounderEntities.getEntities(), new Vector3f(18.0f, 26.0f, 18.0f), new Vector3f()),
 						new InstanceMoon3(FlounderEntities.getEntities(), new Vector3f(-20.0f, 30.0f, 20.0f), new Vector3f()),
 						new InstanceRing(FlounderEntities.getEntities(), new Vector3f(), new Vector3f())
 				},
-				null, // TODO: new InstanceAtmosphere(FlounderEntities.getEntities(), new Vector3f(), new Vector3f()),
 				new Vector3f[]{
 						new Vector3f(0.0f, 349.3f, 52.5f),
 						new Vector3f(0.0f, 172.2f, 66.4f),

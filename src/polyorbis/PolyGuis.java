@@ -66,6 +66,20 @@ public class PolyGuis extends GuiMaster {
 				toggleDebug();
 			}
 		});
+
+		FlounderEvents.addEvent(new IEvent() {
+			private KeyButton toggleHUD = new KeyButton(GLFW_KEY_F4);
+
+			@Override
+			public boolean eventTriggered() {
+				return toggleHUD.wasDown();
+			}
+
+			@Override
+			public void onEvent() {
+				toggleHUD();
+			}
+		});
 	}
 
 	@Override
@@ -123,6 +137,20 @@ public class PolyGuis extends GuiMaster {
 				overlayDebug.setAlphaDriver(new SlideDriver(overlayDebug.getAlpha(), 1.0f, SLIDE_TIME));
 			} else {
 				overlayDebug.setAlphaDriver(new SlideDriver(overlayDebug.getAlpha(), 0.0f, SLIDE_TIME));
+			}
+		}
+	}
+
+	public void toggleHUD() {
+		if (overlayDeath.getAlpha() != 0.0f) {
+			return;
+		}
+
+		if (!isGamePaused()) {
+			if (overlayHUD.getAlpha() < 0.5f) {
+				overlayHUD.setAlphaDriver(new SlideDriver(overlayHUD.getAlpha(), 1.0f, SLIDE_TIME));
+			} else {
+				overlayHUD.setAlphaDriver(new SlideDriver(overlayHUD.getAlpha(), 0.0f, SLIDE_TIME));
 			}
 		}
 	}
