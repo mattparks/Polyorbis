@@ -12,13 +12,10 @@ import javax.swing.*;
 import java.util.*;
 
 public class ComponentEnemy extends IComponentEntity implements IComponentEditor {
-	private static final float SPEED = 0.8f;
+	private static final float SPEED = 14.0f;
 
 	private Vector3f rotation;
 	private float radius;
-
-	private float deviation;
-	private float randomness;
 
 	private float health;
 	private boolean killed;
@@ -37,9 +34,6 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 
 		this.rotation = rotation;
 		this.radius = radius;
-
-		this.deviation = 0.2f;
-		this.randomness = Maths.randomInRange(0.0f, 10.0f);
 
 		this.health = health * Maths.randomInRange(0.6f, 1.0f);
 		this.killed = false;
@@ -80,20 +74,29 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 			getEntity().remove();
 			killed = true;
 
-		//	PolyWorld.fireProjectile(new Vector3f(rotation), radius, 3, new Vector2f(0.03f, 0.0f), false);
-
 			if (player != null) {
 				player.addExperience(15);
 			}
 		}
 
 		if (!killed) {
-			// TODO: Do ai.
+			// TODO: Real movement speeds.
+			float currentSpeedY = 0.9f;
+			float currentSpeedZ = 0.9f;
+			float PLAYER_SPEED = 1.2f;
+
+			// TODO: Shooting AI.
+
+			// The wacky rotation effect on run.
+			float as = Math.min((Math.abs(currentSpeedY) + Math.abs(currentSpeedZ)) / PLAYER_SPEED, 1.0f);
+			float rx = as * 15.0f * (float) (Math.sin(0.25 * 15.0f * Framework.getTimeSec()) - Math.sin(1.2 * 15.0f * Framework.getTimeSec()) + Math.cos(0.5 * 15.0f * Framework.getTimeSec()));
+			float rz = as * 15.0f * (float) (Math.cos(0.25 * 15.0f * Framework.getTimeSec()) - Math.cos(1.2 * 15.0f * Framework.getTimeSec()) + Math.sin(0.5 * 15.0f * Framework.getTimeSec()));
+
+			// Moves and rotates the player.
 			Vector3f right = new Vector3f(0.0f, 1.0f, 1.0f).scale(SPEED * Framework.getDelta());
-			right.y -= deviation * Math.sin(Math.PI * randomness * Framework.getTimeSec());
-			right.z += deviation * Math.sin(Math.PI * randomness * Framework.getTimeSec());
 			Vector3f.add(rotation, right, rotation);
 			Vector3f.rotate(new Vector3f(0.0f, radius, 0.0f), rotation, getEntity().getPosition());
+			getEntity().getRotation().set(rx, rotation.y, rotation.z + rz);
 			getEntity().setMoved();
 		}
 	}

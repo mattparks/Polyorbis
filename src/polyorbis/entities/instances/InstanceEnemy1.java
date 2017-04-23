@@ -20,9 +20,9 @@ public class InstanceEnemy1 extends Entity {
 		super(structure, Vector3f.rotate(new Vector3f(0.0f, radius, 0.0f), rotation, null), new Vector3f(0.0f, rotation.y, rotation.z));
 		new ComponentEnemy(this, rotation, radius, 0.9f);
 		new ComponentCollect(this, pc -> {
-			pc.modifyHealth(-0.3f);
+			pc.modifyHealth(-0.2f);
 		});
-		new ComponentModel(this, 0.13f, MODEL, TEXTURE, 1);
+		new ComponentModel(this, 0.2f, MODEL, TEXTURE, 1);
 		new ComponentSurface(this, 1.0f, 0.0f, false, false, true);
 		new ComponentLight(this, new Vector3f(0.0f, 0.0f, 0.0f), new Colour(0.812f, 0.243f, 0.131f), new Attenuation(1.0f, 0.02f, 2.0f));
 		new ComponentGlow(this, TEXTURE_GLOW);

@@ -13,7 +13,7 @@ import javax.swing.*;
 import java.util.*;
 
 public class ComponentSpawn extends IComponentEntity implements IComponentEditor {
-	private static final float SPAWN_VARIATION = 15.0f;
+	private static final float SPAWN_VARIATION = 18.0f;
 
 	private Vector3f rotation;
 	private float radius;
