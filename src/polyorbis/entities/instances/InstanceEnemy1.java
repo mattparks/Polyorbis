@@ -2,8 +2,8 @@ package polyorbis.entities.instances;
 
 import flounder.entities.*;
 import flounder.entities.components.*;
-//import flounder.lights.Attenuation;
-//import flounder.maths.Colour;
+import flounder.lights.Attenuation;
+import flounder.maths.Colour;
 import flounder.maths.vectors.*;
 import flounder.models.*;
 import flounder.resources.*;
@@ -24,9 +24,7 @@ public class InstanceEnemy1 extends Entity {
 		});
 		new ComponentModel(this, 0.13f, MODEL, TEXTURE, 1);
 		new ComponentSurface(this, 1.0f, 0.0f, false, false);
-		//TODO Matt for whatever reason me putting this in makes it lag hard, want to have the enemy spin and produce a red light
-		//new ComponentLight(this, new Vector3f(0.0f, 0.0f, 0.0f), new Colour(0.812f, 0.243f, 0.131f), new Attenuation(1.0f, 0.02f, 2.0f));
-		//new ComponentRotate(this, rotation, radius, new Vector3f(0.0f, 1.0f, 0.0f), 0.4f);
+		new ComponentLight(this, new Vector3f(0.0f, 0.0f, 0.0f), new Colour(0.812f, 0.243f, 0.131f), new Attenuation(1.0f, 0.02f, 2.0f));
 		new ComponentGlow(this, TEXTURE_GLOW);
 		new ComponentCollision(this);
 		new ComponentRemoveFade(this);

@@ -1,6 +1,7 @@
 package polyorbis.entities.components;
 
 import flounder.entities.*;
+import flounder.framework.*;
 import flounder.helpers.*;
 import flounder.maths.*;
 import flounder.maths.vectors.*;
@@ -9,8 +10,13 @@ import polyorbis.world.*;
 import javax.swing.*;
 
 public class ComponentEnemy extends IComponentEntity implements IComponentEditor {
+	private static final float SPEED = 0.8f;
+
 	private Vector3f rotation;
 	private float radius;
+
+	private float deviation;
+	private float randomness;
 
 	private float health;
 	private boolean killed;
@@ -29,6 +35,9 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 
 		this.rotation = rotation;
 		this.radius = radius;
+
+		this.deviation = 0.2f;
+		this.randomness = Maths.randomInRange(0.0f, 10.0f);
 
 		this.health = health * Maths.randomInRange(0.6f, 1.0f);
 		this.killed = false;
@@ -49,6 +58,12 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 
 		if (!killed) {
 			// TODO: Do ai.
+			Vector3f right = new Vector3f(0.0f, 1.0f, 1.0f).scale(SPEED * Framework.getDelta());
+			right.y -= deviation * Math.sin(Math.PI * randomness * Framework.getTimeSec());
+			right.z += deviation * Math.sin(Math.PI * randomness * Framework.getTimeSec());
+			Vector3f.add(rotation, right, rotation);
+			Vector3f.rotate(new Vector3f(0.0f, radius, 0.0f), rotation, getEntity().getPosition());
+			getEntity().setMoved();
 		}
 	}
 
