@@ -4,6 +4,7 @@ import flounder.entities.*;
 import flounder.framework.*;
 import flounder.maths.*;
 import flounder.maths.vectors.*;
+import flounder.particles.*;
 import flounder.resources.*;
 import flounder.shadows.*;
 import flounder.skybox.*;
@@ -40,17 +41,22 @@ public class PolyWorld extends Module {
 	private LinearDriver dayDriver;
 	private float dayFactor;
 
+	private PlayData endGameData;
+	private float highsore;
+
 	public PolyWorld() {
 		super(ModuleUpdate.UPDATE_PRE, PROFILE_TAB_NAME, FlounderEntities.class);
 	}
 
 	@Override
 	public void init() {
-		this.entityPlayer = new InstancePlayer(FlounderEntities.getEntities(), new Vector3f(0.0f, 0.0f, 0.0f), new Vector3f());
-		this.entityPlanet = new InstancePlanet(FlounderEntities.getEntities(), new Vector3f(0.0f, 0.0f, 0.0f), new Vector3f());
+		this.entityPlayer = null;
+		this.entityPlanet = null;
 
 		this.dayDriver = new LinearDriver(0.0f, 100.0f, DAY_NIGHT_CYCLE);
 		this.dayFactor = 0.0f;
+
+		this.endGameData = null;
 
 		FlounderShadows.setBrightnessBoost(PolyConfigs.BRIGHTNESS_BOOST.getFloat());
 		FlounderShadows.setShadowSize(PolyConfigs.SHADOWMAP_SIZE.getInteger());
@@ -60,6 +66,8 @@ public class PolyWorld extends Module {
 		FlounderSkybox.setCubemap(TextureFactory.newBuilder().setCubemap(SKYBOX_TEXTURE_FILES).create());
 		FlounderShadows.setShadowBoxOffset(20.0f);
 		FlounderShadows.setShadowBoxDistance(30.0f);
+
+		reset();
 	}
 
 	@Override
@@ -68,6 +76,24 @@ public class PolyWorld extends Module {
 		dayFactor = dayDriver.update(Framework.getDelta()) / 100.0f;
 		Vector3f.rotate(LIGHT_DIRECTION, FlounderSkybox.getRotation().set(0.0f, dayFactor * 360.0f, 0.0f), FlounderShadows.getLightPosition());
 		FlounderSkybox.setBlendFactor(1.0f);
+
+		float score = calculateScore(entityPlayer);
+
+		if (score > highsore) {
+			highsore = score;
+		}
+	}
+
+	public static void reset() {
+		for (Entity entity : FlounderEntities.getEntities().getAll()) {
+			entity.forceRemove();
+		}
+
+		FlounderParticles.clear();
+
+		INSTANCE.entityPlayer = new InstancePlayer(FlounderEntities.getEntities(), new Vector3f(0.0f, 0.0f, 0.0f), new Vector3f());
+		INSTANCE.entityPlanet = new InstancePlanet(FlounderEntities.getEntities(), new Vector3f(0.0f, 0.0f, 0.0f), new Vector3f());
+		INSTANCE.endGameData = null;
 	}
 
 	@Override
@@ -90,8 +116,34 @@ public class PolyWorld extends Module {
 		return INSTANCE.dayFactor;
 	}
 
+	public static int calculateScore(Entity player) {
+		if (player == null) {
+			return -1;
+		}
+
+		ComponentPlayer p = (ComponentPlayer) player.getComponent(ComponentPlayer.class);
+
+		if (p != null) {
+			return calculateScore(p.getExperience(), p.getSurvivalTime());
+		}
+
+		return -1;
+	}
+
 	public static int calculateScore(int experience, float survivalTime) {
-		return experience + (int) (0.321f * survivalTime); // TODO: Calculate better!
+		return experience + (int) (0.1862f * survivalTime); // TODO: Calculate better!
+	}
+
+	public static PlayData getEndGameData() {
+		return INSTANCE.endGameData;
+	}
+
+	public static void setEndGameData(PlayData lastData) {
+		INSTANCE.endGameData = lastData;
+	}
+
+	public static float getHighsore() {
+		return INSTANCE.highsore;
 	}
 
 	@Override

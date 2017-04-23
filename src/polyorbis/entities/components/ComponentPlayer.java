@@ -32,6 +32,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 
 	private int experience;
 	private float survivalTime;
+	private int kills;
 	private float health;
 
 	private float charge1;
@@ -72,6 +73,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 
 		this.experience = 0;
 		this.survivalTime = 0.0f;
+		this.kills = 0;
 		this.health = 0.6f;
 
 		this.charge1 = 1.0f;
@@ -93,6 +95,13 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 	public void update() {
 		// Do not update on paused.
 		if (FlounderGuis.getGuiMaster() == null || FlounderGuis.getGuiMaster().isGamePaused()) {
+			return;
+		}
+
+		// Kill the player!
+		if (health <= 0.0f) {
+			PolyWorld.setEndGameData(new PlayData(experience, survivalTime, kills));
+			getEntity().remove();
 			return;
 		}
 
@@ -157,7 +166,6 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 			if (!FlounderJoysticks.isConnected(0)) {
 				direction.set((FlounderMouse.getPositionX() * 2.0f - 1.0f) + 0.03f, FlounderMouse.getPositionY() * 2.0f - 1.0f);
 				direction.y /= FlounderDisplay.getAspectRatio();
-				direction.normalize();
 			}
 
 			// Fixes any zero vectors.
@@ -165,6 +173,9 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 				direction.x += 0.03f;
 			}
 
+			direction.normalize();
+
+			// Fire a type of selected particle.
 			switch (selectedCharge) {
 				case 1:
 					if (charge1 > 0.0f) {
@@ -244,6 +255,14 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 
 	public void addExperience(int xp) {
 		this.experience += xp;
+	}
+
+	public int getKills() {
+		return kills;
+	}
+
+	public void addKill() {
+		this.kills++;
 	}
 
 	public float getSurvivalTime() {

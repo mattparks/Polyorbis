@@ -7,6 +7,7 @@ import flounder.inputs.*;
 import flounder.maths.*;
 import flounder.visual.*;
 import polyorbis.uis.*;
+import polyorbis.world.*;
 
 import static org.lwjgl.glfw.GLFW.*;
 
@@ -18,6 +19,7 @@ public class PolyGuis extends GuiMaster {
 	private OverlayDebug overlayDebug;
 	private OverlayHUD overlayHUD;
 	private OverlaySlider overlaySlider;
+	private OverlayDeath overlayDeath;
 
 	public PolyGuis() {
 		super();
@@ -28,10 +30,12 @@ public class PolyGuis extends GuiMaster {
 		this.overlayDebug = new OverlayDebug(FlounderGuis.getContainer());
 		this.overlayHUD = new OverlayHUD(FlounderGuis.getContainer());
 		this.overlaySlider = new OverlaySlider(FlounderGuis.getContainer());
+		this.overlayDeath  = new OverlayDeath(FlounderGuis.getContainer());
 
 		this.overlayDebug.setAlphaDriver(new ConstantDriver(Framework.isRunningFromJar() ? 0.0f : 1.0f));
 		this.overlayHUD.setAlphaDriver(new ConstantDriver(1.0f));
 		this.overlaySlider.setAlphaDriver(new ConstantDriver(0.0f));
+		this.overlayDeath.setAlphaDriver(new ConstantDriver(0.0f));
 
 		FlounderGuis.getSelector().initJoysticks(0, 0, 1, 0, 1);
 
@@ -66,6 +70,7 @@ public class PolyGuis extends GuiMaster {
 
 	@Override
 	public void update() {
+		toggleDeath(PolyWorld.getEndGameData() != null);
 	}
 
 	@Override
@@ -74,12 +79,12 @@ public class PolyGuis extends GuiMaster {
 
 	@Override
 	public boolean isGamePaused() {
-		return overlaySlider.getAlpha() > 0.1f;
+		return overlaySlider.getAlpha() > 0.1f || overlayDeath.getAlpha() != 0.0f;
 	}
 
 	@Override
 	public float getBlurFactor() {
-		return overlaySlider.getBlurFactor();
+		return overlayDeath.getAlpha() != 0.0f ? overlayDeath.getAlpha() : overlaySlider.getBlurFactor();
 	}
 
 	@Override
@@ -88,6 +93,10 @@ public class PolyGuis extends GuiMaster {
 	}
 
 	public void togglePause(boolean force) {
+		if (overlayDeath.getAlpha() != 0.0f) {
+			return;
+		}
+
 		if (force) {
 			overlayHUD.setAlphaDriver(new ConstantDriver(1.0f));
 			overlayDebug.setAlphaDriver(new ConstantDriver(0.0f));
@@ -105,6 +114,10 @@ public class PolyGuis extends GuiMaster {
 	}
 
 	public void toggleDebug() {
+		if (overlayDeath.getAlpha() != 0.0f) {
+			return;
+		}
+
 		if (!isGamePaused()) {
 			if (overlayDebug.getAlpha() < 0.5f) {
 				overlayDebug.setAlphaDriver(new SlideDriver(overlayDebug.getAlpha(), 1.0f, SLIDE_TIME));
@@ -114,12 +127,38 @@ public class PolyGuis extends GuiMaster {
 		}
 	}
 
+	public void toggleDeath(boolean open) {
+		if (open) {
+			if (overlayDeath.getAlpha() == 0.0f) {
+				overlayHUD.setAlphaDriver(new SlideDriver(overlayHUD.getAlpha(), 0.0f, SLIDE_TIME));
+				overlayDebug.setAlphaDriver(new SlideDriver(overlayDebug.getAlpha(), 0.0f, SLIDE_TIME));
+				overlaySlider.setAlphaDriver(new SlideDriver(overlaySlider.getAlpha(), 0.0f, SLIDE_TIME));
+				overlayDeath.setAlphaDriver(new SlideDriver(overlayDeath.getAlpha(), 1.0f, SLIDE_TIME));
+			}
+		} else {
+			if (overlayDeath.getAlpha() == 1.0f) {
+				overlayHUD.setAlphaDriver(new SlideDriver(overlayHUD.getAlpha(), 1.0f, SLIDE_TIME));
+				overlayDebug.setAlphaDriver(new SlideDriver(overlayDebug.getAlpha(), 0.0f, SLIDE_TIME));
+				overlaySlider.setAlphaDriver(new SlideDriver(overlaySlider.getAlpha(), 0.0f, SLIDE_TIME));
+				overlayDeath.setAlphaDriver(new SlideDriver(overlayDeath.getAlpha(), 0.0f, SLIDE_TIME));
+			}
+		}
+	}
+
+	public OverlayHUD getOverlayHUD() {
+		return overlayHUD;
+	}
+
 	public OverlayDebug getOverlayDebug() {
 		return overlayDebug;
 	}
 
 	public OverlaySlider getOverlaySlider() {
 		return overlaySlider;
+	}
+
+	public OverlayDeath getOverlayDeath() {
+		return overlayDeath;
 	}
 
 	@Override

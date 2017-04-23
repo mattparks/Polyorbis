@@ -23,7 +23,7 @@ public class InstanceHealth extends Entity {
 			pc.addCharge2(0.15f);
 			pc.addCharge3(0.10f);
 
-			pc.addExperience(7);
+			pc.addExperience(3);
 		});
 		new ComponentRotate(this, rotation, radius, new Vector3f(0.0f, 1.0f, 1.0f), 0.4f);
 		new ComponentModel(this, 0.18f, MODEL, TEXTURE, 1);

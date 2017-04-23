@@ -70,7 +70,7 @@ public class ComponentProjectile extends IComponentEntity implements IComponentE
 					enemy.modifyHealth(damage);
 
 					if (player != null) {
-						player.addExperience(10);
+						player.addExperience(5);
 					}
 				}
 			}

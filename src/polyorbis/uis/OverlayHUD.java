@@ -2,10 +2,12 @@ package polyorbis.uis;
 
 import flounder.fonts.*;
 import flounder.guis.*;
+import flounder.logger.*;
 import flounder.maths.*;
 import flounder.maths.vectors.*;
 import flounder.resources.*;
 import flounder.textures.*;
+import flounder.visual.*;
 import polyorbis.entities.components.*;
 import polyorbis.world.*;
 
@@ -22,6 +24,7 @@ public class OverlayHUD extends ScreenObject {
 
 	private TextObject textScore;
 	private TextObject textTime;
+	private TextObject textHighscore;
 	private boolean updateText;
 
 	private HudStatus statusHealth;
@@ -43,6 +46,10 @@ public class OverlayHUD extends ScreenObject {
 		this.textTime = new TextObject(this, new Vector2f(0.01f, 0.06f), "Time: 0.0", 1.2f, FlounderFonts.SEGOE, 0.5f, GuiAlign.LEFT);
 		this.textTime.setInScreenCoords(false);
 		this.textTime.setColour(new Colour(1.0f, 1.0f, 1.0f));
+
+		this.textHighscore = new TextObject(this, new Vector2f(0.01f, 0.10f), "High Score: 0", 1.2f, FlounderFonts.SEGOE, 0.5f, GuiAlign.LEFT);
+		this.textHighscore.setInScreenCoords(false);
+		this.textHighscore.setColour(new Colour(1.0f, 1.0f, 1.0f));
 
 		this.updateText = false;
 
@@ -90,9 +97,13 @@ public class OverlayHUD extends ScreenObject {
 							break;
 					}
 
-					this.textScore.setText("Score: " + PolyWorld.calculateScore(player.getExperience(), player.getSurvivalTime()));
+					this.textScore.setText("Score: " + PolyWorld.calculateScore(player.getEntity()));
 					this.textTime.setText("Time: " + Maths.roundToPlace(player.getSurvivalTime(), 2));
-
+					int previousHighscore = (int) Float.parseFloat(this.textHighscore.getTextString().substring(12));
+					this.textHighscore.setText("High Score: " + PolyWorld.getHighsore());
+					if (previousHighscore != PolyWorld.getHighsore()) {
+						this.textHighscore.setScaleDriver(new BounceDriver(1.2f, 1.4f, 0.5f));
+					}
 				}
 			}
 			this.updateText = false;
