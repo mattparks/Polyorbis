@@ -75,11 +75,7 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 
 					float distance = Vector3f.getDistance(PolyWorld.getEntityPlayer().getPosition(), getEntity().getPosition());
 
-					if (distance < 3.75f) {
-						if (playerRotation == null) {
-							return;
-						}
-
+					if (distance < 4.20f) {
 						Vector2f thisRotation = new Vector2f(rotation.y, rotation.z);
 						thisRotation.x = Maths.normalizeAngle(thisRotation.x);
 						thisRotation.y = Maths.normalizeAngle(thisRotation.y);
@@ -96,7 +92,7 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 						float random = (float) Math.random();
 						int projectile = 1;
 
-						if (random < 0.09f) {
+						if (random < 0.05f) {
 							projectile = 3;
 						} else if (random < 0.55f) {
 							projectile = 2;

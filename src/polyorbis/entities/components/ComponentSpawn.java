@@ -59,13 +59,13 @@ public class ComponentSpawn extends IComponentEntity implements IComponentEditor
 
 			int maxAllowed = 1;
 
-			if (PolyWorld.calculateScore(PolyWorld.getEntityPlayer()) > 2000) {
+			if (PolyWorld.calculateScore(PolyWorld.getEntityPlayer()) > 4000) {
 				maxAllowed = 5;
-			} else if (PolyWorld.calculateScore(PolyWorld.getEntityPlayer()) > 1200) {
+			} else if (PolyWorld.calculateScore(PolyWorld.getEntityPlayer()) > 2000) {
 				maxAllowed = 4;
-			} else if (PolyWorld.calculateScore(PolyWorld.getEntityPlayer()) > 800) {
+			} else if (PolyWorld.calculateScore(PolyWorld.getEntityPlayer()) > 1000) {
 				maxAllowed = 3;
-			} else if (PolyWorld.calculateScore(PolyWorld.getEntityPlayer()) > 300) {
+			} else if (PolyWorld.calculateScore(PolyWorld.getEntityPlayer()) > 500) {
 				maxAllowed = 2;
 			}
 

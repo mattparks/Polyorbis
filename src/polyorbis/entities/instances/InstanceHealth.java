@@ -27,7 +27,7 @@ public class InstanceHealth extends Entity {
 		new ComponentRotate(this, rotation, radius, new Vector3f(0.0f, 1.0f, 1.0f), 0.4f);
 		new ComponentModel(this, 0.15f, MODEL, TEXTURE, 1);
 		new ComponentSurface(this, 1.0f, 0.0f, false, false, true);
-		new ComponentLight(this, new Vector3f(0.0f, 0.0f, 0.0f), new Colour(1.0f, 0.125f, 0.588f), new Attenuation(1.0f, 0.02f, 2.0f));
+		new ComponentLight(this, new Vector3f(0.0f, 0.0f, 0.0f), new Colour(1.0f, 0.0f, 1.0f), new Attenuation(1.0f, 0.02f, 2.0f));
 		new ComponentCollision(this);
 		new ComponentRemoveFade(this);
 	}
