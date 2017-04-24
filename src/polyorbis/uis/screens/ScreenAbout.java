@@ -14,7 +14,7 @@ public class ScreenAbout extends ScreenObject {
 
 		// Text 1.
 		String t1 = "Polyorbis was written in 3 days for the Ludum Dare 38 Jam, created by: Mattparks and Decaxon. " +
-				"The competitions theme is: A Small World. We used our open-sourced Java OpenGL game engine: Flounder, found at https://github.com/mattparks/Flounder-Engine, to create our low poly action game. " +
+				"The competitions theme is: A Small World. We used our open-sourced Java OpenGL game engine: Flounder, found at https://github.com/Equilibrium-Games/Flounder-Engine, to create our low poly action game. " +
 				"Info on how to play the game can be found in the F1 help menu. Our twitters are @Mattparks5855, @decaxon, and @EquilGame.";
 		TextObject text1 = new TextObject(this, new Vector2f(0.5f, 0.4f), t1, 1.4f, FlounderFonts.CANDARA, 0.7f, GuiAlign.CENTRE);
 		text1.setInScreenCoords(true);
