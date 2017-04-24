@@ -28,11 +28,11 @@ public class PolyWorld extends Module {
 			new MyFile(FlounderSkybox.SKYBOX_FOLDER, "starsFront.png")
 	};
 
-	public static final Colour SUN_COLOUR = new Colour(0.8f, 0.8f, 0.8f);
+	public static final Colour SUN_COLOUR = new Colour(0.75f, 0.75f, 0.75f);
 
-	public static final Colour MOON_COLOUR = new Colour(0.1f, 0.1f, 0.3f);
+	public static final Colour MOON_COLOUR = new Colour(0.15f, 0.15f, 0.3f);
 
-	public static final float DAY_NIGHT_CYCLE = 200.0f; // The day/night length (sec).
+	public static final float DAY_NIGHT_CYCLE = 175.0f; // The day/night length (sec).
 
 	private static final Vector3f LIGHT_DIRECTION = new Vector3f(0.3f, 0.05f, 0.3f); // The starting light direction.
 

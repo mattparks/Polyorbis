@@ -22,21 +22,21 @@ public class InstancePlanet extends Entity {
 	};
 	private static final Vector3f[] BIRCH_SPAWNS = new Vector3f[]{
 			new Vector3f(0.0f, 287.9f, 68.1f),
-			new Vector3f(0.0f, 315.5f, 84.0f),
+			//	new Vector3f(0.0f, 315.5f, 84.0f),
 			new Vector3f(0.0f, 313.9f, 115.9f),
 			new Vector3f(0.0f, 26.4f, 95.8f),
 			new Vector3f(0.0f, 36.2f, 70.7f),
-			new Vector3f(0.0f, 72.0f, 68.0f),
+			//	new Vector3f(0.0f, 72.0f, 68.0f),
 			new Vector3f(0.0f, 180.4f, 99.9f),
 	};
 	private static final Vector3f[] CACTUS_SPAWNS = new Vector3f[]{
 			new Vector3f(0.0f, 23.7f, 124.4f),
 			new Vector3f(0.0f, 108.2f, 79.6f),
 			new Vector3f(0.0f, 127.3f, 110.5f),
-			new Vector3f(0.0f, 216.1f, 49.4f),
-			new Vector3f(0.0f, 261.5f, 94.7f),
+			//	new Vector3f(0.0f, 216.1f, 49.4f),
+			//	new Vector3f(0.0f, 261.5f, 94.7f),
 			new Vector3f(0.0f, 350.3f, 84.7f),
-			new Vector3f(0.0f, 207.7f, 113.1f),
+			//	new Vector3f(0.0f, 207.7f, 113.1f),
 			new Vector3f(0.0f, 216.6f, 97.7f),
 	};
 
@@ -47,9 +47,9 @@ public class InstancePlanet extends Entity {
 				new InstanceSun(FlounderEntities.getEntities(), new Vector3f(-150.0f, -150.0f, -150.0f), new Vector3f()),
 				new InstanceAtmosphere(FlounderEntities.getEntities(), new Vector3f(), new Vector3f()),
 				new Entity[]{
-						new InstanceMoon1(FlounderEntities.getEntities(), new Vector3f(15.0f, -10.0f, -15.0f), new Vector3f()),
-						new InstanceMoon2(FlounderEntities.getEntities(), new Vector3f(18.0f, 30.0f, 18.0f), new Vector3f()),
-						new InstanceMoon3(FlounderEntities.getEntities(), new Vector3f(-20.0f, 30.0f, 20.0f), new Vector3f()),
+						new InstanceMoon1(FlounderEntities.getEntities(), new Vector3f(-15.0f, -10.0f, 15.0f), new Vector3f()),
+						new InstanceMoon2(FlounderEntities.getEntities(), new Vector3f(18.0f, 20.0f, 18.0f), new Vector3f()),
+						new InstanceMoon3(FlounderEntities.getEntities(), new Vector3f(-20.0f, 40.0f, -20.0f), new Vector3f()),
 						new InstanceRing(FlounderEntities.getEntities(), new Vector3f(), new Vector3f())
 				},
 				new Vector3f[]{

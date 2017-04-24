@@ -2,15 +2,12 @@ package polyorbis.entities.instances;
 
 import flounder.entities.*;
 import flounder.entities.components.*;
-import flounder.lights.*;
-import flounder.maths.*;
 import flounder.maths.vectors.*;
 import flounder.models.*;
 import flounder.resources.*;
 import flounder.space.*;
 import flounder.textures.*;
 import polyorbis.entities.components.*;
-import polyorbis.world.*;
 
 public class InstanceMoon1 extends Entity {
 	private static final ModelObject MODEL = ModelFactory.newBuilder().setFile(new MyFile(FlounderEntities.ENTITIES_FOLDER, "moon1", "model.obj")).create();
@@ -23,7 +20,7 @@ public class InstanceMoon1 extends Entity {
 		new ComponentModel(this, 0.8f, MODEL, TEXTURE, 1);
 		new ComponentGlow(this, TEXTURE_GLOW);
 		new ComponentSurface(this, 1.0f, 0.0f, false, false, true);
-	//	new ComponentLight(this, new Vector3f(0.0f, 0.0f, 0.0f), new Colour(PolyWorld.MOON_COLOUR), new Attenuation(1.0f, 0.0f, 0.0f));
+		//	new ComponentLight(this, new Vector3f(0.0f, 0.0f, 0.0f), new Colour(PolyWorld.MOON_COLOUR), new Attenuation(1.0f, 0.0f, 0.0f));
 	}
 }
 

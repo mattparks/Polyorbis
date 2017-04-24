@@ -89,7 +89,7 @@ public class ComponentProjectile extends IComponentEntity implements IComponentE
 						getEntity().remove();
 						FlounderSound.playSystemSound(SOUND_DAMAGE);
 					} else if (player != null && !playerSpawned) {
-						player.modifyHealth(damage + 0.7f);
+						player.modifyHealth(damage + 0.6f);
 						getEntity().remove();
 						FlounderSound.playSystemSound(SOUND_DAMAGE);
 					}
