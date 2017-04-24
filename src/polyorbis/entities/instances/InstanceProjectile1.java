@@ -25,7 +25,7 @@ public class InstanceProjectile1 extends Entity {
 
 	public InstanceProjectile1(ISpatialStructure<Entity> structure, Vector3f rotation, float radius, Vector3f direction, boolean playerSpawned) {
 		super(structure, Vector3f.rotate(new Vector3f(0.0f, radius, 0.0f), rotation, null), new Vector3f(0.0f, rotation.y, rotation.z));
-		new ComponentProjectile(this, rotation, radius, -0.7f, direction.normalize().scale(0.25f), 0.45f, 1.3f, playerSpawned);
+		new ComponentProjectile(this, rotation, radius, -0.7f, direction.scale(0.25f), 0.45f, 1.3f, playerSpawned);
 		new ComponentRotate(this, rotation, radius, new Vector3f(0.3f, 1.0f, 1.0f), 0.7f);
 		new ComponentModel(this, 0.1f, MODEL, TEXTURE, 1);
 		new ComponentGlow(this, TEXTURE_GLOW);

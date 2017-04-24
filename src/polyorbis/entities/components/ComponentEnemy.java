@@ -70,24 +70,39 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 			if (shootTime > 2.0f) {
 				if (PolyWorld.getEntityPlayer() != null) {
 					Vector2f playerRotation = ((ComponentPlayer) PolyWorld.getEntityPlayer().getComponent(ComponentPlayer.class)).getRotation();
+					playerRotation.x = Maths.normalizeAngle(playerRotation.x);
+					playerRotation.y = Maths.normalizeAngle(playerRotation.y);
 
 					float distance = Vector3f.getDistance(PolyWorld.getEntityPlayer().getPosition(), getEntity().getPosition());
 
-					if (distance < 3.33f) {
+					if (distance < 3.75f) {
 						if (playerRotation == null) {
 							return;
 						}
 
-						Vector2f thisRotation = new Vector2f(rotation.y, rotation.z); // TODO: Aim in the right direction.
-						Vector2f direction = Vector2f.subtract(thisRotation, playerRotation, null);
+						Vector2f thisRotation = new Vector2f(rotation.y, rotation.z);
+						thisRotation.x = Maths.normalizeAngle(thisRotation.x);
+						thisRotation.y = Maths.normalizeAngle(thisRotation.y);
+						Vector2f direction = Vector2f.subtract(playerRotation, thisRotation, null);
 
 						if (direction.isZero()) {
 							direction.x += 0.03f;
 						}
 
-						// direction.scale(Maths.randomInRange(-Maths.randomInRange(1.0f, 2.0f), +Maths.randomInRange(1.0f, 2.0f))); // TODO: Decrease error over time.
+						direction.scale(Maths.randomInRange(1.0f, 20000.0f / Math.min(PolyWorld.calculateScore(PolyWorld.getEntityPlayer()), 3000)));
 						direction.normalize();
-						PolyWorld.fireProjectile(new Vector3f(rotation), radius, (int) (3.0f - (3.0f * Math.pow(1.0f / Maths.randomInRange(1.0f, 3.0f), 2))), direction, false); // TODO: Fix selected attacks.
+						direction.scale(0.5f); // 1/2 normal speed.
+
+						float random = (float) Math.random();
+						int projectile = 1;
+
+						if (random < 0.09f) {
+							projectile = 3;
+						} else if (random < 0.55f) {
+							projectile = 2;
+						}
+
+						PolyWorld.fireProjectile(new Vector3f(rotation), radius, projectile, direction, false);
 					}
 
 					shootTime = 0.0f;
