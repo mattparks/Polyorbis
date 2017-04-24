@@ -1,17 +1,23 @@
 package polyorbis.entities.components;
 
+import flounder.devices.*;
 import flounder.entities.*;
 import flounder.framework.*;
 import flounder.guis.*;
 import flounder.helpers.*;
 import flounder.maths.*;
 import flounder.maths.vectors.*;
+import flounder.resources.*;
+import flounder.sounds.*;
 import polyorbis.world.*;
 
 import javax.swing.*;
 import java.util.*;
 
 public class ComponentProjectile extends IComponentEntity implements IComponentEditor {
+	public final static Sound SOUND_SHOOT = Sound.loadSoundInBackground(new MyFile(FlounderSound.SOUND_FOLDER, "laserShoot.wav"), 1.0f, 1.0f);
+	public final static Sound SOUND_DAMAGE = Sound.loadSoundInBackground(new MyFile(FlounderSound.SOUND_FOLDER, "laserDamage.wav"), 1.0f, 1.0f);
+
 	private Vector3f rotation;
 	private float radius;
 
@@ -76,13 +82,16 @@ public class ComponentProjectile extends IComponentEntity implements IComponentE
 						enemy.modifyHealth(damage);
 
 						if (realPlayer != null) {
+							realPlayer.addKill();
 							realPlayer.addExperience(5);
 						}
 
 						getEntity().remove();
+						FlounderSound.playSystemSound(SOUND_DAMAGE);
 					} else if (player != null && !playerSpawned) {
 						player.modifyHealth(damage + 0.45f);
 						getEntity().remove();
+						FlounderSound.playSystemSound(SOUND_DAMAGE);
 					}
 				}
 			}

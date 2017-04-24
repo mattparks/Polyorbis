@@ -8,6 +8,7 @@ import flounder.helpers.*;
 import flounder.inputs.*;
 import flounder.networking.*;
 import flounder.particles.*;
+import flounder.resources.*;
 import flounder.shadows.*;
 import flounder.skybox.*;
 import flounder.sounds.*;
@@ -30,8 +31,9 @@ public class PolyInterface extends Standard {
 		FlounderSound.getSourcePool().setSystemVolume(PolyConfigs.SOUND_VOLUME.setReference(() -> FlounderSound.getSourcePool().getSystemVolume()).getFloat());
 
 		gamePlaylist = new Playlist();
-		// gamePlaylist.addMusic(Sound.loadSoundInBackground(new MyFile(MyFile.RES_FOLDER, "music", "09-hitori-bocchi-1b.wav"), 0.80f, 1.0f));
-		FlounderSound.getMusicPlayer().playMusicPlaylist(gamePlaylist, true, 4.0f, 10.0f);
+		gamePlaylist.addMusic(Sound.loadSoundInBackground(new MyFile(MyFile.RES_FOLDER, "music", "A#Bb-3-3-sine-120.wav"), 0.40f, 1.0f));
+		gamePlaylist.addMusic(Sound.loadSoundInBackground(new MyFile(MyFile.RES_FOLDER, "music", "a-3-3-triangle-100.wav"), 0.40f, 1.0f));
+		FlounderSound.getMusicPlayer().playMusicPlaylist(gamePlaylist, true, 5.0f, 10.0f);
 
 		if (PolyConfigs.MUSIC_ENABLED.setReference(() -> !FlounderSound.getMusicPlayer().isPaused()).getBoolean()) {
 			FlounderSound.getMusicPlayer().unpauseTrack();

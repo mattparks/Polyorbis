@@ -16,7 +16,7 @@ public class InstanceRing extends Entity {
 	public InstanceRing(ISpatialStructure<Entity> structure, Vector3f position, Vector3f rotation) {
 		super(structure, position, rotation);
 		new ComponentRotate(this, rotation, 1.0f, new Vector3f(1.0f, 0.0f, 0.0f), 0.01f);
-		new ComponentModel(this, 13.0f, MODEL, TEXTURE, 1);
+		new ComponentModel(this, 14.2f, MODEL, TEXTURE, 1);
 		new ComponentSurface(this, 1.0f, 0.0f, false, false, true);
 	}
 }

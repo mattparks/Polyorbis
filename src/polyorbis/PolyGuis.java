@@ -16,6 +16,7 @@ public class PolyGuis extends GuiMaster {
 
 	public static final float SLIDE_TIME = 0.5f;
 
+	private OverlayHelp overlayHelp;
 	private OverlayDebug overlayDebug;
 	private OverlayHUD overlayHUD;
 	private OverlaySlider overlaySlider;
@@ -27,13 +28,15 @@ public class PolyGuis extends GuiMaster {
 
 	@Override
 	public void init() {
+		this.overlayHelp = new OverlayHelp(FlounderGuis.getContainer());
 		this.overlayDebug = new OverlayDebug(FlounderGuis.getContainer());
 		this.overlayHUD = new OverlayHUD(FlounderGuis.getContainer());
 		this.overlaySlider = new OverlaySlider(FlounderGuis.getContainer());
 		this.overlayDeath = new OverlayDeath(FlounderGuis.getContainer());
 
-		this.overlayDebug.setAlphaDriver(new ConstantDriver(Framework.isRunningFromJar() ? 0.0f : 1.0f));
-		this.overlayHUD.setAlphaDriver(new ConstantDriver(1.0f));
+		this.overlayHelp.setAlphaDriver(new ConstantDriver(1.0f));
+		this.overlayDebug.setAlphaDriver(new ConstantDriver(0.0f));
+		this.overlayHUD.setAlphaDriver(new ConstantDriver(0.0f));
 		this.overlaySlider.setAlphaDriver(new ConstantDriver(0.0f));
 		this.overlayDeath.setAlphaDriver(new ConstantDriver(0.0f));
 
@@ -50,6 +53,20 @@ public class PolyGuis extends GuiMaster {
 			@Override
 			public void onEvent() {
 				togglePause(false);
+			}
+		});
+
+		FlounderEvents.addEvent(new IEvent() {
+			private KeyButton toggleHelp = new KeyButton(GLFW_KEY_F1);
+
+			@Override
+			public boolean eventTriggered() {
+				return toggleHelp.wasDown();
+			}
+
+			@Override
+			public void onEvent() {
+				toggleHelp();
 			}
 		});
 
@@ -93,12 +110,18 @@ public class PolyGuis extends GuiMaster {
 
 	@Override
 	public boolean isGamePaused() {
-		return overlaySlider.getAlpha() > 0.1f || overlayDeath.getAlpha() != 0.0f;
+		return overlaySlider.getAlpha() > 0.1f || overlayDeath.getAlpha() != 0.0f || overlayHelp.getAlpha() != 0.0f;
 	}
 
 	@Override
 	public float getBlurFactor() {
-		return overlayDeath.getAlpha() != 0.0f ? overlayDeath.getAlpha() : overlaySlider.getBlurFactor();
+		if (overlayDeath.getAlpha() != 0.0f) {
+			return overlayDeath.getAlpha();
+		} else if (overlayHelp.getAlpha() != 0.0f) {
+			return overlayHelp.getAlpha();
+		}
+
+		return overlaySlider.getBlurFactor();
 	}
 
 	@Override
@@ -106,8 +129,24 @@ public class PolyGuis extends GuiMaster {
 		return COLOUR_PRIMARY;
 	}
 
-	public void togglePause(boolean force) {
+	public void toggleHelp() {
 		if (overlayDeath.getAlpha() != 0.0f) {
+			return;
+		}
+
+		if (overlayHelp.getAlpha() < 0.5f) {
+			overlayHUD.setAlphaDriver(new SlideDriver(overlayHUD.getAlpha(), 0.0f, SLIDE_TIME));
+			overlayDebug.setAlphaDriver(new SlideDriver(overlayDebug.getAlpha(), 0.0f, SLIDE_TIME));
+			overlaySlider.setAlphaDriver(new SlideDriver(overlaySlider.getAlpha(), 0.0f, SLIDE_TIME));
+			overlayHelp.setAlphaDriver(new SlideDriver(overlayHelp.getAlpha(), 1.0f, SLIDE_TIME));
+		} else {
+			overlayHUD.setAlphaDriver(new SlideDriver(overlayHUD.getAlpha(), 1.0f, SLIDE_TIME));
+			overlayHelp.setAlphaDriver(new SlideDriver(overlayHelp.getAlpha(), 0.0f, SLIDE_TIME));
+		}
+	}
+
+	public void togglePause(boolean force) {
+		if (overlayDeath.getAlpha() != 0.0f || overlayHelp.getAlpha() != 0.0f) {
 			return;
 		}
 
@@ -128,7 +167,7 @@ public class PolyGuis extends GuiMaster {
 	}
 
 	public void toggleDebug() {
-		if (overlayDeath.getAlpha() != 0.0f) {
+		if (overlayDeath.getAlpha() != 0.0f || overlayHelp.getAlpha() != 0.0f) {
 			return;
 		}
 
@@ -142,7 +181,7 @@ public class PolyGuis extends GuiMaster {
 	}
 
 	public void toggleHUD() {
-		if (overlayDeath.getAlpha() != 0.0f) {
+		if (overlayDeath.getAlpha() != 0.0f || overlayHelp.getAlpha() != 0.0f) {
 			return;
 		}
 

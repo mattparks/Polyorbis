@@ -8,6 +8,8 @@ import flounder.helpers.*;
 import flounder.inputs.*;
 import flounder.maths.*;
 import flounder.maths.vectors.*;
+import flounder.resources.*;
+import flounder.sounds.*;
 import polyorbis.world.*;
 
 import javax.swing.*;
@@ -15,6 +17,9 @@ import javax.swing.*;
 import static org.lwjgl.glfw.GLFW.*;
 
 public class ComponentPlayer extends IComponentEntity implements IComponentEditor {
+	public final static Sound SOUND_GAMEOVER = Sound.loadSoundInBackground(new MyFile(FlounderSound.SOUND_FOLDER, "gameover.wav"), 1.0f, 1.0f);
+	public final static Sound SOUND_JUMP = Sound.loadSoundInBackground(new MyFile(FlounderSound.SOUND_FOLDER, "jump.wav"), 1.0f, 1.0f);
+
 	private static final float PLAYER_HEIGHT = 0.22f;
 	private static final float PLAYER_ACCELERATION = 10.0f;
 	private static final float PLAYER_SPEED = 1.2f;
@@ -33,6 +38,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 	private float survivalTime;
 	private int kills;
 	private float health;
+	private boolean dead;
 
 	private float charge1;
 	private float charge2;
@@ -74,6 +80,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 		this.survivalTime = 0.0f;
 		this.kills = 0;
 		this.health = 1.0f;
+		this.dead = false;
 
 		this.charge1 = 1.0f;
 		this.charge2 = 0.5f;
@@ -87,7 +94,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 		this.inputY = new CompoundAxis(new ButtonAxis(leftKeyButtons, rightKeyButtons), new JoystickAxis(0, 0));
 		this.inputZ = new CompoundAxis(new ButtonAxis(downKeyButtons, upKeyButtons), new JoystickAxis(0, 1));
 		this.inputJump = new CompoundButton(jumpButtons, new JoystickButton(0, 0));
-		this.inputFire = new CompoundButton(new MouseButton(GLFW_MOUSE_BUTTON_LEFT), new JoystickButton(0, 5)); // TODO: Use real trigger.
+		this.inputFire = new CompoundButton(new MouseButton(GLFW_MOUSE_BUTTON_LEFT), new JoystickButton(0, 5));
 	}
 
 	@Override
@@ -98,7 +105,8 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 		}
 
 		// Kill the player!
-		if (health <= 0.0f) {
+		if (health <= 0.0f && !dead) {
+			FlounderSound.playSystemSound(SOUND_GAMEOVER);
 			PolyWorld.fireProjectile(new Vector3f(0.0f, currentY, currentZ), currentRadius, 3, new Vector2f(0.03f, 0.0f), true);
 			getEntity().remove();
 			new java.util.Timer().schedule(
@@ -110,6 +118,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 					},
 					3000
 			);
+			dead = true;
 			return;
 		}
 
@@ -133,7 +142,10 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 		// Move player current positions.
 		currentY += currentSpeedY;
 		currentZ += currentSpeedZ;
-		currentSpeedUp = (inputJump.isDown() && currentSpeedUp == 0.0f && currentRadius <= planetRadius + PLAYER_HEIGHT) ? PLAYER_JUMP : currentSpeedUp;
+		if (inputJump.isDown() && currentSpeedUp == 0.0f && currentRadius <= planetRadius + PLAYER_HEIGHT) {
+			FlounderSound.playSystemSound(SOUND_JUMP);
+			currentSpeedUp = PLAYER_JUMP;
+		}
 		currentSpeedUp += PLAYER_GRAVITY * Framework.getDelta();
 		currentRadius += currentSpeedUp;
 

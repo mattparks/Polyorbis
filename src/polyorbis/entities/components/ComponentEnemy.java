@@ -2,6 +2,7 @@ package polyorbis.entities.components;
 
 import flounder.entities.*;
 import flounder.framework.*;
+import flounder.guis.*;
 import flounder.helpers.*;
 import flounder.logger.*;
 import flounder.maths.*;
@@ -48,6 +49,11 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 
 	@Override
 	public void update() {
+		// Do not update on paused.
+		if (FlounderGuis.getGuiMaster() == null || FlounderGuis.getGuiMaster().isGamePaused()) {
+			return;
+		}
+
 		if (health <= 0.0f && !killed) {
 			ComponentPlayer player = PolyWorld.getEntityPlayer() == null ? null : (ComponentPlayer) PolyWorld.getEntityPlayer().getComponent(ComponentPlayer.class);
 
@@ -73,14 +79,14 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 							return;
 						}
 
-						Vector2f thisRotation = new Vector2f(rotation.y, rotation.z);
+						Vector2f thisRotation = new Vector2f(rotation.y, rotation.z); // TODO: Aim in the right direction.
 						Vector2f direction = Vector2f.subtract(thisRotation, playerRotation, null);
 
 						if (direction.isZero()) {
 							direction.x += 0.03f;
 						}
 
-						direction.scale(Maths.randomInRange(-Maths.randomInRange(1.0f, 2.0f), +Maths.randomInRange(1.0f, 2.0f))); // Error.
+						// direction.scale(Maths.randomInRange(-Maths.randomInRange(1.0f, 2.0f), +Maths.randomInRange(1.0f, 2.0f))); // TODO: Decrease error over time.
 						direction.normalize();
 						PolyWorld.fireProjectile(new Vector3f(rotation), radius, (int) (3.0f - (3.0f * Math.pow(1.0f / Maths.randomInRange(1.0f, 3.0f), 2))), direction, false);
 					}

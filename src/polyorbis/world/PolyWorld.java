@@ -1,5 +1,6 @@
 package polyorbis.world;
 
+import flounder.devices.*;
 import flounder.entities.*;
 import flounder.framework.*;
 import flounder.maths.*;
@@ -8,6 +9,7 @@ import flounder.particles.*;
 import flounder.resources.*;
 import flounder.shadows.*;
 import flounder.skybox.*;
+import flounder.sounds.*;
 import flounder.textures.*;
 import flounder.visual.*;
 import polyorbis.*;
@@ -121,9 +123,11 @@ public class PolyWorld extends Module {
 		switch (type) {
 			case 1:
 				new InstanceProjectile1(FlounderEntities.getEntities(), new Vector3f(rotation), radius, new Vector3f(0.0f, direction.x, direction.y), playerSpawned);
+				FlounderSound.playSystemSound(ComponentProjectile.SOUND_SHOOT);
 				break;
 			case 2:
 				new InstanceProjectile2(FlounderEntities.getEntities(), new Vector3f(rotation), radius, new Vector3f(0.0f, direction.x, direction.y), playerSpawned);
+				FlounderSound.playSystemSound(ComponentProjectile.SOUND_SHOOT);
 				break;
 			case 3:
 				float amount = 28.0f;
@@ -141,6 +145,8 @@ public class PolyWorld extends Module {
 					d.normalize();
 					new InstanceProjectile3(FlounderEntities.getEntities(), new Vector3f(rotation), radius, new Vector3f(0.0f, d.x, d.y), true);
 				}
+
+				FlounderSound.playSystemSound(ComponentProjectile.SOUND_SHOOT);
 				break;
 		}
 	}

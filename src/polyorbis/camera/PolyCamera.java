@@ -40,8 +40,8 @@ public class PolyCamera extends Camera {
 
 	private static final float MAX_ANGLE_OF_ELEVATION = 90.0f;
 	private static final float MIN_ANGLE_OF_ELEVATION = -90.0f;
-	private static final float MINIMUM_ZOOM = 2.0f;
-	private static final float MAXIMUM_ZOOM = 15.0f;
+	private static final float MINIMUM_ZOOM = 3.0f;
+	private static final float MAXIMUM_ZOOM = 20.0f;
 	private static final float NORMAL_ZOOM = 8.0f;
 
 	private Vector3f position;

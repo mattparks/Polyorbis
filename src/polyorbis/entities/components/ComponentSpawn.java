@@ -55,12 +55,14 @@ public class ComponentSpawn extends IComponentEntity implements IComponentEditor
 		}
 
 		if (targetTime != -1.0f && Framework.getTimeSec() - targetTime > 0.0f) {
-			this.targetTime = Framework.getTimeSec() + Maths.randomInRange(3.0f, 10.0f); // TODO: Increase frequency with player XP.
+			this.targetTime = Framework.getTimeSec() + Maths.randomInRange(3.0f, 10.0f);
 			int current = 0;
 
 			int maxAllowed = 1;
 
-			if (PolyWorld.calculateScore(PolyWorld.getEntityPlayer()) > 2048) {
+			if (PolyWorld.calculateScore(PolyWorld.getEntityPlayer()) > 4096) {
+				maxAllowed = 5;
+			} else if (PolyWorld.calculateScore(PolyWorld.getEntityPlayer()) > 2048) {
 				maxAllowed = 4;
 			} else if (PolyWorld.calculateScore(PolyWorld.getEntityPlayer()) > 1024) {
 				maxAllowed = 3;

@@ -1,13 +1,18 @@
 package polyorbis.entities.components;
 
+import flounder.devices.*;
 import flounder.entities.*;
 import flounder.guis.*;
 import flounder.helpers.*;
+import flounder.maths.vectors.*;
+import flounder.resources.*;
+import flounder.sounds.*;
 import polyorbis.world.*;
 
 import javax.swing.*;
 
 public class ComponentCollect extends IComponentEntity implements IComponentEditor {
+	private Sound playSound;
 	private Collected collected;
 
 	/**
@@ -19,9 +24,10 @@ public class ComponentCollect extends IComponentEntity implements IComponentEdit
 		super(entity);
 	}
 
-	public ComponentCollect(Entity entity, Collected collected) {
+	public ComponentCollect(Entity entity, Sound playSound, Collected collected) {
 		super(entity);
 
+		this.playSound = playSound;
 		this.collected = collected;
 	}
 
@@ -37,7 +43,10 @@ public class ComponentCollect extends IComponentEntity implements IComponentEdit
 		}
 
 		if (PolyWorld.getEntityPlayer().getCollider().intersects(getEntity().getCollider()).isIntersection()) {
-			//	((ComponentPlayer) PolyWorld.getEntityPlayer().getComponent(ComponentPlayer.class)).modifyHealth(health);
+			if (playSound != null) {
+				FlounderSound.playSystemSound(playSound);
+			}
+
 			collected.action((ComponentPlayer) PolyWorld.getEntityPlayer().getComponent(ComponentPlayer.class));
 			getEntity().remove();
 		}
