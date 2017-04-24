@@ -27,16 +27,26 @@ public class InstancePlanet extends Entity {
 			new Vector3f(0.0f, 180.4f, 99.9f),
 			new Vector3f(0.0f, 91.8f, 145.7f)
 	};
+	private static final Vector3f[] CACTUS_SPAWNS = new Vector3f[]{
+			new Vector3f(0.0f, 23.7f, 124.4f),
+			new Vector3f(0.0f, 108.2f, 79.6f),
+			new Vector3f(0.0f, 127.3f, 110.5f),
+			new Vector3f(0.0f, 216.1f, 49.4f),
+			new Vector3f(0.0f, 261.5f, 94.7f),
+			new Vector3f(0.0f, 350.3f, 84.7f),
+			new Vector3f(0.0f, 207.7f, 113.1f),
+			new Vector3f(0.0f, 216.6f, 97.7f),
+	};
 
 	public InstancePlanet(ISpatialStructure<Entity> structure, Vector3f position, Vector3f rotation) {
 		super(structure, position, rotation);
 		TEXTURE.setHasAlpha(true);
 		new ComponentPlanet(this,
-				new InstanceSun(FlounderEntities.getEntities(), new Vector3f(-100.0f, -100.0f, -100.0f), new Vector3f()),
+				new InstanceSun(FlounderEntities.getEntities(), new Vector3f(-150.0f, -150.0f, -150.0f), new Vector3f()),
 				new InstanceAtmosphere(FlounderEntities.getEntities(), new Vector3f(), new Vector3f()),
 				new Entity[]{
-						new InstanceMoon1(FlounderEntities.getEntities(), new Vector3f(10.0f, -20.0f, -10.0f), new Vector3f()),
-						new InstanceMoon2(FlounderEntities.getEntities(), new Vector3f(18.0f, 26.0f, 18.0f), new Vector3f()),
+						new InstanceMoon1(FlounderEntities.getEntities(), new Vector3f(15.0f, -10.0f, -15.0f), new Vector3f()),
+						new InstanceMoon2(FlounderEntities.getEntities(), new Vector3f(18.0f, 30.0f, 18.0f), new Vector3f()),
 						new InstanceMoon3(FlounderEntities.getEntities(), new Vector3f(-20.0f, 30.0f, 20.0f), new Vector3f()),
 						new InstanceRing(FlounderEntities.getEntities(), new Vector3f(), new Vector3f())
 				},
@@ -53,6 +63,10 @@ public class InstancePlanet extends Entity {
 
 		for (int i = 0; i < TREE_SPAWNS.length; i++) {
 			new InstanceTree(FlounderEntities.getEntities(), TREE_SPAWNS[i], 6.0f);
+		}
+
+		for (int i = 0; i < CACTUS_SPAWNS.length; i++) {
+			new InstanceCactus(FlounderEntities.getEntities(), CACTUS_SPAWNS[i], 6.0f);
 		}
 	}
 }

@@ -81,7 +81,7 @@ public class PolyInterface extends Standard {
 			}
 		});
 
-		FlounderEvents.addEvent(new IEvent() {
+		/*FlounderEvents.addEvent(new IEvent() {
 			KeyButton closeWindow = new KeyButton(GLFW_KEY_DELETE);
 
 			@Override
@@ -93,7 +93,7 @@ public class PolyInterface extends Standard {
 			public void onEvent() {
 				Framework.requestClose();
 			}
-		});
+		});*/
 	}
 
 	@Override

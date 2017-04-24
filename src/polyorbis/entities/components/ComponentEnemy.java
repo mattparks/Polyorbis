@@ -11,7 +11,7 @@ import polyorbis.world.*;
 import javax.swing.*;
 
 public class ComponentEnemy extends IComponentEntity implements IComponentEditor {
-	private static final float SPEED = 14.0f;
+	private static final float SPEED = 12.0f;
 
 	private Vector3f rotation;
 	private float radius;

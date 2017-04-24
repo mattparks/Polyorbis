@@ -103,13 +103,13 @@ public class ComponentSpawn extends IComponentEntity implements IComponentEditor
 				case 2:
 					// Spawns a new enemy if there are currently less than 2 in the world from this spawn.
 					for (Entity entity : spawned) {
-						if (!entity.isRemoved() && entity instanceof InstanceEnemy1) {
+						if (!entity.isRemoved() && entity instanceof InstanceEnemy) {
 							current++;
 						}
 					}
 
 					if (current < maxAllowed) {
-						Entity e = new InstanceEnemy1(FlounderEntities.getEntities(), randomEntityRotation(), radius);
+						Entity e = new InstanceEnemy(FlounderEntities.getEntities(), randomEntityRotation(), radius);
 						spawned.add(e);
 					}
 

@@ -220,7 +220,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 						PolyWorld.fireProjectile(new Vector3f(0.0f, currentY, currentZ), currentRadius, 1, direction, true);
 					}
 
-					charge1 -= 0.08f;
+					charge1 -= 0.07f;
 					charge1 = Maths.clamp(charge1, 0.0f, 1.0f);
 					break;
 				case 2:

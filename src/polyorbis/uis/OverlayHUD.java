@@ -53,9 +53,9 @@ public class OverlayHUD extends ScreenObject {
 		this.updateText = false;
 
 		this.statusHealth = new HudStatus(this, hudTexture, hudProgress, 2, 0.0f, new Colour(1.0f, 0.2f, 0.2f));
-		this.statusPower1 = new HudStatus(this, hudTexture, hudProgress, 3, 0.15f, new Colour(0.8f, 0.8f, 0.8f));
-		this.statusPower2 = new HudStatus(this, hudTexture, hudProgress, 4, 0.25f, new Colour(0.8f, 0.8f, 0.8f));
-		this.statusPower3 = new HudStatus(this, hudTexture, hudProgress, 5, 0.35f, new Colour(0.8f, 0.8f, 0.8f));
+		this.statusPower1 = new HudStatus(this, hudTexture, hudProgress, 3, 0.13f, new Colour(0.8f, 0.8f, 0.8f));
+		this.statusPower2 = new HudStatus(this, hudTexture, hudProgress, 4, 0.23f, new Colour(0.8f, 0.8f, 0.8f));
+		this.statusPower3 = new HudStatus(this, hudTexture, hudProgress, 5, 0.33f, new Colour(0.8f, 0.8f, 0.8f));
 
 		java.util.Timer timer = new java.util.Timer();
 		timer.schedule(new TimerTask() {

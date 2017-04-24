@@ -68,8 +68,8 @@ public class PolyWorld extends Module {
 		FlounderShadows.setShadowBias(PolyConfigs.SHADOWMAP_BIAS.getFloat());
 		FlounderShadows.setShadowDarkness(PolyConfigs.SHADOWMAP_DARKNESS.getFloat());
 		FlounderSkybox.setCubemap(TextureFactory.newBuilder().setCubemap(SKYBOX_TEXTURE_FILES).create());
-		FlounderShadows.setShadowBoxOffset(16.0f);
-		FlounderShadows.setShadowBoxDistance(32.0f);
+		FlounderShadows.setShadowBoxOffset(11.5f);
+		FlounderShadows.setShadowBoxDistance(32.5f);
 
 		this.atmosphere = PolyConfigs.ATMOSPHERE_ENABLED.setReference(() -> atmosphere).getBoolean();
 
