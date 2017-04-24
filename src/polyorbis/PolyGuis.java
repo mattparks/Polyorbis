@@ -30,7 +30,7 @@ public class PolyGuis extends GuiMaster {
 		this.overlayDebug = new OverlayDebug(FlounderGuis.getContainer());
 		this.overlayHUD = new OverlayHUD(FlounderGuis.getContainer());
 		this.overlaySlider = new OverlaySlider(FlounderGuis.getContainer());
-		this.overlayDeath  = new OverlayDeath(FlounderGuis.getContainer());
+		this.overlayDeath = new OverlayDeath(FlounderGuis.getContainer());
 
 		this.overlayDebug.setAlphaDriver(new ConstantDriver(Framework.isRunningFromJar() ? 0.0f : 1.0f));
 		this.overlayHUD.setAlphaDriver(new ConstantDriver(1.0f));

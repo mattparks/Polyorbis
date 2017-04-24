@@ -8,7 +8,6 @@ import flounder.helpers.*;
 import flounder.inputs.*;
 import flounder.maths.*;
 import flounder.maths.vectors.*;
-import polyorbis.entities.instances.*;
 import polyorbis.world.*;
 
 import javax.swing.*;
@@ -74,7 +73,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 		this.experience = 0;
 		this.survivalTime = 0.0f;
 		this.kills = 0;
-		this.health = 0.6f;
+		this.health = 1.0f;
 
 		this.charge1 = 1.0f;
 		this.charge2 = 0.5f;
@@ -163,6 +162,20 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 			selectedCharge++;
 
 			if (selectedCharge > 3) {
+				selectedCharge = 1;
+			}
+		}
+
+		if (!(charge1 != 0.0f && charge2 != 0.0f && charge3 != 0.0f)) {
+			if (selectedCharge == 1 && charge1 == 0.0f) {
+				selectedCharge = 2;
+			}
+
+			if (selectedCharge == 2 && charge2 == 0.0f) {
+				selectedCharge = 3;
+			}
+
+			if (selectedCharge == 3 && charge3 == 0.0f) {
 				selectedCharge = 1;
 			}
 		}

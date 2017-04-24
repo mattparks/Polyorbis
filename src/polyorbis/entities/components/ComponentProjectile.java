@@ -81,7 +81,7 @@ public class ComponentProjectile extends IComponentEntity implements IComponentE
 
 						getEntity().remove();
 					} else if (player != null && !playerSpawned) {
-						player.modifyHealth(damage + 0.3f);
+						player.modifyHealth(damage + 0.45f);
 						getEntity().remove();
 					}
 				}

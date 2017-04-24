@@ -15,8 +15,8 @@ public class InstanceAtmosphere extends Entity {
 	public InstanceAtmosphere(ISpatialStructure<Entity> structure, Vector3f position, Vector3f rotation) {
 		super(structure, position, rotation);
 		TEXTURE.setHasAlpha(true);
-	//	new ComponentRotate(this, rotation, 1.0f, new Vector3f(1.0f, 0.0f, 0.0f), 0.01f);
-		new ComponentModel(this, 7.0f, MODEL, TEXTURE, 1);
+		//	new ComponentRotate(this, rotation, 1.0f, new Vector3f(1.0f, 0.0f, 0.0f), 0.01f);
+		new ComponentModel(this, 7.4f, MODEL, TEXTURE, 1);
 		new ComponentAlpha(this, 0.3f);
 		new ComponentSurface(this, 1.0f, 0.0f, true, false, false);
 	}

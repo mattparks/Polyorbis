@@ -3,6 +3,7 @@ package polyorbis.entities.components;
 import flounder.entities.*;
 import flounder.guis.*;
 import flounder.helpers.*;
+import flounder.maths.*;
 import flounder.maths.vectors.*;
 import polyorbis.entities.instances.*;
 

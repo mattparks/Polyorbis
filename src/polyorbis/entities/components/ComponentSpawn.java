@@ -58,6 +58,16 @@ public class ComponentSpawn extends IComponentEntity implements IComponentEditor
 			this.targetTime = Framework.getTimeSec() + Maths.randomInRange(3.0f, 10.0f); // TODO: Increase frequency with player XP.
 			int current = 0;
 
+			int maxAllowed = 1;
+
+			if (PolyWorld.calculateScore(PolyWorld.getEntityPlayer()) > 2048) {
+				maxAllowed = 4;
+			} else if (PolyWorld.calculateScore(PolyWorld.getEntityPlayer()) > 1024) {
+				maxAllowed = 3;
+			} else if (PolyWorld.calculateScore(PolyWorld.getEntityPlayer()) > 512) {
+				maxAllowed = 2;
+			}
+
 			switch ((int) Maths.randomInRange(0.0f, 3.0f)) {
 				case 0:
 					// Spawns new health if there are currently less than 1 in the world from this spawn.
@@ -95,7 +105,7 @@ public class ComponentSpawn extends IComponentEntity implements IComponentEditor
 						}
 					}
 
-					if (current < 2) {
+					if (current < maxAllowed) {
 						Entity e = new InstanceEnemy1(FlounderEntities.getEntities(), randomEntityRotation(), radius);
 						spawned.add(e);
 					}

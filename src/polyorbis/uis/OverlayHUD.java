@@ -2,7 +2,6 @@ package polyorbis.uis;
 
 import flounder.fonts.*;
 import flounder.guis.*;
-import flounder.logger.*;
 import flounder.maths.*;
 import flounder.maths.vectors.*;
 import flounder.resources.*;

@@ -1,12 +1,10 @@
 package polyorbis.uis;
 
 import flounder.fonts.*;
-import flounder.framework.*;
 import flounder.guis.*;
 import flounder.maths.*;
 import flounder.maths.vectors.*;
 import flounder.visual.*;
-import polyorbis.uis.screens.*;
 import polyorbis.world.*;
 
 public class OverlayDeath extends ScreenObject {
