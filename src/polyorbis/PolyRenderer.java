@@ -58,10 +58,10 @@ public class PolyRenderer extends RendererMaster {
 		this.pipelineMRT = new PipelineMRT();
 		this.pipelineBloom = new PipelineBloom();
 		this.filterBlurMotion = new FilterBlurMotion();
-		this.filterTiltShift = new FilterTiltShift(0.6f, 1.1f, 0.006f, 2.0f);
+		this.filterTiltShift = new FilterTiltShift(0.5f, 1.1f, 0.003f, 2.0f);
 		this.filterLensFlare = new FilterLensFlare();
 		this.pipelinePaused = new PipelinePaused();
-		this.filterGain = new FilterGain(2.3f);
+		this.filterGain = new FilterGain(2.7f);
 	}
 
 	@Override
