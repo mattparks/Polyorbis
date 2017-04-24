@@ -96,7 +96,7 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 						float random = (float) Math.random();
 						int projectile = 1;
 
-						if (random < 0.05f) {
+						if (random < 0.09f) {
 							projectile = 3;
 						} else if (random < 0.55f) {
 							projectile = 2;

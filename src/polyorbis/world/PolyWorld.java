@@ -28,7 +28,7 @@ public class PolyWorld extends Module {
 			new MyFile(FlounderSkybox.SKYBOX_FOLDER, "starsFront.png")
 	};
 
-	public static final Colour SUN_COLOUR = new Colour(0.7f, 0.7f, 0.7f);
+	public static final Colour SUN_COLOUR = new Colour(0.8f, 0.8f, 0.8f);
 
 	public static final Colour MOON_COLOUR = new Colour(0.1f, 0.1f, 0.3f);
 
