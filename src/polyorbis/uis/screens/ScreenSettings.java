@@ -1,10 +1,13 @@
 package polyorbis.uis.screens;
 
+import flounder.events.*;
 import flounder.guis.*;
 import flounder.maths.vectors.*;
 import flounder.visual.*;
+import polyorbis.*;
 import polyorbis.uis.*;
 import polyorbis.uis.screens.settings.*;
+import polyorbis.world.*;
 
 public class ScreenSettings extends ScreenObject {
 	public ScreenSettings(OverlaySlider slider) {
@@ -37,10 +40,40 @@ public class ScreenSettings extends ScreenObject {
 			}
 		});
 
+		// Toggle Start Help.
+		GuiButtonText toggleStartHelp = new GuiButtonText(paneLeft, new Vector2f(0.25f, 0.34f), "Startup Help: ", GuiAlign.CENTRE);
+		FlounderEvents.addEvent(new EventChange<Boolean>(((PolyGuis) FlounderGuis.getGuiMaster())::isStarthelp) {
+			@Override
+			public void onEvent(Boolean newValue) {
+				toggleStartHelp.setText("Startup Help: " + newValue);
+			}
+		});
+		toggleStartHelp.addLeftListener(new ScreenListener() {
+			@Override
+			public void eventOccurred() {
+				((PolyGuis) FlounderGuis.getGuiMaster()).setStarthelp(!((PolyGuis) FlounderGuis.getGuiMaster()).isStarthelp());
+			}
+		});
+
+		// Toggle Atmosphere.
+		GuiButtonText toggleAtmosphere = new GuiButtonText(paneLeft, new Vector2f(0.25f, 0.41f), "Atmosphere: ", GuiAlign.CENTRE);
+		FlounderEvents.addEvent(new EventChange<Boolean>(PolyWorld::hasAtmosphere) {
+			@Override
+			public void onEvent(Boolean newValue) {
+				toggleAtmosphere.setText("Atmosphere: " + newValue);
+			}
+		});
+		toggleAtmosphere.addLeftListener(new ScreenListener() {
+			@Override
+			public void eventOccurred() {
+				PolyWorld.setAtmosphere(!PolyWorld.hasAtmosphere());
+			}
+		});
+
 		// Screen Audio.
 		ScreenSettingAudio screenAudio = new ScreenSettingAudio(slider, this);
 		screenAudio.setAlphaDriver(new ConstantDriver(0.0f));
-		GuiButtonText audio = new GuiButtonText(paneLeft, new Vector2f(0.25f, 0.34f), "Audio", GuiAlign.CENTRE);
+		GuiButtonText audio = new GuiButtonText(paneRight, new Vector2f(0.75f, 0.20f), "Audio", GuiAlign.CENTRE);
 		audio.addLeftListener(new ScreenListener() {
 			@Override
 			public void eventOccurred() {
@@ -51,7 +84,7 @@ public class ScreenSettings extends ScreenObject {
 		// Screen Graphics.
 		ScreenSettingGraphics screenGraphics = new ScreenSettingGraphics(slider, this);
 		screenGraphics.setAlphaDriver(new ConstantDriver(0.0f));
-		GuiButtonText graphics = new GuiButtonText(paneRight, new Vector2f(0.75f, 0.20f), "Graphics", GuiAlign.CENTRE);
+		GuiButtonText graphics = new GuiButtonText(paneRight, new Vector2f(0.75f, 0.27f), "Graphics", GuiAlign.CENTRE);
 		graphics.addLeftListener(new ScreenListener() {
 			@Override
 			public void eventOccurred() {
@@ -62,7 +95,7 @@ public class ScreenSettings extends ScreenObject {
 		// Screen Post.
 		ScreenSettingPost settingPost = new ScreenSettingPost(slider, this);
 		settingPost.setAlphaDriver(new ConstantDriver(0.0f));
-		GuiButtonText post = new GuiButtonText(paneRight, new Vector2f(0.75f, 0.27f), "Post Effects", GuiAlign.CENTRE);
+		GuiButtonText post = new GuiButtonText(paneRight, new Vector2f(0.75f, 0.34f), "Post Effects", GuiAlign.CENTRE);
 		post.addLeftListener(new ScreenListener() {
 			@Override
 			public void eventOccurred() {

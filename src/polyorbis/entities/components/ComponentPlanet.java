@@ -3,9 +3,9 @@ package polyorbis.entities.components;
 import flounder.entities.*;
 import flounder.guis.*;
 import flounder.helpers.*;
-import flounder.maths.*;
 import flounder.maths.vectors.*;
 import polyorbis.entities.instances.*;
+import polyorbis.world.*;
 
 import javax.swing.*;
 
@@ -57,7 +57,10 @@ public class ComponentPlanet extends IComponentEntity implements IComponentEdito
 		// Reorder atmosphere to be the last rendered.
 		if (atmosphere != null) {
 			FlounderEntities.getEntities().remove(atmosphere);
-			FlounderEntities.getEntities().add(atmosphere);
+
+			if (PolyWorld.hasAtmosphere()) {
+				FlounderEntities.getEntities().add(atmosphere);
+			}
 		}
 	}
 

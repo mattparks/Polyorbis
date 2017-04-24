@@ -7,7 +7,6 @@ import flounder.models.*;
 import flounder.resources.*;
 import flounder.space.*;
 import flounder.textures.*;
-import polyorbis.entities.components.*;
 
 public class InstanceTree extends Entity {
 	private static final ModelObject MODEL = ModelFactory.newBuilder().setFile(new MyFile(FlounderEntities.ENTITIES_FOLDER, "tree", "model.obj")).create();
@@ -18,7 +17,7 @@ public class InstanceTree extends Entity {
 		super(structure, Vector3f.rotate(new Vector3f(0.0f, radius, 0.0f), rotation, null), new Vector3f(0.0f, rotation.y, rotation.z));
 		new ComponentModel(this, 0.32f, MODEL, TEXTURE, 1);
 		new ComponentSurface(this, 1.0f, 0.0f, false, false, true);
-	//	new ComponentSway(this, TEXTURE_SWAY); // TODO: Made great again.
+		new ComponentSway(this, TEXTURE_SWAY); // TODO: Make great again.
 		new ComponentCollision(this);
 	}
 }

@@ -4,8 +4,6 @@ import flounder.devices.*;
 import flounder.entities.*;
 import flounder.guis.*;
 import flounder.helpers.*;
-import flounder.maths.vectors.*;
-import flounder.resources.*;
 import flounder.sounds.*;
 import polyorbis.world.*;
 

@@ -4,7 +4,6 @@ import flounder.entities.*;
 import flounder.framework.*;
 import flounder.guis.*;
 import flounder.helpers.*;
-import flounder.logger.*;
 import flounder.maths.*;
 import flounder.maths.vectors.*;
 import polyorbis.world.*;
@@ -88,7 +87,7 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 
 						// direction.scale(Maths.randomInRange(-Maths.randomInRange(1.0f, 2.0f), +Maths.randomInRange(1.0f, 2.0f))); // TODO: Decrease error over time.
 						direction.normalize();
-						PolyWorld.fireProjectile(new Vector3f(rotation), radius, (int) (3.0f - (3.0f * Math.pow(1.0f / Maths.randomInRange(1.0f, 3.0f), 2))), direction, false);
+						PolyWorld.fireProjectile(new Vector3f(rotation), radius, (int) (3.0f - (3.0f * Math.pow(1.0f / Maths.randomInRange(1.0f, 3.0f), 2))), direction, false); // TODO: Fix selected attacks.
 					}
 
 					shootTime = 0.0f;

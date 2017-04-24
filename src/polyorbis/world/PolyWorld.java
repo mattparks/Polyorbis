@@ -9,7 +9,6 @@ import flounder.particles.*;
 import flounder.resources.*;
 import flounder.shadows.*;
 import flounder.skybox.*;
-import flounder.sounds.*;
 import flounder.textures.*;
 import flounder.visual.*;
 import polyorbis.*;
@@ -46,6 +45,8 @@ public class PolyWorld extends Module {
 	private PlayData endGameData;
 	private int highsore;
 
+	private boolean atmosphere;
+
 	public PolyWorld() {
 		super(ModuleUpdate.UPDATE_PRE, PROFILE_TAB_NAME, FlounderEntities.class);
 	}
@@ -69,6 +70,8 @@ public class PolyWorld extends Module {
 		FlounderSkybox.setCubemap(TextureFactory.newBuilder().setCubemap(SKYBOX_TEXTURE_FILES).create());
 		FlounderShadows.setShadowBoxOffset(16.0f);
 		FlounderShadows.setShadowBoxDistance(32.0f);
+
+		this.atmosphere = PolyConfigs.ATMOSPHERE_ENABLED.setReference(() -> atmosphere).getBoolean();
 
 		reset();
 	}
@@ -179,6 +182,14 @@ public class PolyWorld extends Module {
 
 	public static int getHighsore() {
 		return INSTANCE.highsore;
+	}
+
+	public static boolean hasAtmosphere() {
+		return INSTANCE.atmosphere;
+	}
+
+	public static void setAtmosphere(boolean atmosphere) {
+		INSTANCE.atmosphere = atmosphere;
 	}
 
 	@Override

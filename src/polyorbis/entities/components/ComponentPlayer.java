@@ -184,7 +184,11 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 			}
 
 			if (selectedCharge == 2 && charge2 == 0.0f) {
-				selectedCharge = 3;
+				if (charge1 == 0.0f) {
+					selectedCharge = 3;
+				} else {
+					selectedCharge = 1;
+				}
 			}
 
 			if (selectedCharge == 3 && charge3 == 0.0f) {

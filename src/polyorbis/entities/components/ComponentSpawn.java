@@ -55,20 +55,21 @@ public class ComponentSpawn extends IComponentEntity implements IComponentEditor
 		}
 
 		if (targetTime != -1.0f && Framework.getTimeSec() - targetTime > 0.0f) {
-			this.targetTime = Framework.getTimeSec() + Maths.randomInRange(3.0f, 10.0f);
 			int current = 0;
 
 			int maxAllowed = 1;
 
-			if (PolyWorld.calculateScore(PolyWorld.getEntityPlayer()) > 4096) {
+			if (PolyWorld.calculateScore(PolyWorld.getEntityPlayer()) > 2000) {
 				maxAllowed = 5;
-			} else if (PolyWorld.calculateScore(PolyWorld.getEntityPlayer()) > 2048) {
+			} else if (PolyWorld.calculateScore(PolyWorld.getEntityPlayer()) > 1200) {
 				maxAllowed = 4;
-			} else if (PolyWorld.calculateScore(PolyWorld.getEntityPlayer()) > 1024) {
+			} else if (PolyWorld.calculateScore(PolyWorld.getEntityPlayer()) > 800) {
 				maxAllowed = 3;
-			} else if (PolyWorld.calculateScore(PolyWorld.getEntityPlayer()) > 512) {
+			} else if (PolyWorld.calculateScore(PolyWorld.getEntityPlayer()) > 300) {
 				maxAllowed = 2;
 			}
+
+			this.targetTime = Framework.getTimeSec() + Maths.randomInRange(3.0f, 10.0f / (float) maxAllowed);
 
 			switch ((int) Maths.randomInRange(0.0f, 3.0f)) {
 				case 0:

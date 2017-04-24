@@ -21,6 +21,9 @@ public class PolyConfigs {
 	public static final ConfigData PROFILER_ENABLED = CONFIG_MAIN.getData(ConfigSection.DEBUG, "profilerEnabled", false, FlounderProfiler::isOpen);
 	public static final ConfigData WIREFRAME_ENABLED = CONFIG_MAIN.getData(ConfigSection.DEBUG, "wireframeEnabled", false, OpenGlUtils::isInWireframe);
 
+	public static final ConfigData ATMOSPHERE_ENABLED = CONFIG_MAIN.getData(ConfigSection.GRAPHICS, "atmosphereEnabled", true);
+	public static final ConfigData STARTHELP_ENABLED = CONFIG_MAIN.getData(ConfigSection.DEBUG, "starthelpEnabled", true);
+
 	public static final ConfigData MUSIC_ENABLED = CONFIG_MAIN.getData(ConfigSection.AUDIO, "musicEnabled", true);
 	public static final ConfigData MUSIC_VOLUME = CONFIG_MAIN.getData(ConfigSection.AUDIO, "musicVolume", 0.3f);
 	public static final ConfigData SOUND_VOLUME = CONFIG_MAIN.getData(ConfigSection.AUDIO, "soundVolume", 0.5f);

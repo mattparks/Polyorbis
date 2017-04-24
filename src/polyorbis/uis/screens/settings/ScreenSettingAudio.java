@@ -33,7 +33,7 @@ public class ScreenSettingAudio extends ScreenObject {
 		});
 
 		// Slider Music Volume.
-		GuiSliderText sliderMusicVolume = new GuiSliderText(this, new Vector2f(0.5f, 0.27f), "Music Volume: ", 0.1f, 1.0f, FlounderSound.getMusicPlayer().getVolume(), GuiAlign.CENTRE);
+		GuiSliderText sliderMusicVolume = new GuiSliderText(this, new Vector2f(0.5f, 0.27f), "Music Volume: ", 0.0f, 1.0f, FlounderSound.getMusicPlayer().getVolume(), GuiAlign.CENTRE);
 		FlounderEvents.addEvent(new EventChange<Float>(FlounderSound.getMusicPlayer()::getVolume) {
 			@Override
 			public void onEvent(Float newValue) {

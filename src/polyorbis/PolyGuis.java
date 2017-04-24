@@ -1,7 +1,6 @@
 package polyorbis;
 
 import flounder.events.*;
-import flounder.framework.*;
 import flounder.guis.*;
 import flounder.inputs.*;
 import flounder.maths.*;
@@ -22,6 +21,8 @@ public class PolyGuis extends GuiMaster {
 	private OverlaySlider overlaySlider;
 	private OverlayDeath overlayDeath;
 
+	private boolean starthelp;
+
 	public PolyGuis() {
 		super();
 	}
@@ -34,11 +35,23 @@ public class PolyGuis extends GuiMaster {
 		this.overlaySlider = new OverlaySlider(FlounderGuis.getContainer());
 		this.overlayDeath = new OverlayDeath(FlounderGuis.getContainer());
 
-		this.overlayHelp.setAlphaDriver(new ConstantDriver(1.0f));
+		this.overlayHelp.setAlphaDriver(new ConstantDriver(0.0f));
 		this.overlayDebug.setAlphaDriver(new ConstantDriver(0.0f));
-		this.overlayHUD.setAlphaDriver(new ConstantDriver(0.0f));
+		this.overlayHUD.setAlphaDriver(new ConstantDriver(1.0f));
 		this.overlaySlider.setAlphaDriver(new ConstantDriver(0.0f));
 		this.overlayDeath.setAlphaDriver(new ConstantDriver(0.0f));
+
+		new java.util.Timer().schedule(
+				new java.util.TimerTask() {
+					@Override
+					public void run() {
+						if (starthelp = PolyConfigs.STARTHELP_ENABLED.setReference(() -> starthelp).getBoolean()) {
+							toggleHelp();
+						}
+					}
+				},
+				500
+		);
 
 		FlounderGuis.getSelector().initJoysticks(0, 0, 1, 0, 1);
 
@@ -226,6 +239,14 @@ public class PolyGuis extends GuiMaster {
 
 	public OverlayDeath getOverlayDeath() {
 		return overlayDeath;
+	}
+
+	public boolean isStarthelp() {
+		return starthelp;
+	}
+
+	public void setStarthelp(boolean starthelp) {
+		this.starthelp = starthelp;
 	}
 
 	@Override
