@@ -68,8 +68,8 @@ public class PolyWorld extends Module {
 		FlounderShadows.setShadowBias(PolyConfigs.SHADOWMAP_BIAS.getFloat());
 		FlounderShadows.setShadowDarkness(PolyConfigs.SHADOWMAP_DARKNESS.getFloat());
 		FlounderSkybox.setCubemap(TextureFactory.newBuilder().setCubemap(SKYBOX_TEXTURE_FILES).create());
-		FlounderShadows.setShadowBoxOffset(11.5f);
-		FlounderShadows.setShadowBoxDistance(32.5f);
+		FlounderShadows.setShadowBoxOffset(13.0f);
+		FlounderShadows.setShadowBoxDistance(33.0f);
 
 		this.atmosphere = PolyConfigs.ATMOSPHERE_ENABLED.setReference(() -> atmosphere).getBoolean();
 
@@ -80,7 +80,7 @@ public class PolyWorld extends Module {
 	public void update() {
 		// Update the sky colours and sun position.
 		dayFactor = dayDriver.update(Framework.getDelta()) / 100.0f;
-		Vector3f.rotate(LIGHT_DIRECTION, FlounderSkybox.getRotation().set(0.0f, dayFactor * 360.0f, 0.0f), FlounderShadows.getLightPosition());
+		Vector3f.rotate(LIGHT_DIRECTION, FlounderSkybox.getRotation().set(0.0f, dayFactor * 360.0f, 0.0f), FlounderShadows.getLightPosition()).normalize();
 		FlounderSkybox.setBlendFactor(1.0f);
 
 		int score = calculateScore(entityPlayer);

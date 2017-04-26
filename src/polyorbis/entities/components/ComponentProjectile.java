@@ -72,7 +72,7 @@ public class ComponentProjectile extends IComponentEntity implements IComponentE
 
 		ComponentPlayer realPlayer = PolyWorld.getEntityPlayer() == null ? null : (ComponentPlayer) PolyWorld.getEntityPlayer().getComponent(ComponentPlayer.class);
 
-		for (Entity entity : new ArrayList<>(FlounderEntities.getEntities().getAll())) {
+		for (Entity entity : FlounderEntities.getEntities().getAll()) {
 			if (entity != null) {
 				ComponentEnemy enemy = (ComponentEnemy) entity.getComponent(ComponentEnemy.class);
 				ComponentPlayer player = (ComponentPlayer) entity.getComponent(ComponentPlayer.class);
@@ -98,8 +98,8 @@ public class ComponentProjectile extends IComponentEntity implements IComponentE
 		}
 
 		Vector3f right = new Vector3f(direction).scale(360.0f * Framework.getDelta());
-		right.y -= deviation * Math.cos(Math.PI * randomness * Framework.getTimeSec());
-		right.z += deviation * Math.sin(Math.PI * randomness * Framework.getTimeSec());
+		right.y -= deviation * 100.0f * Math.cos(Math.PI * randomness * Framework.getTimeSec()) * Framework.getDelta();
+		right.z += deviation * 100.0f * Math.sin(Math.PI * randomness * Framework.getTimeSec()) * Framework.getDelta();
 		Vector3f.add(rotation, right, rotation);
 		Vector3f.rotate(new Vector3f(0.0f, radius, 0.0f), rotation, getEntity().getPosition());
 		getEntity().setMoved();

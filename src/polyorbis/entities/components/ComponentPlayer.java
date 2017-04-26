@@ -140,14 +140,16 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 		}
 
 		// Move player current positions.
-		currentY += currentSpeedY;
-		currentZ += currentSpeedZ;
+		currentY += currentSpeedY * 100.0f * Framework.getDelta();
+		currentZ += currentSpeedZ * 100.0f * Framework.getDelta();
+
 		if (inputJump.isDown() && currentSpeedUp == 0.0f && currentRadius <= planetRadius + PLAYER_HEIGHT) {
 			FlounderSound.playSystemSound(SOUND_JUMP);
 			currentSpeedUp = PLAYER_JUMP;
 		}
+
 		currentSpeedUp += PLAYER_GRAVITY * Framework.getDelta();
-		currentRadius += currentSpeedUp;
+		currentRadius += currentSpeedUp * 100.0f * Framework.getDelta();
 
 		// Collision with the planet.
 		if (currentRadius < planetRadius + PLAYER_HEIGHT) {
