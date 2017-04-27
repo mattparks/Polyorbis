@@ -15,7 +15,7 @@ import flounder.standards.*;
 import polyorbis.post.*;
 import polyorbis.world.*;
 
-import static org.lwjgl.glfw.GLFW.*;
+import static flounder.platform.Constants.*;
 
 public class PolyInterface extends Standard {
 	private Playlist gamePlaylist;

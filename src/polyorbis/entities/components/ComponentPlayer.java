@@ -14,7 +14,7 @@ import polyorbis.world.*;
 
 import javax.swing.*;
 
-import static org.lwjgl.glfw.GLFW.*;
+import static flounder.platform.Constants.*;
 
 public class ComponentPlayer extends IComponentEntity implements IComponentEditor {
 	public final static Sound SOUND_GAMEOVER = Sound.loadSoundInBackground(new MyFile(FlounderSound.SOUND_FOLDER, "gameover.wav"), 1.0f, 1.0f);

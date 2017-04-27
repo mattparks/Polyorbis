@@ -8,7 +8,7 @@ import flounder.visual.*;
 import polyorbis.uis.*;
 import polyorbis.world.*;
 
-import static org.lwjgl.glfw.GLFW.*;
+import static flounder.platform.Constants.*;
 
 public class PolyGuis extends GuiMaster {
 	private static final Colour COLOUR_PRIMARY = new Colour(0.1f, 0.8f, 0.2f); // Neon Green.

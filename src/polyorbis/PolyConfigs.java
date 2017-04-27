@@ -8,9 +8,10 @@ import flounder.profiling.*;
 import flounder.resources.*;
 import flounder.shadows.*;
 import flounder.textures.*;
-import org.lwjgl.glfw.*;
 import polyorbis.post.*;
 import polyorbis.world.*;
+
+import static flounder.platform.Constants.*;
 
 /**
  * A class that contains a bunch of config references.
@@ -25,8 +26,8 @@ public class PolyConfigs {
 	public static final ConfigData STARTHELP_ENABLED = CONFIG_MAIN.getData(ConfigSection.DEBUG, "starthelpEnabled", true);
 
 	public static final ConfigData MUSIC_ENABLED = CONFIG_MAIN.getData(ConfigSection.AUDIO, "musicEnabled", true);
-	public static final ConfigData MUSIC_VOLUME = CONFIG_MAIN.getData(ConfigSection.AUDIO, "musicVolume", 0.3f);
-	public static final ConfigData SOUND_VOLUME = CONFIG_MAIN.getData(ConfigSection.AUDIO, "soundVolume", 0.5f);
+	public static final ConfigData MUSIC_VOLUME = CONFIG_MAIN.getData(ConfigSection.AUDIO, "musicVolume", 0.1f);
+	public static final ConfigData SOUND_VOLUME = CONFIG_MAIN.getData(ConfigSection.AUDIO, "soundVolume", 0.3f);
 
 	public static final ConfigData DISPLAY_WIDTH = CONFIG_MAIN.getData(ConfigSection.GRAPHICS, "displayWidth", 1080, FlounderDisplay::getWindowWidth);
 	public static final ConfigData DISPLAY_HEIGHT = CONFIG_MAIN.getData(ConfigSection.GRAPHICS, "displayHeight", 720, FlounderDisplay::getWindowHeight);
@@ -50,7 +51,7 @@ public class PolyConfigs {
 	public static final ConfigData POST_GRAIN_ENABLED = CONFIG_MAIN.getData(ConfigSection.POST, "grainEnabled", true, PolyPost::isGrainEnabled);
 
 	public static final ConfigData CAMERA_SENSITIVITY = CONFIG_MAIN.getData(ConfigSection.CONTROLS, "cameraSensitivity", 1.0f); // Reference set in camera.
-	public static final ConfigData CAMERA_REANGLE = CONFIG_MAIN.getData(ConfigSection.CONTROLS, "cameraReangle", GLFW.GLFW_MOUSE_BUTTON_RIGHT); // Reference set in camera.
+	public static final ConfigData CAMERA_REANGLE = CONFIG_MAIN.getData(ConfigSection.CONTROLS, "cameraReangle", GLFW_MOUSE_BUTTON_RIGHT); // Reference set in camera.
 
 	// Save configs.
 	private static final Config CONFIG_SAVE = new Config(new MyFile(Framework.getRoamingFolder(), "saves", "save.conf"));

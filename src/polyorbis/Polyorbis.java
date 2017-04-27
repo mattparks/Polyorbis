@@ -4,6 +4,8 @@ import flounder.devices.*;
 import flounder.framework.*;
 import flounder.framework.updater.*;
 import flounder.helpers.*;
+import flounder.lwjgl3.*;
+import flounder.lwjgl3.devices.*;
 import flounder.profiling.*;
 import flounder.resources.*;
 import flounder.textures.*;
@@ -17,7 +19,7 @@ public class Polyorbis extends Framework {
 	}
 
 	public Polyorbis() {
-		super("polyorbis", new UpdaterDefault(GLFW::glfwGetTime), -1, new PolyInterface(), new PolyRenderer(), new PolyCamera(), new PolyPlayer(), new PolyGuis());
+		super("polyorbis", new UpdaterDefault(GLFW::glfwGetTime), -1, new PlatformLWJGL3(), new LWJGLSound(), new PolyInterface(), new PolyRenderer(), new PolyCamera(), new PolyPlayer(), new PolyGuis());
 		FlounderDisplay.setup(
 				PolyConfigs.DISPLAY_WIDTH.getInteger(),
 				PolyConfigs.DISPLAY_HEIGHT.getInteger(),
