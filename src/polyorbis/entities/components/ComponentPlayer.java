@@ -14,7 +14,7 @@ import polyorbis.world.*;
 
 import javax.swing.*;
 
-import static org.lwjgl.glfw.GLFW.*;
+import static flounder.platform.Constants.*;
 
 public class ComponentPlayer extends IComponentEntity implements IComponentEditor {
 	public final static Sound SOUND_GAMEOVER = Sound.loadSoundInBackground(new MyFile(FlounderSound.SOUND_FOLDER, "gameover.wav"), 1.0f, 1.0f);
@@ -205,7 +205,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 			// Calculates the direction from the mouse click position.
 			if (!FlounderJoysticks.isConnected(0)) {
 				direction.set((FlounderMouse.getPositionX() * 2.0f - 1.0f) + 0.03f, FlounderMouse.getPositionY() * 2.0f - 1.0f);
-				direction.y /= FlounderDisplay.getAspectRatio();
+				direction.y /= FlounderDisplay.getDevice().getAspectRatio();
 			}
 
 			// Fixes any zero vectors.

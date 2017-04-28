@@ -15,7 +15,7 @@ import flounder.standards.*;
 import polyorbis.post.*;
 import polyorbis.world.*;
 
-import static org.lwjgl.glfw.GLFW.*;
+import static flounder.platform.Constants.*;
 
 public class PolyInterface extends Standard {
 	private Playlist gamePlaylist;
@@ -62,7 +62,7 @@ public class PolyInterface extends Standard {
 
 			@Override
 			public void onEvent() {
-				FlounderDisplay.setFullscreen(!FlounderDisplay.isFullscreen());
+				FlounderDisplay.getDevice().setFullscreen(!FlounderDisplay.getDevice().isFullscreen());
 			}
 		});
 

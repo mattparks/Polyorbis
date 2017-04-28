@@ -179,10 +179,6 @@ public class PolyRenderer extends RendererMaster {
 	public void profile() {
 	}
 
-	public ShadowRenderer getShadowRenderer() {
-		return shadowRenderer;
-	}
-
 	@Override
 	public void dispose() {
 		shadowRenderer.dispose();

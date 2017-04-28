@@ -306,7 +306,7 @@ public class PolyCamera extends Camera {
 	}
 
 	private void updateProjectionMatrix() {
-		Matrix4f.perspectiveMatrix(getFOV(), FlounderDisplay.getAspectRatio(), getNearPlane(), getFarPlane(), projectionMatrix);
+		Matrix4f.perspectiveMatrix(getFOV(), FlounderDisplay.getDevice().getAspectRatio(), getNearPlane(), getFarPlane(), projectionMatrix);
 	}
 
 	@Override
