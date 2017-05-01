@@ -27,7 +27,7 @@ public class PolyGuis extends GuiMaster {
 		super();
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_INIT)
 	public void init() {
 		this.overlayHelp = new OverlayHelp(FlounderGuis.getContainer());
 		this.overlayDebug = new OverlayDebug(FlounderGuis.getContainer());
@@ -112,12 +112,12 @@ public class PolyGuis extends GuiMaster {
 		});
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_UPDATE_PRE)
 	public void update() {
 		toggleDeath(PolyWorld.getEndGameData() != null);
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_PROFILE)
 	public void profile() {
 	}
 
@@ -249,7 +249,7 @@ public class PolyGuis extends GuiMaster {
 		this.starthelp = starthelp;
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_DISPOSE)
 	public void dispose() {
 
 	}

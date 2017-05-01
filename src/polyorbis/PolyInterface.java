@@ -24,7 +24,7 @@ public class PolyInterface extends Standard {
 		super(FlounderDisplay.class, FlounderKeyboard.class, FlounderSound.class, FlounderEvents.class, FlounderNetwork.class, FlounderShadows.class, FlounderParticles.class, FlounderSkybox.class, PolyPost.class, PolyWorld.class);
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_INIT)
 	public void init() {
 		FlounderSound.getMusicPlayer().setVolume(PolyConfigs.MUSIC_VOLUME.setReference(() -> FlounderSound.getMusicPlayer().getVolume()).getFloat());
 		FlounderSound.getSourcePool().setSystemVolume(PolyConfigs.SOUND_VOLUME.setReference(() -> FlounderSound.getSourcePool().getSystemVolume()).getFloat());
@@ -62,7 +62,7 @@ public class PolyInterface extends Standard {
 
 			@Override
 			public void onEvent() {
-				FlounderDisplay.getDevice().setFullscreen(!FlounderDisplay.getDevice().isFullscreen());
+				FlounderDisplay.setFullscreen(!FlounderDisplay.isFullscreen());
 			}
 		});
 
@@ -95,16 +95,16 @@ public class PolyInterface extends Standard {
 		});*/
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_UPDATE_PRE)
 	public void update() {
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_PROFILE)
 	public void profile() {
 
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_DISPOSE)
 	public void dispose() {
 		PolyConfigs.saveAllConfigs();
 	}

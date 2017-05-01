@@ -20,7 +20,7 @@ public class PolyPost extends Module {
 		super(ModuleUpdate.UPDATE_PRE, PROFILE_TAB_NAME);
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_INIT)
 	public void init() {
 		this.effectsEnabled = PolyConfigs.POST_EFFECTS_ENABLED.getBoolean();
 
@@ -31,17 +31,17 @@ public class PolyPost extends Module {
 		this.grainEnabled = PolyConfigs.POST_GRAIN_ENABLED.getBoolean();
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_UPDATE_PRE)
 	public void update() {
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_PROFILE)
 	public void profile() {
-		FlounderProfiler.add(PROFILE_TAB_NAME, "Effects Enabled", effectsEnabled);
-		FlounderProfiler.add(PROFILE_TAB_NAME, "Bloom Enabled", bloomEnabled);
-		FlounderProfiler.add(PROFILE_TAB_NAME, "Motion Blur Enabled", motionBlurEnabled);
-		FlounderProfiler.add(PROFILE_TAB_NAME, "Lens Flare Enabled", lensFlareEnabled);
-		FlounderProfiler.add(PROFILE_TAB_NAME, "Grain Filter Enabled", grainEnabled);
+		FlounderProfiler.get().add(PROFILE_TAB_NAME, "Effects Enabled", effectsEnabled);
+		FlounderProfiler.get().add(PROFILE_TAB_NAME, "Bloom Enabled", bloomEnabled);
+		FlounderProfiler.get().add(PROFILE_TAB_NAME, "Motion Blur Enabled", motionBlurEnabled);
+		FlounderProfiler.get().add(PROFILE_TAB_NAME, "Lens Flare Enabled", lensFlareEnabled);
+		FlounderProfiler.get().add(PROFILE_TAB_NAME, "Grain Filter Enabled", grainEnabled);
 	}
 
 	public static boolean isEffectsEnabled() {
@@ -92,12 +92,8 @@ public class PolyPost extends Module {
 		INSTANCE.grainEnabled = grainEnabled;
 	}
 
-	@Override
-	public Module getInstance() {
-		return INSTANCE;
-	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_DISPOSE)
 	public void dispose() {
 	}
 }

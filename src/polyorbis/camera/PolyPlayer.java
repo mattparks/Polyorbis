@@ -12,13 +12,13 @@ public class PolyPlayer extends Player {
 		super();
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_INIT)
 	public void init() {
 		this.position = new Vector3f();
 		this.rotation = new Vector3f();
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_UPDATE_PRE)
 	public void update() {
 		if (PolyWorld.getEntityPlayer() != null) {
 			this.position.set(PolyWorld.getEntityPlayer().getPosition());

@@ -29,7 +29,7 @@ public class ComponentCollect extends IComponentEntity implements IComponentEdit
 		this.collected = collected;
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_UPDATE_PRE)
 	public void update() {
 		// Do not update on paused.
 		if (FlounderGuis.getGuiMaster() == null || FlounderGuis.getGuiMaster().isGamePaused()) {
@@ -66,7 +66,7 @@ public class ComponentCollect extends IComponentEntity implements IComponentEdit
 		);
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_DISPOSE)
 	public void dispose() {
 	}
 

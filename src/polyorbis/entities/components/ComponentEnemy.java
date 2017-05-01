@@ -46,7 +46,7 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 		this.shootTime = 0.0f;
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_UPDATE_PRE)
 	public void update() {
 		// Do not update on paused.
 		if (FlounderGuis.getGuiMaster() == null || FlounderGuis.getGuiMaster().isGamePaused()) {
@@ -144,7 +144,7 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 		);
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_DISPOSE)
 	public void dispose() {
 	}
 }

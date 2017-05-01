@@ -28,7 +28,7 @@ public class ComponentCelestial extends IComponentEntity implements IComponentEd
 		}
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_UPDATE_PRE)
 	public void update() {
 		Vector3f.multiply(FlounderShadows.getLightPosition(), startPosition, getEntity().getPosition());
 
@@ -55,7 +55,7 @@ public class ComponentCelestial extends IComponentEntity implements IComponentEd
 		);
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_DISPOSE)
 	public void dispose() {
 	}
 }

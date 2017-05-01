@@ -75,7 +75,7 @@ public class PolyCamera extends Camera {
 		super(FlounderJoysticks.class, FlounderKeyboard.class, FlounderMouse.class);
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_INIT)
 	public void init() {
 		this.position = new Vector3f();
 		this.rotation = new Vector3f();
@@ -131,7 +131,7 @@ public class PolyCamera extends Camera {
 		if (player != null) {
 			this.targetPosition.set(player.getPosition());
 			this.targetRotation.set(player.getRotation());
-			//	FlounderLogger.log(targetRotation + " | " + rotation);
+			//	FlounderLogger.get().log(targetRotation + " | " + rotation);
 		}
 
 		updateActualZoom();
@@ -141,13 +141,13 @@ public class PolyCamera extends Camera {
 		calculatePosition();
 
 		if (FlounderProfiler.isOpen()) {
-			FlounderProfiler.add(FlounderCamera.PROFILE_TAB_NAME, "Camera Angle Of Elevation", angleOfElevation);
-			FlounderProfiler.add(FlounderCamera.PROFILE_TAB_NAME, "Camera Rotation", rotation);
-			FlounderProfiler.add(FlounderCamera.PROFILE_TAB_NAME, "Camera Angle Around MainPlayer", angleAroundPlayer);
-			FlounderProfiler.add(FlounderCamera.PROFILE_TAB_NAME, "Camera Actual Distance From Point", actualDistanceFromPoint);
-			FlounderProfiler.add(FlounderCamera.PROFILE_TAB_NAME, "Camera Target Zoom", targetZoom);
-			FlounderProfiler.add(FlounderCamera.PROFILE_TAB_NAME, "Camera Target Elevation", targetElevation);
-			FlounderProfiler.add(FlounderCamera.PROFILE_TAB_NAME, "Camera Target Rotation Angle", targetRotationAngle);
+			FlounderProfiler.get().add(FlounderCamera.PROFILE_TAB_NAME, "Camera Angle Of Elevation", angleOfElevation);
+			FlounderProfiler.get().add(FlounderCamera.PROFILE_TAB_NAME, "Camera Rotation", rotation);
+			FlounderProfiler.get().add(FlounderCamera.PROFILE_TAB_NAME, "Camera Angle Around MainPlayer", angleAroundPlayer);
+			FlounderProfiler.get().add(FlounderCamera.PROFILE_TAB_NAME, "Camera Actual Distance From Point", actualDistanceFromPoint);
+			FlounderProfiler.get().add(FlounderCamera.PROFILE_TAB_NAME, "Camera Target Zoom", targetZoom);
+			FlounderProfiler.get().add(FlounderCamera.PROFILE_TAB_NAME, "Camera Target Elevation", targetElevation);
+			FlounderProfiler.get().add(FlounderCamera.PROFILE_TAB_NAME, "Camera Target Rotation Angle", targetRotationAngle);
 		}
 	}
 
@@ -306,7 +306,7 @@ public class PolyCamera extends Camera {
 	}
 
 	private void updateProjectionMatrix() {
-		Matrix4f.perspectiveMatrix(getFOV(), FlounderDisplay.getDevice().getAspectRatio(), getNearPlane(), getFarPlane(), projectionMatrix);
+		Matrix4f.perspectiveMatrix(getFOV(), FlounderDisplay.getAspectRatio(), getNearPlane(), getFarPlane(), projectionMatrix);
 	}
 
 	@Override

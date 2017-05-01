@@ -43,7 +43,7 @@ public class PolyRenderer extends RendererMaster {
 		super(FlounderDisplay.class);
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_INIT)
 	public void init() {
 		this.shadowRenderer = new ShadowRenderer();
 		this.skyboxRenderer = new SkyboxRenderer();
@@ -175,11 +175,11 @@ public class PolyRenderer extends RendererMaster {
 		output.unbindFrameBuffer();
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_PROFILE)
 	public void profile() {
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_DISPOSE)
 	public void dispose() {
 		shadowRenderer.dispose();
 		skyboxRenderer.dispose();

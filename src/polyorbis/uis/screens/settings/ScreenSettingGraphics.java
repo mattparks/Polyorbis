@@ -26,7 +26,7 @@ public class ScreenSettingGraphics extends ScreenObject {
 
 		// Toggle Antialiasing.
 		GuiButtonText toggleAntialiasing = new GuiButtonText(paneLeft, new Vector2f(0.25f, 0.20f), "Is Antialiasing: ", GuiAlign.CENTRE);
-		FlounderEvents.addEvent(new EventChange<Boolean>(FlounderDisplay.getDevice()::isAntialiasing) {
+		FlounderEvents.addEvent(new EventChange<Boolean>(FlounderDisplay::isAntialiasing) {
 			@Override
 			public void onEvent(Boolean newValue) {
 				toggleAntialiasing.setText("Is Antialiasing: " + newValue);
@@ -35,13 +35,13 @@ public class ScreenSettingGraphics extends ScreenObject {
 		toggleAntialiasing.addLeftListener(new ScreenListener() {
 			@Override
 			public void eventOccurred() {
-				FlounderDisplay.getDevice().setAntialiasing(!FlounderDisplay.getDevice().isAntialiasing());
+				FlounderDisplay.setAntialiasing(!FlounderDisplay.isAntialiasing());
 			}
 		});
 
 		// Toggle Fullscreen.
 		GuiButtonText toggleFullscreen = new GuiButtonText(paneLeft, new Vector2f(0.25f, 0.27f), "Is Fullscreen: ", GuiAlign.CENTRE);
-		FlounderEvents.addEvent(new EventChange<Boolean>(FlounderDisplay.getDevice()::isFullscreen) {
+		FlounderEvents.addEvent(new EventChange<Boolean>(FlounderDisplay::isFullscreen) {
 			@Override
 			public void onEvent(Boolean newValue) {
 				toggleFullscreen.setText("Is Fullscreen: " + newValue);
@@ -50,13 +50,13 @@ public class ScreenSettingGraphics extends ScreenObject {
 		toggleFullscreen.addLeftListener(new ScreenListener() {
 			@Override
 			public void eventOccurred() {
-				FlounderDisplay.getDevice().setFullscreen(!FlounderDisplay.getDevice().isFullscreen());
+				FlounderDisplay.setFullscreen(!FlounderDisplay.isFullscreen());
 			}
 		});
 
 		// Toggle Vsync.
 		GuiButtonText toggleVsync = new GuiButtonText(paneLeft, new Vector2f(0.25f, 0.34f), "VSync Enabled: ", GuiAlign.CENTRE);
-		FlounderEvents.addEvent(new EventChange<Boolean>(FlounderDisplay.getDevice()::isVSync) {
+		FlounderEvents.addEvent(new EventChange<Boolean>(FlounderDisplay::isVSync) {
 			@Override
 			public void onEvent(Boolean newValue) {
 				toggleVsync.setText("VSync Enabled: " + newValue);
@@ -65,7 +65,7 @@ public class ScreenSettingGraphics extends ScreenObject {
 		toggleVsync.addLeftListener(new ScreenListener() {
 			@Override
 			public void eventOccurred() {
-				FlounderDisplay.getDevice().setVsync(!FlounderDisplay.getDevice().isVSync());
+				FlounderDisplay.setVSync(!FlounderDisplay.isVSync());
 			}
 		});
 

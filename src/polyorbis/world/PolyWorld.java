@@ -51,7 +51,7 @@ public class PolyWorld extends Module {
 		super(ModuleUpdate.UPDATE_PRE, PROFILE_TAB_NAME, FlounderEntities.class);
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_INIT)
 	public void init() {
 		this.entityPlayer = null;
 		this.entityPlanet = null;
@@ -76,7 +76,7 @@ public class PolyWorld extends Module {
 		reset();
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_UPDATE_PRE)
 	public void update() {
 		// Update the sky colours and sun position.
 		dayFactor = dayDriver.update(Framework.getDelta()) / 100.0f;
@@ -102,7 +102,7 @@ public class PolyWorld extends Module {
 		INSTANCE.endGameData = null;
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_PROFILE)
 	public void profile() {
 	}
 
@@ -192,12 +192,8 @@ public class PolyWorld extends Module {
 		INSTANCE.atmosphere = atmosphere;
 	}
 
-	@Override
-	public Module getInstance() {
-		return INSTANCE;
-	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_DISPOSE)
 	public void dispose() {
 	}
 }

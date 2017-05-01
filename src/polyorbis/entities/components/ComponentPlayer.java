@@ -97,7 +97,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 		this.inputFire = new CompoundButton(new MouseButton(GLFW_MOUSE_BUTTON_LEFT), new JoystickButton(0, 5));
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_UPDATE_PRE)
 	public void update() {
 		// Do not update on paused.
 		if (FlounderGuis.getGuiMaster() == null || FlounderGuis.getGuiMaster().isGamePaused()) {
@@ -205,7 +205,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 			// Calculates the direction from the mouse click position.
 			if (!FlounderJoysticks.isConnected(0)) {
 				direction.set((FlounderMouse.getPositionX() * 2.0f - 1.0f) + 0.03f, FlounderMouse.getPositionY() * 2.0f - 1.0f);
-				direction.y /= FlounderDisplay.getDevice().getAspectRatio();
+				direction.y /= FlounderDisplay.getAspectRatio();
 			}
 
 			// Fixes any zero vectors.
@@ -355,7 +355,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 		);
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_DISPOSE)
 	public void dispose() {
 	}
 }

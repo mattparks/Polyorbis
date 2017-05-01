@@ -12,7 +12,6 @@ import flounder.sounds.*;
 import polyorbis.world.*;
 
 import javax.swing.*;
-import java.util.*;
 
 public class ComponentProjectile extends IComponentEntity implements IComponentEditor {
 	public final static Sound SOUND_SHOOT = Sound.loadSoundInBackground(new MyFile(FlounderSound.SOUND_FOLDER, "laserShoot.wav"), 1.0f, 1.0f);
@@ -57,7 +56,7 @@ public class ComponentProjectile extends IComponentEntity implements IComponentE
 		this.spentTime = 0.0f;
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_UPDATE_PRE)
 	public void update() {
 		// Do not update on paused.
 		if (FlounderGuis.getGuiMaster() == null || FlounderGuis.getGuiMaster().isGamePaused()) {
@@ -121,7 +120,7 @@ public class ComponentProjectile extends IComponentEntity implements IComponentE
 		);
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_DISPOSE)
 	public void dispose() {
 	}
 }
