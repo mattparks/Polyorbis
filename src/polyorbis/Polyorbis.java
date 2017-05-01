@@ -2,8 +2,11 @@ package polyorbis;
 
 import flounder.framework.*;
 import flounder.framework.updater.*;
+import flounder.helpers.*;
 import flounder.lwjgl3.*;
 import flounder.lwjgl3.devices.*;
+import flounder.profiling.*;
+import flounder.textures.*;
 import org.lwjgl.glfw.*;
 import polyorbis.camera.*;
 
@@ -14,7 +17,10 @@ public class Polyorbis extends Framework {
 	}
 
 	public Polyorbis() {
-		super("polyorbis", new UpdaterDefault(GLFW::glfwGetTime), -1, new Extension[]{new PlatformLwjgl(), new LwjglSound(), new PolyInterface(), new PolyRenderer(), new PolyCamera(), new PolyPlayer(), new PolyGuis()}, new Module[]{});
+		super("polyorbis", new UpdaterDefault(GLFW::glfwGetTime), -1,
+				new Extension[]{new PlatformLwjgl(), new PolyInterface(), new PolyRenderer(), new PolyCamera(), new PolyPlayer(), new PolyGuis()},
+				new Module[]{new LwjglDisplay(), new LwjglSound(), new LwjglKeyboard(), new LwjglMouse(), new LwjglSound()}
+				);
 		/*FlounderDisplay.setup(
 				PolyConfigs.DISPLAY_WIDTH.getInteger(),
 				PolyConfigs.DISPLAY_HEIGHT.getInteger(),
@@ -25,9 +31,9 @@ public class Polyorbis extends Framework {
 				PolyConfigs.DISPLAY_FULLSCREEN.getBoolean(),
 				false
 		);*/
-/*		setFpsLimit(PolyConfigs.FRAMEWORK_FPS_LIMIT.getInteger());
-		FlounderTextures.setup(PolyConfigs.TEXTURES_ANISOTROPY_MAX.getFloat());
-		FlounderProfiler.toggle(PolyConfigs.PROFILER_ENABLED.getBoolean());
-		OpenGlUtils.goWireframe(PolyConfigs.WIREFRAME_ENABLED.getBoolean());*/
+		setFpsLimit(PolyConfigs.FRAMEWORK_FPS_LIMIT.getInteger());
+		FlounderTextures.get().setAnisotropyLevel(PolyConfigs.TEXTURES_ANISOTROPY_MAX.getFloat());
+		FlounderProfiler.get().toggle(PolyConfigs.PROFILER_ENABLED.getBoolean());
+		OpenGlUtils.goWireframe(PolyConfigs.WIREFRAME_ENABLED.getBoolean());
 	}
 }

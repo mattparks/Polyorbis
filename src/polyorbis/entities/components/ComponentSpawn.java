@@ -110,7 +110,16 @@ public class ComponentSpawn extends IComponentEntity implements IComponentEditor
 
 					if (current < maxAllowed) {
 						Entity e = new InstanceEnemy(FlounderEntities.get().getEntities(), randomEntityRotation(), radius);
-						spawned.add(e);
+
+						if (PolyWorld.get().getEntityPlayer().getCollider() == null || e.getCollider() == null) {
+							return;
+						}
+
+						if (PolyWorld.get().getEntityPlayer().getCollider().intersects(e.getCollider()).isIntersection()) {
+							e.forceRemove();
+						} else {
+							spawned.add(e);
+						}
 					}
 
 					break;

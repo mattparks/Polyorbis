@@ -21,7 +21,7 @@ public class PolyInterface extends Standard {
 	private Playlist gamePlaylist;
 
 	public PolyInterface() {
-		super(FlounderDisplay.class, FlounderKeyboard.class, FlounderSound.class, FlounderEvents.class, FlounderNetwork.class, FlounderShadows.class, FlounderParticles.class, FlounderSkybox.class, PolyPost.class, PolyWorld.class);
+		super(FlounderDisplay.class, FlounderKeyboard.class, FlounderMouse.class, FlounderJoysticks.class, FlounderNetwork.class, FlounderShadows.class, FlounderParticles.class, FlounderSkybox.class, PolyPost.class, PolyWorld.class);
 	}
 
 	@Override

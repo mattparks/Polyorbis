@@ -11,7 +11,7 @@ import flounder.textures.*;
 import polyorbis.entities.components.*;
 
 public class InstancePlayer extends Entity {
-	private static final Colour COLOUR_OFFSET = new Colour(Maths.randomInRange(0.0f, 1.0f), Maths.randomInRange(0.0f, 1.0f), Maths.randomInRange(0.0f, 1.0f));
+	private static final Colour COLOUR_OFFSET = new Colour(0.2f, 0.9f, 0.1f);//new Colour(Maths.randomInRange(0.0f, 1.0f), Maths.randomInRange(0.0f, 1.0f), Maths.randomInRange(0.0f, 1.0f));
 
 	private static final ModelObject MODEL = ModelFactory.newBuilder().setFile(new MyFile(FlounderEntities.ENTITIES_FOLDER, "player", "model.obj")).create();
 	private static final TextureObject TEXTURE = TextureFactory.newBuilder().setFile(new MyFile(FlounderEntities.ENTITIES_FOLDER, "player", "diffuse.png")).setNumberOfRows(1).create();
