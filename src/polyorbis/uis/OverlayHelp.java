@@ -39,7 +39,7 @@ public class OverlayHelp extends ScreenObject {
 		exitToMenu.addLeftListener(new ScreenListener() {
 			@Override
 			public void eventOccurred() {
-				((PolyGuis) FlounderGuis.getGuiMaster()).toggleHelp();
+				((PolyGuis) FlounderGuis.get().getGuiMaster()).toggleHelp();
 			}
 		});
 

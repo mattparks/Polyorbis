@@ -51,7 +51,7 @@ public class OverlayDeath extends ScreenObject {
 		exitToMenu.addLeftListener(new ScreenListener() {
 			@Override
 			public void eventOccurred() {
-				PolyWorld.reset();
+				PolyWorld.get().reset();
 			}
 		});
 
@@ -60,16 +60,16 @@ public class OverlayDeath extends ScreenObject {
 
 	@Override
 	public void updateObject() {
-		PlayData data = PolyWorld.getEndGameData();
+		PlayData data = PolyWorld.get().getEndGameData();
 
 		if (lastData != data) {
 			lastData = data;
 
 			if (data != null) {
-				textScore.setText("Score: " + PolyWorld.calculateScore(data.getExperience(), data.getSurvivalTime()));
+				textScore.setText("Score: " + PolyWorld.get().calculateScore(data.getExperience(), data.getSurvivalTime()));
 				textTime.setText("Time: " + Maths.roundToPlace(data.getSurvivalTime(), 1));
 				textKills.setText("Kills: " + data.getKills());
-				textHighscore.setText("High Score: " + PolyWorld.getHighsore());
+				textHighscore.setText("High Score: " + PolyWorld.get().getHighsore());
 			}
 		}
 	}

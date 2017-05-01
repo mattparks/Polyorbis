@@ -29,11 +29,11 @@ public class PolyGuis extends GuiMaster {
 
 	@Override
 	public void init() {
-		this.overlayHelp = new OverlayHelp(FlounderGuis.getContainer());
-		this.overlayDebug = new OverlayDebug(FlounderGuis.getContainer());
-		this.overlayHUD = new OverlayHUD(FlounderGuis.getContainer());
-		this.overlaySlider = new OverlaySlider(FlounderGuis.getContainer());
-		this.overlayDeath = new OverlayDeath(FlounderGuis.getContainer());
+		this.overlayHelp = new OverlayHelp(FlounderGuis.get().getContainer());
+		this.overlayDebug = new OverlayDebug(FlounderGuis.get().getContainer());
+		this.overlayHUD = new OverlayHUD(FlounderGuis.get().getContainer());
+		this.overlaySlider = new OverlaySlider(FlounderGuis.get().getContainer());
+		this.overlayDeath = new OverlayDeath(FlounderGuis.get().getContainer());
 
 		this.overlayHelp.setAlphaDriver(new ConstantDriver(0.0f));
 		this.overlayDebug.setAlphaDriver(new ConstantDriver(0.0f));
@@ -53,9 +53,9 @@ public class PolyGuis extends GuiMaster {
 				500
 		);
 
-		FlounderGuis.getSelector().initJoysticks(0, 0, 1, 0, 1);
+		FlounderGuis.get().getSelector().initJoysticks(0, 0, 1, 0, 1);
 
-		FlounderEvents.addEvent(new IEvent() {
+		FlounderEvents.get().addEvent(new IEvent() {
 			private CompoundButton escape = new CompoundButton(new KeyButton(GLFW_KEY_ESCAPE), new JoystickButton(0, 7));
 
 			@Override
@@ -69,7 +69,7 @@ public class PolyGuis extends GuiMaster {
 			}
 		});
 
-		FlounderEvents.addEvent(new IEvent() {
+		FlounderEvents.get().addEvent(new IEvent() {
 			private KeyButton toggleHelp = new KeyButton(GLFW_KEY_F1);
 
 			@Override
@@ -83,7 +83,7 @@ public class PolyGuis extends GuiMaster {
 			}
 		});
 
-		FlounderEvents.addEvent(new IEvent() {
+		FlounderEvents.get().addEvent(new IEvent() {
 			private KeyButton toggleDebug = new KeyButton(GLFW_KEY_F3);
 
 			@Override
@@ -97,7 +97,7 @@ public class PolyGuis extends GuiMaster {
 			}
 		});
 
-		FlounderEvents.addEvent(new IEvent() {
+		FlounderEvents.get().addEvent(new IEvent() {
 			private KeyButton toggleHUD = new KeyButton(GLFW_KEY_F4);
 
 			@Override
@@ -114,7 +114,7 @@ public class PolyGuis extends GuiMaster {
 
 	@Override
 	public void update() {
-		toggleDeath(PolyWorld.getEndGameData() != null);
+		toggleDeath(PolyWorld.get().getEndGameData() != null);
 	}
 
 	@Override

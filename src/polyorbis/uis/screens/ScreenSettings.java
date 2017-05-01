@@ -42,7 +42,7 @@ public class ScreenSettings extends ScreenObject {
 
 		// Toggle Start Help.
 		GuiButtonText toggleStartHelp = new GuiButtonText(paneLeft, new Vector2f(0.25f, 0.34f), "Startup Help: ", GuiAlign.CENTRE);
-		FlounderEvents.addEvent(new EventChange<Boolean>(((PolyGuis) FlounderGuis.getGuiMaster())::isStarthelp) {
+		FlounderEvents.get().addEvent(new EventChange<Boolean>(((PolyGuis) FlounderGuis.get().getGuiMaster())::isStarthelp) {
 			@Override
 			public void onEvent(Boolean newValue) {
 				toggleStartHelp.setText("Startup Help: " + newValue);
@@ -51,13 +51,13 @@ public class ScreenSettings extends ScreenObject {
 		toggleStartHelp.addLeftListener(new ScreenListener() {
 			@Override
 			public void eventOccurred() {
-				((PolyGuis) FlounderGuis.getGuiMaster()).setStarthelp(!((PolyGuis) FlounderGuis.getGuiMaster()).isStarthelp());
+				((PolyGuis) FlounderGuis.get().getGuiMaster()).setStarthelp(!((PolyGuis) FlounderGuis.get().getGuiMaster()).isStarthelp());
 			}
 		});
 
 		// Toggle Atmosphere.
 		GuiButtonText toggleAtmosphere = new GuiButtonText(paneLeft, new Vector2f(0.25f, 0.41f), "Atmosphere: ", GuiAlign.CENTRE);
-		FlounderEvents.addEvent(new EventChange<Boolean>(PolyWorld::hasAtmosphere) {
+		FlounderEvents.get().addEvent(new EventChange<Boolean>(PolyWorld.get()::hasAtmosphere) {
 			@Override
 			public void onEvent(Boolean newValue) {
 				toggleAtmosphere.setText("Atmosphere: " + newValue);
@@ -66,7 +66,7 @@ public class ScreenSettings extends ScreenObject {
 		toggleAtmosphere.addLeftListener(new ScreenListener() {
 			@Override
 			public void eventOccurred() {
-				PolyWorld.setAtmosphere(!PolyWorld.hasAtmosphere());
+				PolyWorld.get().setAtmosphere(!PolyWorld.get().hasAtmosphere());
 			}
 		});
 

@@ -41,7 +41,7 @@ public class ComponentPlanet extends IComponentEntity implements IComponentEdito
 	@Override
 	public void update() {
 		// Do not update on paused.
-		if (FlounderGuis.getGuiMaster() == null || FlounderGuis.getGuiMaster().isGamePaused()) {
+		if (FlounderGuis.get().getGuiMaster() == null || FlounderGuis.get().getGuiMaster().isGamePaused()) {
 			return;
 		}
 
@@ -49,17 +49,17 @@ public class ComponentPlanet extends IComponentEntity implements IComponentEdito
 			spawnEntities = new Entity[spawnRotations.length];
 
 			for (int i = 0; i < spawnRotations.length; i++) {
-				Entity e = new InstanceSpawn(FlounderEntities.getEntities(), spawnRotations[i], getEntity().getScale() + SPAWN_HEIGHT);
+				Entity e = new InstanceSpawn(FlounderEntities.get().getEntities(), spawnRotations[i], getEntity().getScale() + SPAWN_HEIGHT);
 				spawnEntities[i] = e;
 			}
 		}
 
 		// Reorder atmosphere to be the last rendered.
 		if (atmosphere != null) {
-			FlounderEntities.getEntities().remove(atmosphere);
+			FlounderEntities.get().getEntities().remove(atmosphere);
 
-			if (PolyWorld.hasAtmosphere()) {
-				FlounderEntities.getEntities().add(atmosphere);
+			if (PolyWorld.get().hasAtmosphere()) {
+				FlounderEntities.get().getEntities().add(atmosphere);
 			}
 		}
 	}

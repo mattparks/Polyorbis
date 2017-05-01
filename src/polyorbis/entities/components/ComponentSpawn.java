@@ -43,15 +43,15 @@ public class ComponentSpawn extends IComponentEntity implements IComponentEditor
 	@Override
 	public void update() {
 		// Do not update on paused.
-		if (FlounderGuis.getGuiMaster() == null || FlounderGuis.getGuiMaster().isGamePaused()) {
+		if (FlounderGuis.get().getGuiMaster() == null || FlounderGuis.get().getGuiMaster().isGamePaused()) {
 			return;
 		}
 
 		spawned.removeIf(entity -> entity == null || entity.isRemoved());
 
 		// After waiting for the player to make the first move...
-		if (targetTime == -1.0f && ((ComponentPlayer) PolyWorld.getEntityPlayer().getComponent(ComponentPlayer.class)).getSurvivalTime() != 0.0f) {
-			this.targetTime = Framework.getTimeSec() + Maths.randomInRange(3.0f, 5.0f);
+		if (targetTime == -1.0f && ((ComponentPlayer) PolyWorld.get().getEntityPlayer().getComponent(ComponentPlayer.class)).getSurvivalTime() != 0.0f) {
+			this.targetTime = Framework.getTimeSec() + Maths.randomInRange(2.0f, 4.0f);
 		}
 
 		if (targetTime != -1.0f && Framework.getTimeSec() - targetTime > 0.0f) {
@@ -59,13 +59,13 @@ public class ComponentSpawn extends IComponentEntity implements IComponentEditor
 
 			int maxAllowed = 1;
 
-			if (PolyWorld.calculateScore(PolyWorld.getEntityPlayer()) > 4000) {
+			if (PolyWorld.get().calculateScore(PolyWorld.get().getEntityPlayer()) > 4000) {
 				maxAllowed = 5;
-			} else if (PolyWorld.calculateScore(PolyWorld.getEntityPlayer()) > 2000) {
+			} else if (PolyWorld.get().calculateScore(PolyWorld.get().getEntityPlayer()) > 2000) {
 				maxAllowed = 4;
-			} else if (PolyWorld.calculateScore(PolyWorld.getEntityPlayer()) > 1000) {
+			} else if (PolyWorld.get().calculateScore(PolyWorld.get().getEntityPlayer()) > 700) {
 				maxAllowed = 3;
-			} else if (PolyWorld.calculateScore(PolyWorld.getEntityPlayer()) > 500) {
+			} else if (PolyWorld.get().calculateScore(PolyWorld.get().getEntityPlayer()) > 100) {
 				maxAllowed = 2;
 			}
 
@@ -81,7 +81,7 @@ public class ComponentSpawn extends IComponentEntity implements IComponentEditor
 					}
 
 					if (current < 1) {
-						Entity e = new InstanceHealth(FlounderEntities.getEntities(), randomEntityRotation(), radius);
+						Entity e = new InstanceHealth(FlounderEntities.get().getEntities(), randomEntityRotation(), radius);
 						spawned.add(e);
 					}
 
@@ -95,7 +95,7 @@ public class ComponentSpawn extends IComponentEntity implements IComponentEditor
 					}
 
 					if (current < 1) {
-						Entity e = new InstanceAmmo(FlounderEntities.getEntities(), randomEntityRotation(), radius);
+						Entity e = new InstanceAmmo(FlounderEntities.get().getEntities(), randomEntityRotation(), radius);
 						spawned.add(e);
 					}
 
@@ -109,7 +109,7 @@ public class ComponentSpawn extends IComponentEntity implements IComponentEditor
 					}
 
 					if (current < maxAllowed) {
-						Entity e = new InstanceEnemy(FlounderEntities.getEntities(), randomEntityRotation(), radius);
+						Entity e = new InstanceEnemy(FlounderEntities.get().getEntities(), randomEntityRotation(), radius);
 						spawned.add(e);
 					}
 

@@ -15,7 +15,7 @@ public class ScreenSettingDebug extends ScreenObject {
 
 		// Toggle Profiler.
 		GuiButtonText toggleProfiler = new GuiButtonText(this, new Vector2f(0.5f, 0.20f), "Developer Profiler: ", GuiAlign.CENTRE);
-		FlounderEvents.addEvent(new EventChange<Boolean>(FlounderProfiler::isOpen) {
+		FlounderEvents.get().addEvent(new EventChange<Boolean>(FlounderProfiler.get()::isOpen) {
 			@Override
 			public void onEvent(Boolean newValue) {
 				toggleProfiler.setText("Developer Profiler: " + newValue);
@@ -24,13 +24,13 @@ public class ScreenSettingDebug extends ScreenObject {
 		toggleProfiler.addLeftListener(new ScreenListener() {
 			@Override
 			public void eventOccurred() {
-				FlounderProfiler.toggle(!FlounderProfiler.isOpen());
+				FlounderProfiler.get().toggle(!FlounderProfiler.get().isOpen());
 			}
 		});
 
 		// Toggle Wireframe.
 		GuiButtonText toggleWireframe = new GuiButtonText(this, new Vector2f(0.5f, 0.27f), "Wireframe Mode: ", GuiAlign.CENTRE);
-		FlounderEvents.addEvent(new EventChange<Boolean>(OpenGlUtils::isInWireframe) {
+		FlounderEvents.get().addEvent(new EventChange<Boolean>(OpenGlUtils::isInWireframe) {
 			@Override
 			public void onEvent(Boolean newValue) {
 				toggleWireframe.setText("Wireframe Mode: " + newValue);

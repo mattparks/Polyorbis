@@ -49,12 +49,12 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 	@Override
 	public void update() {
 		// Do not update on paused.
-		if (FlounderGuis.getGuiMaster() == null || FlounderGuis.getGuiMaster().isGamePaused()) {
+		if (FlounderGuis.get().getGuiMaster() == null || FlounderGuis.get().getGuiMaster().isGamePaused()) {
 			return;
 		}
 
 		if (health <= 0.0f && !killed) {
-			ComponentPlayer player = PolyWorld.getEntityPlayer() == null ? null : (ComponentPlayer) PolyWorld.getEntityPlayer().getComponent(ComponentPlayer.class);
+			ComponentPlayer player = PolyWorld.get().getEntityPlayer() == null ? null : (ComponentPlayer) PolyWorld.get().getEntityPlayer().getComponent(ComponentPlayer.class);
 
 			getEntity().remove();
 			killed = true;
@@ -68,12 +68,12 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 			shootTime += Framework.getDelta();
 
 			if (shootTime > 2.0f) {
-				if (PolyWorld.getEntityPlayer() != null) {
-					Vector2f playerRotation = ((ComponentPlayer) PolyWorld.getEntityPlayer().getComponent(ComponentPlayer.class)).getRotation();
+				if (PolyWorld.get().getEntityPlayer() != null) {
+					Vector2f playerRotation = ((ComponentPlayer) PolyWorld.get().getEntityPlayer().getComponent(ComponentPlayer.class)).getRotation();
 					playerRotation.x = Maths.normalizeAngle(playerRotation.x);
 					playerRotation.y = Maths.normalizeAngle(playerRotation.y);
 
-					float distance = Vector3f.getDistance(PolyWorld.getEntityPlayer().getPosition(), getEntity().getPosition());
+					float distance = Vector3f.getDistance(PolyWorld.get().getEntityPlayer().getPosition(), getEntity().getPosition());
 
 					if (distance < 4.20f) {
 						Vector2f thisRotation = new Vector2f(rotation.y, rotation.z);
@@ -85,7 +85,7 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 							direction.x += 0.03f;
 						}
 
-						direction.scale(Maths.randomInRange(1.0f, 20000.0f / Math.min(PolyWorld.calculateScore(PolyWorld.getEntityPlayer()), 3000)));
+						direction.scale(Maths.randomInRange(1.0f, 20000.0f / Math.min(PolyWorld.get().calculateScore(PolyWorld.get().getEntityPlayer()), 3000)));
 						direction.normalize();
 						direction.scale(0.5f); // 1/2 normal speed.
 
@@ -98,7 +98,7 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 							projectile = 2;
 						}
 
-						PolyWorld.fireProjectile(new Vector3f(rotation), radius, projectile, direction, false);
+						PolyWorld.get().fireProjectile(new Vector3f(rotation), radius, projectile, direction, false);
 					}
 
 					shootTime = 0.0f;

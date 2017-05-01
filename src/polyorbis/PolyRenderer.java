@@ -79,8 +79,8 @@ public class PolyRenderer extends RendererMaster {
 		rendererFBO.unbindFrameBuffer();
 
 		// Post rendering.
-		if (FlounderGuis.getGuiMaster() != null) {
-			renderPost(FlounderGuis.getGuiMaster().isGamePaused(), FlounderGuis.getGuiMaster().getBlurFactor());
+		if (FlounderGuis.get().getGuiMaster() != null) {
+			renderPost(FlounderGuis.get().getGuiMaster().isGamePaused(), FlounderGuis.get().getGuiMaster().getBlurFactor());
 		}
 	}
 
@@ -89,7 +89,7 @@ public class PolyRenderer extends RendererMaster {
 		entitiesRenderer.setRenderPlayer(true);
 
 		// Renders the shadows.
-		shadowRenderer.render(POSITIVE_INFINITY, FlounderCamera.getCamera());
+		shadowRenderer.render(POSITIVE_INFINITY, FlounderCamera.get().getCamera());
 	}
 
 	private void renderScene(Vector4f clipPlane) {
@@ -97,7 +97,7 @@ public class PolyRenderer extends RendererMaster {
 		entitiesRenderer.setRenderPlayer(true);
 
 		// Clears and renders.
-		Camera camera = FlounderCamera.getCamera();
+		Camera camera = FlounderCamera.get().getCamera();
 		OpenGlUtils.prepareNewRenderParse(0.0f, 0.0f, 0.0f);
 
 		particleRenderer.render(clipPlane, camera);
@@ -120,28 +120,28 @@ public class PolyRenderer extends RendererMaster {
 		FBO output = pipelineMRT.getOutput();
 
 		// Render post effects if enabled.
-		if (PolyPost.isEffectsEnabled()) {
+		if (PolyPost.get().isEffectsEnabled()) {
 			// Render Bloom Filter.
-			if (PolyPost.isBloomEnabled()) {
+			if (PolyPost.get().isBloomEnabled()) {
 				pipelineBloom.renderPipeline(output.getColourTexture(0));
 				output = pipelineBloom.getOutput();
 			}
 
 			// Render Motion Blur Filter.
-			if (PolyPost.isMotionBlurEnabled()) {
+			if (PolyPost.get().isMotionBlurEnabled()) {
 				filterBlurMotion.applyFilter(output.getColourTexture(0), rendererFBO.getDepthTexture());
 				output = filterBlurMotion.fbo;
 			}
 
 			// Render Tilt Shift Filter.
-			if (PolyPost.isTiltShiftEnabled()) {
+			if (PolyPost.get().isTiltShiftEnabled()) {
 				filterTiltShift.applyFilter(output.getColourTexture(0));
 				output = filterTiltShift.fbo;
 			}
 
 			// Render Lens Flare Filter.
-			if (PolyPost.isLensFlareEnabled() && PolyWorld.getEntitySun() != null) {
-				filterLensFlare.setSunPosition(PolyWorld.getEntitySun().getPosition());
+			if (PolyPost.get().isLensFlareEnabled() && PolyWorld.get().getEntitySun() != null) {
+				filterLensFlare.setSunPosition(PolyWorld.get().getEntitySun().getPosition());
 				filterLensFlare.setWorldHeight(128.0f); // High enough to always show lens flare.
 				filterLensFlare.applyFilter(output.getColourTexture(0));
 				output = filterLensFlare.fbo;
@@ -159,7 +159,7 @@ public class PolyRenderer extends RendererMaster {
 		renderIndependents(output);
 
 		// Applies grain to the final image.
-		if (PolyPost.isGrainEnabled()) {
+		if (PolyPost.get().isGrainEnabled()) {
 			filterGain.applyFilter(output.getColourTexture(0));
 			output = filterGain.fbo;
 		}
