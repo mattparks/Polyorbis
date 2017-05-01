@@ -34,10 +34,10 @@ public class ComponentRotate extends IComponentEntity implements IComponentEdito
 		this.speed = speed;
 	}
 
-	@Handler.Function(Handler.FLAG_UPDATE_PRE)
+	@Override
 	public void update() {
 		// Do not update on paused.
-		if (FlounderGuis.getGuiMaster() == null || FlounderGuis.getGuiMaster().isGamePaused()) {
+		if (FlounderGuis.get().getGuiMaster() == null || FlounderGuis.get().getGuiMaster().isGamePaused()) {
 			return;
 		}
 
@@ -65,7 +65,7 @@ public class ComponentRotate extends IComponentEntity implements IComponentEdito
 		);
 	}
 
-	@Handler.Function(Handler.FLAG_DISPOSE)
+	@Override
 	public void dispose() {
 	}
 }

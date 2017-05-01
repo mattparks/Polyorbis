@@ -140,26 +140,26 @@ public class PolyCamera extends Camera {
 		calculateDistances();
 		calculatePosition();
 
-		if (FlounderProfiler.isOpen()) {
-			FlounderProfiler.get().add(FlounderCamera.PROFILE_TAB_NAME, "Camera Angle Of Elevation", angleOfElevation);
-			FlounderProfiler.get().add(FlounderCamera.PROFILE_TAB_NAME, "Camera Rotation", rotation);
-			FlounderProfiler.get().add(FlounderCamera.PROFILE_TAB_NAME, "Camera Angle Around MainPlayer", angleAroundPlayer);
-			FlounderProfiler.get().add(FlounderCamera.PROFILE_TAB_NAME, "Camera Actual Distance From Point", actualDistanceFromPoint);
-			FlounderProfiler.get().add(FlounderCamera.PROFILE_TAB_NAME, "Camera Target Zoom", targetZoom);
-			FlounderProfiler.get().add(FlounderCamera.PROFILE_TAB_NAME, "Camera Target Elevation", targetElevation);
-			FlounderProfiler.get().add(FlounderCamera.PROFILE_TAB_NAME, "Camera Target Rotation Angle", targetRotationAngle);
+		if (FlounderProfiler.get().isOpen()) {
+			FlounderProfiler.get().add(FlounderCamera.getTab(), "Camera Angle Of Elevation", angleOfElevation);
+			FlounderProfiler.get().add(FlounderCamera.getTab(), "Camera Rotation", rotation);
+			FlounderProfiler.get().add(FlounderCamera.getTab(), "Camera Angle Around MainPlayer", angleAroundPlayer);
+			FlounderProfiler.get().add(FlounderCamera.getTab(), "Camera Actual Distance From Point", actualDistanceFromPoint);
+			FlounderProfiler.get().add(FlounderCamera.getTab(), "Camera Target Zoom", targetZoom);
+			FlounderProfiler.get().add(FlounderCamera.getTab(), "Camera Target Elevation", targetElevation);
+			FlounderProfiler.get().add(FlounderCamera.getTab(), "Camera Target Rotation Angle", targetRotationAngle);
 		}
 	}
 
 	private void calculateHorizontalAngle() {
 		float angleChange = 0.0f;
 
-		if (FlounderGuis.getGuiMaster() != null && !FlounderGuis.getGuiMaster().isGamePaused()) {
+		if (FlounderGuis.get().getGuiMaster() != null && !FlounderGuis.get().getGuiMaster().isGamePaused()) {
 			if (Maths.deadband(0.05f, joystickHorizontal.getAmount()) != 0.0f && !joystickZoom.isDown()) {
 				angleChange = joystickHorizontal.getAmount() * INFLUENCE_OF_JOYSTICK_DX * sensitivity;
 			} else {
-				if (FlounderMouse.isCursorDisabled() || FlounderMouse.getMouse(reangleButton)) {
-					angleChange = -FlounderMouse.getDeltaX() * INFLUENCE_OF_MOUSE_DX * sensitivity;
+				if (FlounderMouse.get().isCursorDisabled() || FlounderMouse.get().getMouse(reangleButton)) {
+					angleChange = -FlounderMouse.get().getDeltaX() * INFLUENCE_OF_MOUSE_DX * sensitivity;
 				}
 			}
 		}
@@ -182,12 +182,12 @@ public class PolyCamera extends Camera {
 	private void calculateVerticalAngle() {
 		float angleChange = 0.0f;
 
-		if (FlounderGuis.getGuiMaster() != null && !FlounderGuis.getGuiMaster().isGamePaused()) {
+		if (FlounderGuis.get().getGuiMaster() != null && !FlounderGuis.get().getGuiMaster().isGamePaused()) {
 			if (Maths.deadband(0.05f, joystickVertical.getAmount()) != 0.0f && !joystickZoom.isDown()) {
 				angleChange = joystickVertical.getAmount() * INFLUENCE_OF_JOYSTICK_DY * sensitivity;
 			} else {
-				if (FlounderMouse.isCursorDisabled() || FlounderMouse.getMouse(reangleButton)) {
-					angleChange = FlounderMouse.getDeltaY() * INFLUENCE_OF_MOUSE_DY * sensitivity;
+				if (FlounderMouse.get().isCursorDisabled() || FlounderMouse.get().getMouse(reangleButton)) {
+					angleChange = FlounderMouse.get().getDeltaY() * INFLUENCE_OF_MOUSE_DY * sensitivity;
 				}
 			}
 		}
@@ -210,11 +210,11 @@ public class PolyCamera extends Camera {
 	private void calculateZoom() {
 		float zoomChange = 0.0f;
 
-		if (FlounderGuis.getGuiMaster() != null && !FlounderGuis.getGuiMaster().isGamePaused()) {
+		if (FlounderGuis.get().getGuiMaster() != null && !FlounderGuis.get().getGuiMaster().isGamePaused()) {
 			if (joystickZoom.isDown()) {
 				zoomChange = joystickVertical.getAmount() * INFLUENCE_OF_JOYSTICK_ZOOM * sensitivity;
-			} else if (Math.abs(FlounderMouse.getDeltaWheel()) > 0.1f) {
-				zoomChange = FlounderMouse.getDeltaWheel() * INFLUENCE_OF_MOUSE_WHEEL * sensitivity;
+			} else if (Math.abs(FlounderMouse.get().getDeltaWheel()) > 0.1f) {
+				zoomChange = FlounderMouse.get().getDeltaWheel() * INFLUENCE_OF_MOUSE_WHEEL * sensitivity;
 			}
 		}
 
@@ -306,7 +306,7 @@ public class PolyCamera extends Camera {
 	}
 
 	private void updateProjectionMatrix() {
-		Matrix4f.perspectiveMatrix(getFOV(), FlounderDisplay.getAspectRatio(), getNearPlane(), getFarPlane(), projectionMatrix);
+		Matrix4f.perspectiveMatrix(getFOV(), FlounderDisplay.get().getAspectRatio(), getNearPlane(), getFarPlane(), projectionMatrix);
 	}
 
 	@Override

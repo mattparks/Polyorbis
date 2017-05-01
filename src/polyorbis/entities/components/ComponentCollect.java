@@ -29,23 +29,23 @@ public class ComponentCollect extends IComponentEntity implements IComponentEdit
 		this.collected = collected;
 	}
 
-	@Handler.Function(Handler.FLAG_UPDATE_PRE)
+	@Override
 	public void update() {
 		// Do not update on paused.
-		if (FlounderGuis.getGuiMaster() == null || FlounderGuis.getGuiMaster().isGamePaused()) {
+		if (FlounderGuis.get().getGuiMaster() == null || FlounderGuis.get().getGuiMaster().isGamePaused()) {
 			return;
 		}
 
-		if (PolyWorld.getEntityPlayer().getCollider() == null || getEntity().getCollider() == null) {
+		if (PolyWorld.get().getEntityPlayer().getCollider() == null || getEntity().getCollider() == null) {
 			return;
 		}
 
-		if (PolyWorld.getEntityPlayer().getCollider().intersects(getEntity().getCollider()).isIntersection()) {
+		if (PolyWorld.get().getEntityPlayer().getCollider().intersects(getEntity().getCollider()).isIntersection()) {
 			if (playSound != null) {
-				FlounderSound.playSystemSound(playSound);
+				FlounderSound.get().playSystemSound(playSound);
 			}
 
-			collected.action((ComponentPlayer) PolyWorld.getEntityPlayer().getComponent(ComponentPlayer.class));
+			collected.action((ComponentPlayer) PolyWorld.get().getEntityPlayer().getComponent(ComponentPlayer.class));
 			getEntity().remove();
 		}
 	}
@@ -66,7 +66,7 @@ public class ComponentCollect extends IComponentEntity implements IComponentEdit
 		);
 	}
 
-	@Handler.Function(Handler.FLAG_DISPOSE)
+	@Override
 	public void dispose() {
 	}
 

@@ -44,13 +44,13 @@ public class InstancePlanet extends Entity {
 		super(structure, position, rotation);
 		TEXTURE.setHasAlpha(true);
 		new ComponentPlanet(this,
-				new InstanceSun(FlounderEntities.getEntities(), new Vector3f(-150.0f, -150.0f, -150.0f), new Vector3f()),
-				new InstanceAtmosphere(FlounderEntities.getEntities(), new Vector3f(), new Vector3f()),
+				new InstanceSun(structure, new Vector3f(-150.0f, -150.0f, -150.0f), new Vector3f()),
+				new InstanceAtmosphere(structure, new Vector3f(), new Vector3f()),
 				new Entity[]{
-						new InstanceMoon1(FlounderEntities.getEntities(), new Vector3f(-15.0f, -10.0f, 15.0f), new Vector3f()),
-						new InstanceMoon2(FlounderEntities.getEntities(), new Vector3f(18.0f, 20.0f, 18.0f), new Vector3f()),
-						new InstanceMoon3(FlounderEntities.getEntities(), new Vector3f(-20.0f, 40.0f, -20.0f), new Vector3f()),
-						new InstanceRing(FlounderEntities.getEntities(), new Vector3f(), new Vector3f())
+						new InstanceMoon1(structure, new Vector3f(-15.0f, -10.0f, 15.0f), new Vector3f()),
+						new InstanceMoon2(structure, new Vector3f(18.0f, 20.0f, 18.0f), new Vector3f()),
+						new InstanceMoon3(structure, new Vector3f(-20.0f, 40.0f, -20.0f), new Vector3f()),
+						new InstanceRing(structure, new Vector3f(), new Vector3f())
 				},
 				new Vector3f[]{
 						new Vector3f(0.0f, 349.3f, 52.5f),
@@ -64,15 +64,15 @@ public class InstancePlanet extends Entity {
 		new ComponentSurface(this, 1.0f, 0.0f, false, false, true);
 
 		for (int i = 0; i < PINE_SPAWNS.length; i++) {
-			new InstancePine(FlounderEntities.getEntities(), PINE_SPAWNS[i], 6.0f);
+			new InstancePine(structure, PINE_SPAWNS[i], 6.0f);
 		}
 
 		for (int i = 0; i < BIRCH_SPAWNS.length; i++) {
-			new InstanceBirch(FlounderEntities.getEntities(), BIRCH_SPAWNS[i], 6.0f);
+			new InstanceBirch(structure, BIRCH_SPAWNS[i], 6.0f);
 		}
 
 		for (int i = 0; i < CACTUS_SPAWNS.length; i++) {
-			new InstanceCactus(FlounderEntities.getEntities(), CACTUS_SPAWNS[i], 6.0f);
+			new InstanceCactus(structure, CACTUS_SPAWNS[i], 6.0f);
 		}
 	}
 }

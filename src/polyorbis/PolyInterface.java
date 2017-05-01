@@ -24,21 +24,21 @@ public class PolyInterface extends Standard {
 		super(FlounderDisplay.class, FlounderKeyboard.class, FlounderSound.class, FlounderEvents.class, FlounderNetwork.class, FlounderShadows.class, FlounderParticles.class, FlounderSkybox.class, PolyPost.class, PolyWorld.class);
 	}
 
-	@Handler.Function(Handler.FLAG_INIT)
+	@Override
 	public void init() {
-		FlounderSound.getMusicPlayer().setVolume(PolyConfigs.MUSIC_VOLUME.setReference(() -> FlounderSound.getMusicPlayer().getVolume()).getFloat());
-		FlounderSound.getSourcePool().setSystemVolume(PolyConfigs.SOUND_VOLUME.setReference(() -> FlounderSound.getSourcePool().getSystemVolume()).getFloat());
+		FlounderSound.get().getMusicPlayer().setVolume(PolyConfigs.MUSIC_VOLUME.setReference(() -> FlounderSound.get().getMusicPlayer().getVolume()).getFloat());
+		FlounderSound.get().getSourcePool().setSystemVolume(PolyConfigs.SOUND_VOLUME.setReference(() -> FlounderSound.get().getSourcePool().getSystemVolume()).getFloat());
 
 		gamePlaylist = new Playlist();
 		gamePlaylist.addMusic(Sound.loadSoundInBackground(new MyFile(MyFile.RES_FOLDER, "music", "A#Bb-3-3-sine-120.wav"), 0.40f, 1.0f));
 		gamePlaylist.addMusic(Sound.loadSoundInBackground(new MyFile(MyFile.RES_FOLDER, "music", "a-3-3-triangle-100.wav"), 0.40f, 1.0f));
-		FlounderSound.getMusicPlayer().playMusicPlaylist(gamePlaylist, true, 5.0f, 10.0f);
+		FlounderSound.get().getMusicPlayer().playMusicPlaylist(gamePlaylist, true, 5.0f, 10.0f);
 
-		if (PolyConfigs.MUSIC_ENABLED.setReference(() -> !FlounderSound.getMusicPlayer().isPaused()).getBoolean()) {
-			FlounderSound.getMusicPlayer().unpauseTrack();
+		if (PolyConfigs.MUSIC_ENABLED.setReference(() -> !FlounderSound.get().getMusicPlayer().isPaused()).getBoolean()) {
+			FlounderSound.get().getMusicPlayer().unpauseTrack();
 		}
 
-		FlounderEvents.addEvent(new IEvent() {
+		FlounderEvents.get().addEvent(new IEvent() {
 			KeyButton screenshot = new KeyButton(GLFW_KEY_F2);
 
 			@Override
@@ -48,11 +48,11 @@ public class PolyInterface extends Standard {
 
 			@Override
 			public void onEvent() {
-				FlounderDisplay.screenshot();
+				FlounderDisplay.get().screenshot();
 			}
 		});
 
-		FlounderEvents.addEvent(new IEvent() {
+		FlounderEvents.get().addEvent(new IEvent() {
 			KeyButton fullscreen = new KeyButton(GLFW_KEY_F11);
 
 			@Override
@@ -62,16 +62,16 @@ public class PolyInterface extends Standard {
 
 			@Override
 			public void onEvent() {
-				FlounderDisplay.setFullscreen(!FlounderDisplay.isFullscreen());
+				FlounderDisplay.get().setFullscreen(!FlounderDisplay.get().isFullscreen());
 			}
 		});
 
-		FlounderEvents.addEvent(new IEvent() {
+		FlounderEvents.get().addEvent(new IEvent() {
 			KeyButton wireframe = new KeyButton(GLFW_KEY_P);
 
 			@Override
 			public boolean eventTriggered() {
-				return wireframe.wasDown() && !FlounderGuis.getGuiMaster().isGamePaused();
+				return wireframe.wasDown() && !FlounderGuis.get().getGuiMaster().isGamePaused();
 			}
 
 			@Override
@@ -95,16 +95,16 @@ public class PolyInterface extends Standard {
 		});*/
 	}
 
-	@Handler.Function(Handler.FLAG_UPDATE_PRE)
+	@Override
 	public void update() {
 	}
 
-	@Handler.Function(Handler.FLAG_PROFILE)
+	@Override
 	public void profile() {
 
 	}
 
-	@Handler.Function(Handler.FLAG_DISPOSE)
+	@Override
 	public void dispose() {
 		PolyConfigs.saveAllConfigs();
 	}

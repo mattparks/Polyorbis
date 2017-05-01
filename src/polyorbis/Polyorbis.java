@@ -14,7 +14,7 @@ public class Polyorbis extends Framework {
 	}
 
 	public Polyorbis() {
-		super("polyorbis", new UpdaterDefault(GLFW::glfwGetTime), -1, new PlatformLwjgl(), new LwjglSound(), new PolyInterface(), new PolyRenderer(), new PolyCamera(), new PolyPlayer(), new PolyGuis());
+		super("polyorbis", new UpdaterDefault(GLFW::glfwGetTime), -1, new Extension[]{new PlatformLwjgl(), new LwjglSound(), new PolyInterface(), new PolyRenderer(), new PolyCamera(), new PolyPlayer(), new PolyGuis()}, new Module[]{});
 		/*FlounderDisplay.setup(
 				PolyConfigs.DISPLAY_WIDTH.getInteger(),
 				PolyConfigs.DISPLAY_HEIGHT.getInteger(),

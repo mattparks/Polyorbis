@@ -56,10 +56,10 @@ public class ComponentProjectile extends IComponentEntity implements IComponentE
 		this.spentTime = 0.0f;
 	}
 
-	@Handler.Function(Handler.FLAG_UPDATE_PRE)
+	@Override
 	public void update() {
 		// Do not update on paused.
-		if (FlounderGuis.getGuiMaster() == null || FlounderGuis.getGuiMaster().isGamePaused()) {
+		if (FlounderGuis.get().getGuiMaster() == null || FlounderGuis.get().getGuiMaster().isGamePaused()) {
 			return;
 		}
 
@@ -69,9 +69,9 @@ public class ComponentProjectile extends IComponentEntity implements IComponentE
 			getEntity().remove();
 		}
 
-		ComponentPlayer realPlayer = PolyWorld.getEntityPlayer() == null ? null : (ComponentPlayer) PolyWorld.getEntityPlayer().getComponent(ComponentPlayer.class);
+		ComponentPlayer realPlayer = PolyWorld.get().getEntityPlayer() == null ? null : (ComponentPlayer) PolyWorld.get().getEntityPlayer().getComponent(ComponentPlayer.class);
 
-		for (Entity entity : FlounderEntities.getEntities().getAll()) {
+		for (Entity entity : FlounderEntities.get().getEntities().getAll()) {
 			if (entity != null) {
 				ComponentEnemy enemy = (ComponentEnemy) entity.getComponent(ComponentEnemy.class);
 				ComponentPlayer player = (ComponentPlayer) entity.getComponent(ComponentPlayer.class);
@@ -86,11 +86,11 @@ public class ComponentProjectile extends IComponentEntity implements IComponentE
 						}
 
 						getEntity().remove();
-						FlounderSound.playSystemSound(SOUND_DAMAGE);
+						FlounderSound.get().playSystemSound(SOUND_DAMAGE);
 					} else if (player != null && !playerSpawned) {
 						player.modifyHealth(damage + 0.6f);
 						getEntity().remove();
-						FlounderSound.playSystemSound(SOUND_DAMAGE);
+						FlounderSound.get().playSystemSound(SOUND_DAMAGE);
 					}
 				}
 			}
@@ -120,7 +120,7 @@ public class ComponentProjectile extends IComponentEntity implements IComponentE
 		);
 	}
 
-	@Handler.Function(Handler.FLAG_DISPOSE)
+	@Override
 	public void dispose() {
 	}
 }

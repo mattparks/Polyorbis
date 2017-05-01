@@ -15,7 +15,7 @@ public class ScreenSettingControls extends ScreenObject {
 
 		// Slider Camera Sensitivity.
 		GuiSliderText sliderSensitivity = new GuiSliderText(this, new Vector2f(0.5f, 0.20f), "Sensitivity: ", 0.1f, 7.0f, PolyCamera.getSensitivity(), GuiAlign.CENTRE);
-		FlounderEvents.addEvent(new EventChange<Float>(PolyCamera::getSensitivity) {
+		FlounderEvents.get().addEvent(new EventChange<Float>(PolyCamera::getSensitivity) {
 			@Override
 			public void onEvent(Float newValue) {
 				sliderSensitivity.setText("Sensitivity: " + Maths.roundToPlace(newValue, 2));

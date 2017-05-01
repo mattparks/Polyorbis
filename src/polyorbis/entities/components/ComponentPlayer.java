@@ -97,23 +97,23 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 		this.inputFire = new CompoundButton(new MouseButton(GLFW_MOUSE_BUTTON_LEFT), new JoystickButton(0, 5));
 	}
 
-	@Handler.Function(Handler.FLAG_UPDATE_PRE)
+	@Override
 	public void update() {
 		// Do not update on paused.
-		if (FlounderGuis.getGuiMaster() == null || FlounderGuis.getGuiMaster().isGamePaused()) {
+		if (FlounderGuis.get().getGuiMaster() == null || FlounderGuis.get().getGuiMaster().isGamePaused()) {
 			return;
 		}
 
 		// Kill the player!
 		if (health <= 0.0f && !dead) {
-			FlounderSound.playSystemSound(SOUND_GAMEOVER);
-			PolyWorld.fireProjectile(new Vector3f(0.0f, currentY, currentZ), currentRadius, 3, new Vector2f(0.03f, 0.0f), true);
+			FlounderSound.get().playSystemSound(SOUND_GAMEOVER);
+			PolyWorld.get().fireProjectile(new Vector3f(0.0f, currentY, currentZ), currentRadius, 3, new Vector2f(0.03f, 0.0f), true);
 			getEntity().remove();
 			new java.util.Timer().schedule(
 					new java.util.TimerTask() {
 						@Override
 						public void run() {
-							PolyWorld.setEndGameData(new PlayData(experience, survivalTime, kills));
+							PolyWorld.get().setEndGameData(new PlayData(experience, survivalTime, kills));
 						}
 					},
 					3000
@@ -123,7 +123,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 		}
 
 		// Calculate speeds.
-		float planetRadius = PolyWorld.getEntityPlanet() == null ? 0.0f : PolyWorld.getEntityPlanet().getScale();
+		float planetRadius = PolyWorld.get().getEntityPlanet() == null ? 0.0f : PolyWorld.get().getEntityPlanet().getScale();
 
 		if (inputY.getAmount() == 0.0f) {
 			currentSpeedY += (currentSpeedY <= 0.0f ? 1.0f : -1.0f) * Math.abs(currentSpeedY) * PLAYER_ACCELERATION * Framework.getDelta();
@@ -144,7 +144,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 		currentZ += currentSpeedZ * 100.0f * Framework.getDelta();
 
 		if (inputJump.isDown() && currentSpeedUp == 0.0f && currentRadius <= planetRadius + PLAYER_HEIGHT) {
-			FlounderSound.playSystemSound(SOUND_JUMP);
+			FlounderSound.get().playSystemSound(SOUND_JUMP);
 			currentSpeedUp = PLAYER_JUMP;
 		}
 
@@ -203,9 +203,9 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 			Vector2f direction = new Vector2f(currentSpeedY, currentSpeedZ);
 
 			// Calculates the direction from the mouse click position.
-			if (!FlounderJoysticks.isConnected(0)) {
-				direction.set((FlounderMouse.getPositionX() * 2.0f - 1.0f) + 0.03f, FlounderMouse.getPositionY() * 2.0f - 1.0f);
-				direction.y /= FlounderDisplay.getAspectRatio();
+			if (!FlounderJoysticks.get().isConnected(0)) {
+				direction.set((FlounderMouse.get().getPositionX() * 2.0f - 1.0f) + 0.03f, FlounderMouse.get().getPositionY() * 2.0f - 1.0f);
+				direction.y /= FlounderDisplay.get().getAspectRatio();
 			}
 
 			// Fixes any zero vectors.
@@ -219,7 +219,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 			switch (selectedCharge) {
 				case 1:
 					if (charge1 > 0.0f) {
-						PolyWorld.fireProjectile(new Vector3f(0.0f, currentY, currentZ), currentRadius, 1, direction, true);
+						PolyWorld.get().fireProjectile(new Vector3f(0.0f, currentY, currentZ), currentRadius, 1, direction, true);
 					}
 
 					charge1 -= 0.07f;
@@ -227,7 +227,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 					break;
 				case 2:
 					if (charge2 > 0.0f) {
-						PolyWorld.fireProjectile(new Vector3f(0.0f, currentY, currentZ), currentRadius, 2, direction, true);
+						PolyWorld.get().fireProjectile(new Vector3f(0.0f, currentY, currentZ), currentRadius, 2, direction, true);
 					}
 
 					charge2 -= 0.09f;
@@ -235,7 +235,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 					break;
 				case 3:
 					if (charge3 > 0.0f) {
-						PolyWorld.fireProjectile(new Vector3f(0.0f, currentY, currentZ), currentRadius, 3, direction, true);
+						PolyWorld.get().fireProjectile(new Vector3f(0.0f, currentY, currentZ), currentRadius, 3, direction, true);
 					}
 
 					charge3 -= 0.20f;
@@ -355,7 +355,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 		);
 	}
 
-	@Handler.Function(Handler.FLAG_DISPOSE)
+	@Override
 	public void dispose() {
 	}
 }
