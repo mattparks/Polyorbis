@@ -131,7 +131,7 @@ public class PolyCamera extends Camera {
 		if (player != null) {
 			this.targetPosition.set(player.getPosition());
 			this.targetRotation.set(player.getRotation());
-			//	FlounderLogger.get().log(targetRotation + " | " + rotation);
+			this.targetRotation.z = 0.4f * this.targetRotation.z; // Vertical movement scaled back.
 		}
 
 		updateActualZoom();
@@ -280,8 +280,8 @@ public class PolyCamera extends Camera {
 	}
 
 	private void calculateDistances() {
-		horizontalDistanceFromFocus = (float) (actualDistanceFromPoint * Math.cos(Math.toRadians(angleOfElevation)));
-		verticalDistanceFromFocus = (float) (actualDistanceFromPoint * Math.sin(Math.toRadians(angleOfElevation)));
+		horizontalDistanceFromFocus = (float) (actualDistanceFromPoint * Math.cos(Math.toRadians(angleOfElevation - targetRotation.z)));
+		verticalDistanceFromFocus = (float) (actualDistanceFromPoint * Math.sin(Math.toRadians(angleOfElevation - targetRotation.z)));
 	}
 
 	private void calculatePosition() {
@@ -290,7 +290,7 @@ public class PolyCamera extends Camera {
 		position.y = targetPosition.y + verticalDistanceFromFocus;
 		position.z = targetPosition.z - (float) (horizontalDistanceFromFocus * Math.cos(theta));
 
-		rotation.x = angleOfElevation;
+		rotation.x = angleOfElevation - targetRotation.z;
 		rotation.y = angleAroundPlayer + targetRotation.y + Maths.DEGREES_IN_HALF_CIRCLE;
 		rotation.z = 0.0f;
 	}

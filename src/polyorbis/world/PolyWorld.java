@@ -3,7 +3,6 @@ package polyorbis.world;
 import flounder.devices.*;
 import flounder.entities.*;
 import flounder.framework.*;
-import flounder.logger.*;
 import flounder.maths.*;
 import flounder.maths.vectors.*;
 import flounder.particles.*;
@@ -28,7 +27,7 @@ public class PolyWorld extends Module {
 
 	public static final Colour SUN_COLOUR = new Colour(0.75f, 0.75f, 0.75f);
 
-	public static final Colour MOON_COLOUR = new Colour(0.15f, 0.15f, 0.3f);
+	public static final Colour MOON_COLOUR = new Colour(0.2f, 0.2f, 0.4f);
 
 	public static final float DAY_NIGHT_CYCLE = 175.0f; // The day/night length (sec).
 

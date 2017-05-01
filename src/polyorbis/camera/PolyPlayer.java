@@ -2,6 +2,7 @@ package polyorbis.camera;
 
 import flounder.camera.*;
 import flounder.maths.vectors.*;
+import polyorbis.entities.components.*;
 import polyorbis.world.*;
 
 public class PolyPlayer extends Player {
@@ -23,6 +24,12 @@ public class PolyPlayer extends Player {
 		if (PolyWorld.get().getEntityPlayer() != null) {
 			this.position.set(PolyWorld.get().getEntityPlayer().getPosition());
 			this.rotation.set(PolyWorld.get().getEntityPlayer().getRotation());
+
+			ComponentPlayer player = (ComponentPlayer) PolyWorld.get().getEntityPlayer().getComponent(ComponentPlayer.class);
+
+			if (player != null) {
+				rotation.set(0.0f, player.getCurrentY(), player.getCurrentZ());
+			}
 		}
 	}
 

@@ -22,8 +22,8 @@ public class InstanceAmmo extends Entity {
 	public InstanceAmmo(ISpatialStructure<Entity> structure, Vector3f rotation, float radius) {
 		super(structure, Vector3f.rotate(new Vector3f(0.0f, radius, 0.0f), rotation, null), new Vector3f(0.0f, rotation.y, rotation.z));
 		new ComponentCollect(this, SOUND_PICKUP, pc -> {
-			pc.addCharge1(0.20f);
-			pc.addCharge2(0.15f);
+			pc.addCharge1(0.25f);
+			pc.addCharge2(0.20f);
 			pc.addCharge3(0.10f);
 			pc.addExperience(2);
 		});

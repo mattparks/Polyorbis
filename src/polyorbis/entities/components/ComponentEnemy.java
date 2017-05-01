@@ -18,6 +18,9 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 
 	private Vector3f direction;
 
+	private boolean reverse;
+	private float reverseTime;
+
 	private float health;
 	private boolean killed;
 
@@ -39,6 +42,9 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 		this.radius = radius;
 
 		this.direction = new Vector3f(0.0f, Maths.randomInRange(-1.0f, 1.0f), Maths.randomInRange(-1.0f, 1.0f)).normalize();
+
+		this.reverse = false;
+		this.reverseTime = 0.0f;
 
 		this.health = health * Maths.randomInRange(0.6f, 1.0f);
 		this.killed = false;
@@ -67,7 +73,7 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 		if (!killed) {
 			shootTime += Framework.getDelta();
 
-			if (shootTime > 2.0f) {
+			if (shootTime > 3.2f) {
 				if (PolyWorld.get().getEntityPlayer() != null) {
 					Vector2f playerRotation = ((ComponentPlayer) PolyWorld.get().getEntityPlayer().getComponent(ComponentPlayer.class)).getRotation();
 					playerRotation.x = Maths.normalizeAngle(playerRotation.x);
@@ -75,7 +81,7 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 
 					float distance = Vector3f.getDistance(PolyWorld.get().getEntityPlayer().getPosition(), getEntity().getPosition());
 
-					if (distance < 4.20f) {
+					if (distance < 4.0f) {
 						Vector2f thisRotation = new Vector2f(rotation.y, rotation.z);
 						thisRotation.x = Maths.normalizeAngle(thisRotation.x);
 						thisRotation.y = Maths.normalizeAngle(thisRotation.y);
@@ -94,7 +100,7 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 
 						if (random < 0.05f) {
 							projectile = 3;
-						} else if (random < 0.55f) {
+						} else if (random < 0.3f) {
 							projectile = 2;
 						}
 
@@ -111,8 +117,22 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 			float rz = as * 15.0f * (float) (Math.cos(0.25 * 15.0f * Framework.getTimeSec()) - Math.cos(1.2 * 15.0f * Framework.getTimeSec()) + Math.sin(0.5 * 15.0f * Framework.getTimeSec()));
 
 			// Moves and rotates the player.
-			Vector3f right = new Vector3f(direction).scale(SPEED * Framework.getDelta());
+			Vector3f right = new Vector3f(direction).scale((reverse ? -1.0f : 1.0f) * SPEED * Framework.getDelta());
 			Vector3f.add(rotation, right, rotation);
+
+			reverseTime += Framework.getDelta();
+
+			if (rotation.z <= 20.0f || rotation.z >= 160.0f) {
+				if (reverseTime > 3.0f) {
+					reverseTime = 0.0f;
+					reverse = !reverse;
+				}
+			}
+
+			// Normalizes angles and limits Y rotation to make movement easier.
+			rotation.y = Maths.normalizeAngle(rotation.y);
+			rotation.z = Maths.clamp(rotation.z, 20.0f, 160.0f);
+
 			Vector3f.rotate(new Vector3f(0.0f, radius, 0.0f), rotation, getEntity().getPosition());
 			getEntity().getRotation().set(rx, rotation.y, rotation.z + rz);
 			getEntity().setMoved();

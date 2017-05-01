@@ -24,6 +24,7 @@ public class InstanceSun extends Entity {
 		new ComponentGlow(this, TEXTURE_GLOW);
 		new ComponentSurface(this, 1.0f, 0.0f, true, true, false);
 		new ComponentLight(this, new Vector3f(0.0f, 0.0f, 0.0f), new Colour(PolyWorld.SUN_COLOUR), new Attenuation(1.0f, 0.0f, 0.0f));
+		((ComponentLight) getComponent(ComponentLight.class)).setSun(true);
 	}
 }
 

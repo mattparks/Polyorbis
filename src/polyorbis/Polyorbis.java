@@ -30,19 +30,9 @@ public class Polyorbis extends Framework {
 						PolyConfigs.DISPLAY_FULLSCREEN.getBoolean(),
 						false
 				), new LwjglJoysicks(), new LwjglKeyboard(), new LwjglMouse(), new LwjglSound()});
-		/*FlounderDisplay.setup(
-				PolyConfigs.DISPLAY_WIDTH.getInteger(),
-				PolyConfigs.DISPLAY_HEIGHT.getInteger(),
-				"Polyorbis", new MyFile[]{new MyFile(MyFile.RES_FOLDER, "icon", "icon.png")},
-				PolyConfigs.DISPLAY_VSYNC.getBoolean(),
-				PolyConfigs.DISPLAY_ANTIALIAS.getBoolean(),
-				0,
-				PolyConfigs.DISPLAY_FULLSCREEN.getBoolean(),
-				false
-		);*/
-		setFpsLimit(PolyConfigs.FRAMEWORK_FPS_LIMIT.getInteger());
-		FlounderTextures.get().setAnisotropyLevel(PolyConfigs.TEXTURES_ANISOTROPY_MAX.getFloat());
 		FlounderProfiler.get().toggle(PolyConfigs.PROFILER_ENABLED.getBoolean());
+		Framework.setFpsLimit(PolyConfigs.FRAMEWORK_FPS_LIMIT.getInteger());
+		FlounderTextures.get().setAnisotropyLevel(PolyConfigs.TEXTURES_ANISOTROPY_MAX.getFloat());
 		OpenGlUtils.goWireframe(PolyConfigs.WIREFRAME_ENABLED.getBoolean());
 	}
 }

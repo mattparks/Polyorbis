@@ -187,7 +187,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 
 			if (selectedCharge == 2 && charge2 == 0.0f) {
 				if (charge1 == 0.0f) {
-					selectedCharge = 3;
+					//	selectedCharge = 3;
 				} else {
 					selectedCharge = 1;
 				}
@@ -246,7 +246,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 
 		// Normalizes angles and limits Y rotation to make movement easier.
 		currentY = Maths.normalizeAngle(currentY);
-		currentZ = Maths.clamp(currentZ, 2.0f, 178.0f);
+		currentZ = Maths.clamp(currentZ, 20.0f, 160.0f);
 
 		// The wacky rotation effect on run.
 		float as = Math.min((Math.abs(currentSpeedY) + Math.abs(currentSpeedZ)) / PLAYER_SPEED, 1.0f) + Math.min(9.0f * Math.abs(currentSpeedUp), 1.0f);

@@ -60,19 +60,19 @@ public class InstancePlanet extends Entity {
 						new Vector3f(0.0f, 336.5f, 125.4f),
 				}
 		);
-		new ComponentModel(this, 6.0f, false, MODEL, TEXTURE, 1);
+		new ComponentModel(this, 6.3f, false, MODEL, TEXTURE, 1);
 		new ComponentSurface(this, 1.0f, 0.0f, false, false, true);
 
 		for (int i = 0; i < PINE_SPAWNS.length; i++) {
-			new InstancePine(structure, PINE_SPAWNS[i], 6.0f);
+			new InstancePine(structure, PINE_SPAWNS[i], 6.3f);
 		}
 
 		for (int i = 0; i < BIRCH_SPAWNS.length; i++) {
-			new InstanceBirch(structure, BIRCH_SPAWNS[i], 6.0f);
+			new InstanceBirch(structure, BIRCH_SPAWNS[i], 6.3f);
 		}
 
 		for (int i = 0; i < CACTUS_SPAWNS.length; i++) {
-			new InstanceCactus(structure, CACTUS_SPAWNS[i], 6.0f);
+			new InstanceCactus(structure, CACTUS_SPAWNS[i], 6.3f);
 		}
 	}
 }

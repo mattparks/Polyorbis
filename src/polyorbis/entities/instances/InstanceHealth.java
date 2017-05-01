@@ -21,8 +21,8 @@ public class InstanceHealth extends Entity {
 	public InstanceHealth(ISpatialStructure<Entity> structure, Vector3f rotation, float radius) {
 		super(structure, Vector3f.rotate(new Vector3f(0.0f, radius, 0.0f), rotation, null), new Vector3f(0.0f, rotation.y, rotation.z));
 		new ComponentCollect(this, SOUND_PICKUP, pc -> {
-			pc.modifyHealth(0.1f);
-			pc.addExperience(2);
+			pc.modifyHealth(0.2f);
+			pc.addExperience(4);
 		});
 		new ComponentRotate(this, rotation, radius, new Vector3f(0.0f, 1.0f, 1.0f), 0.4f);
 		new ComponentModel(this, 0.15f, MODEL, TEXTURE, 1);
