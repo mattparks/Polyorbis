@@ -69,8 +69,8 @@ public class OverlayHUD extends ScreenObject {
 	@Override
 	public void updateObject() {
 		if (updateText) {
-			if (PolyWorld.getEntityPlayer() != null) {
-				ComponentPlayer player = (ComponentPlayer) PolyWorld.getEntityPlayer().getComponent(ComponentPlayer.class);
+			if (PolyWorld.get().getEntityPlayer() != null) {
+				ComponentPlayer player = (ComponentPlayer) PolyWorld.get().getEntityPlayer().getComponent(ComponentPlayer.class);
 
 				if (player != null) {
 					this.statusHealth.changePersentage(player.getHealth());
@@ -96,11 +96,11 @@ public class OverlayHUD extends ScreenObject {
 							break;
 					}
 
-					this.textScore.setText("Score: " + PolyWorld.calculateScore(player.getEntity()));
+					this.textScore.setText("Score: " + PolyWorld.get().calculateScore(player.getEntity()));
 					this.textTime.setText("Time: " + Maths.roundToPlace(player.getSurvivalTime(), 2));
 					int previousHighscore = (int) Float.parseFloat(this.textHighscore.getTextString().substring(12));
-					this.textHighscore.setText("High Score: " + PolyWorld.getHighsore());
-					if (previousHighscore != PolyWorld.getHighsore()) {
+					this.textHighscore.setText("High Score: " + PolyWorld.get().getHighsore());
+					if (previousHighscore != PolyWorld.get().getHighsore()) {
 						this.textHighscore.setScaleDriver(new BounceDriver(1.2f, 1.4f, 0.8f));
 					}
 				}

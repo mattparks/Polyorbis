@@ -3,6 +3,7 @@ package polyorbis.world;
 import flounder.devices.*;
 import flounder.entities.*;
 import flounder.framework.*;
+import flounder.logger.*;
 import flounder.maths.*;
 import flounder.maths.vectors.*;
 import flounder.particles.*;
@@ -16,9 +17,6 @@ import polyorbis.entities.components.*;
 import polyorbis.entities.instances.*;
 
 public class PolyWorld extends Module {
-	private static final PolyWorld INSTANCE = new PolyWorld();
-	public static final String PROFILE_TAB_NAME = "Poly World";
-
 	private static MyFile[] SKYBOX_TEXTURE_FILES = {
 			new MyFile(FlounderSkybox.SKYBOX_FOLDER, "starsRight.png"),
 			new MyFile(FlounderSkybox.SKYBOX_FOLDER, "starsLeft.png"),
@@ -48,10 +46,10 @@ public class PolyWorld extends Module {
 	private boolean atmosphere;
 
 	public PolyWorld() {
-		super(ModuleUpdate.UPDATE_PRE, PROFILE_TAB_NAME, FlounderEntities.class);
+		super(FlounderEntities.class);
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_INIT)
 	public void init() {
 		this.entityPlayer = null;
 		this.entityPlanet = null;
@@ -62,26 +60,26 @@ public class PolyWorld extends Module {
 		this.endGameData = null;
 		this.highsore = PolyConfigs.SAVE_HIGHSCORE.getInteger();
 
-		FlounderShadows.setBrightnessBoost(PolyConfigs.BRIGHTNESS_BOOST.getFloat());
-		FlounderShadows.setShadowSize(PolyConfigs.SHADOWMAP_SIZE.getInteger());
-		FlounderShadows.setShadowPCF(PolyConfigs.SHADOWMAP_PCF.getInteger());
-		FlounderShadows.setShadowBias(PolyConfigs.SHADOWMAP_BIAS.getFloat());
-		FlounderShadows.setShadowDarkness(PolyConfigs.SHADOWMAP_DARKNESS.getFloat());
-		FlounderSkybox.setCubemap(TextureFactory.newBuilder().setCubemap(SKYBOX_TEXTURE_FILES).create());
-		FlounderShadows.setShadowBoxOffset(13.0f);
-		FlounderShadows.setShadowBoxDistance(33.0f);
+		FlounderShadows.get().setBrightnessBoost(PolyConfigs.BRIGHTNESS_BOOST.getFloat());
+		FlounderShadows.get().setShadowSize(PolyConfigs.SHADOWMAP_SIZE.getInteger());
+		FlounderShadows.get().setShadowPCF(PolyConfigs.SHADOWMAP_PCF.getInteger());
+		FlounderShadows.get().setShadowBias(PolyConfigs.SHADOWMAP_BIAS.getFloat());
+		FlounderShadows.get().setShadowDarkness(PolyConfigs.SHADOWMAP_DARKNESS.getFloat());
+		FlounderSkybox.get().setCubemap(TextureFactory.newBuilder().setCubemap(SKYBOX_TEXTURE_FILES).create());
+		FlounderShadows.get().setShadowBoxOffset(13.0f);
+		FlounderShadows.get().setShadowBoxDistance(33.0f);
 
 		this.atmosphere = PolyConfigs.ATMOSPHERE_ENABLED.setReference(() -> atmosphere).getBoolean();
 
 		reset();
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_UPDATE_PRE)
 	public void update() {
 		// Update the sky colours and sun position.
 		dayFactor = dayDriver.update(Framework.getDelta()) / 100.0f;
-		Vector3f.rotate(LIGHT_DIRECTION, FlounderSkybox.getRotation().set(0.0f, dayFactor * 360.0f, 0.0f), FlounderShadows.getLightPosition()).normalize();
-		FlounderSkybox.setBlendFactor(1.0f);
+		Vector3f.rotate(LIGHT_DIRECTION, FlounderSkybox.get().getRotation().set(0.0f, dayFactor * 360.0f, 0.0f), FlounderShadows.get().getLightPosition()).normalize();
+		FlounderSkybox.get().setBlendFactor(1.0f);
 
 		int score = calculateScore(entityPlayer);
 
@@ -90,47 +88,47 @@ public class PolyWorld extends Module {
 		}
 	}
 
-	public static void reset() {
-		for (Entity entity : FlounderEntities.getEntities().getAll()) {
+	public void reset() {
+		for (Entity entity : FlounderEntities.get().getEntities().getAll()) {
 			entity.forceRemove();
 		}
 
-		FlounderParticles.clear();
+		FlounderParticles.get().clear();
 
-		INSTANCE.entityPlayer = new InstancePlayer(FlounderEntities.getEntities(), new Vector3f(0.0f, 0.0f, 0.0f), new Vector3f());
-		INSTANCE.entityPlanet = new InstancePlanet(FlounderEntities.getEntities(), new Vector3f(0.0f, 0.0f, 0.0f), new Vector3f());
-		INSTANCE.endGameData = null;
+		this.entityPlayer = new InstancePlayer(FlounderEntities.get().getEntities(), new Vector3f(0.0f, 0.0f, 0.0f), new Vector3f());
+		this.entityPlanet = new InstancePlanet(FlounderEntities.get().getEntities(), new Vector3f(0.0f, 0.0f, 0.0f), new Vector3f());
+		this.endGameData = null;
 	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_PROFILE)
 	public void profile() {
 	}
 
-	public static Entity getEntityPlayer() {
-		return INSTANCE.entityPlayer;
+	public Entity getEntityPlayer() {
+		return this.entityPlayer;
 	}
 
-	public static Entity getEntityPlanet() {
-		return INSTANCE.entityPlanet;
+	public Entity getEntityPlanet() {
+		return this.entityPlanet;
 	}
 
-	public static Entity getEntitySun() {
-		return INSTANCE.entityPlanet == null ? null : ((ComponentPlanet) INSTANCE.entityPlanet.getComponent(ComponentPlanet.class)).getStar();
+	public Entity getEntitySun() {
+		return this.entityPlanet == null ? null : ((ComponentPlanet) this.entityPlanet.getComponent(ComponentPlanet.class)).getStar();
 	}
 
-	public static float getDayFactor() {
-		return INSTANCE.dayFactor;
+	public float getDayFactor() {
+		return this.dayFactor;
 	}
 
-	public static void fireProjectile(Vector3f rotation, float radius, int type, Vector2f direction, boolean playerSpawned) {
+	public void fireProjectile(Vector3f rotation, float radius, int type, Vector2f direction, boolean playerSpawned) {
 		switch (type) {
 			case 1:
-				new InstanceProjectile1(FlounderEntities.getEntities(), new Vector3f(rotation), radius, new Vector3f(0.0f, direction.x, direction.y), playerSpawned);
-				FlounderSound.playSystemSound(ComponentProjectile.SOUND_SHOOT);
+				new InstanceProjectile1(FlounderEntities.get().getEntities(), new Vector3f(rotation), radius, new Vector3f(0.0f, direction.x, direction.y), playerSpawned);
+				FlounderSound.get().playSystemSound(ComponentProjectile.SOUND_SHOOT);
 				break;
 			case 2:
-				new InstanceProjectile2(FlounderEntities.getEntities(), new Vector3f(rotation), radius, new Vector3f(0.0f, direction.x, direction.y), playerSpawned);
-				FlounderSound.playSystemSound(ComponentProjectile.SOUND_SHOOT);
+				new InstanceProjectile2(FlounderEntities.get().getEntities(), new Vector3f(rotation), radius, new Vector3f(0.0f, direction.x, direction.y), playerSpawned);
+				FlounderSound.get().playSystemSound(ComponentProjectile.SOUND_SHOOT);
 				break;
 			case 3:
 				float amount = 28.0f;
@@ -146,15 +144,15 @@ public class PolyWorld extends Module {
 					}
 
 					d.normalize();
-					new InstanceProjectile3(FlounderEntities.getEntities(), new Vector3f(rotation), radius, new Vector3f(0.0f, d.x, d.y), true);
+					new InstanceProjectile3(FlounderEntities.get().getEntities(), new Vector3f(rotation), radius, new Vector3f(0.0f, d.x, d.y), true);
 				}
 
-				FlounderSound.playSystemSound(ComponentProjectile.SOUND_SHOOT);
+				FlounderSound.get().playSystemSound(ComponentProjectile.SOUND_SHOOT);
 				break;
 		}
 	}
 
-	public static int calculateScore(Entity player) {
+	public int calculateScore(Entity player) {
 		if (player == null) {
 			return -1;
 		}
@@ -168,36 +166,42 @@ public class PolyWorld extends Module {
 		return -1;
 	}
 
-	public static int calculateScore(int experience, float survivalTime) {
+	public int calculateScore(int experience, float survivalTime) {
 		return experience + (int) (0.1862f * survivalTime);
 	}
 
-	public static PlayData getEndGameData() {
-		return INSTANCE.endGameData;
+	public PlayData getEndGameData() {
+		return this.endGameData;
 	}
 
-	public static void setEndGameData(PlayData lastData) {
-		INSTANCE.endGameData = lastData;
+	public void setEndGameData(PlayData lastData) {
+		this.endGameData = lastData;
 	}
 
-	public static int getHighsore() {
-		return INSTANCE.highsore;
+	public int getHighsore() {
+		return this.highsore;
 	}
 
-	public static boolean hasAtmosphere() {
-		return INSTANCE.atmosphere;
+	public boolean hasAtmosphere() {
+		return this.atmosphere;
 	}
 
-	public static void setAtmosphere(boolean atmosphere) {
-		INSTANCE.atmosphere = atmosphere;
+	public void setAtmosphere(boolean atmosphere) {
+		this.atmosphere = atmosphere;
 	}
 
-	@Override
-	public Module getInstance() {
-		return INSTANCE;
-	}
 
-	@Override
+	@Handler.Function(Handler.FLAG_DISPOSE)
 	public void dispose() {
+	}
+
+	@Module.Instance
+	public static PolyWorld get() {
+		return (PolyWorld) Framework.getInstance(PolyWorld.class);
+	}
+
+	@Module.TabName
+	public static String getTab() {
+		return "Poly World";
 	}
 }
