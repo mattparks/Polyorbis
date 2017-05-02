@@ -21,7 +21,7 @@ public class PolyGuis extends GuiMaster {
 	private OverlaySlider overlaySlider;
 	private OverlayDeath overlayDeath;
 
-	private boolean starthelp;
+	private boolean gamehelp;
 
 	public PolyGuis() {
 		super();
@@ -45,7 +45,7 @@ public class PolyGuis extends GuiMaster {
 				new java.util.TimerTask() {
 					@Override
 					public void run() {
-						if (starthelp = PolyConfigs.STARTHELP_ENABLED.setReference(() -> starthelp).getBoolean()) {
+						if (gamehelp = PolyConfigs.GAMEHELP_ENABLED.setReference(() -> gamehelp).getBoolean()) {
 							toggleHelp();
 						}
 					}
@@ -241,12 +241,12 @@ public class PolyGuis extends GuiMaster {
 		return overlayDeath;
 	}
 
-	public boolean isStarthelp() {
-		return starthelp;
+	public boolean isGameHelp() {
+		return gamehelp;
 	}
 
-	public void setStarthelp(boolean starthelp) {
-		this.starthelp = starthelp;
+	public void setGamehelp(boolean gamehelp) {
+		this.gamehelp = gamehelp;
 	}
 
 	@Override

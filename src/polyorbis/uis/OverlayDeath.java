@@ -47,7 +47,7 @@ public class OverlayDeath extends ScreenObject {
 		this.textHighscore.setColour(new Colour(1.0f, 1.0f, 1.0f));
 
 		// Restart.
-		GuiButtonText exitToMenu = new GuiButtonText(this, new Vector2f(0.5f, 0.60f), "New Game", GuiAlign.CENTRE);
+		GuiButtonText exitToMenu = new GuiButtonText(this, new Vector2f(0.5f, 0.60f), "Try Again", GuiAlign.CENTRE);
 		exitToMenu.addLeftListener(new ScreenListener() {
 			@Override
 			public void eventOccurred() {

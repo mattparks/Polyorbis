@@ -40,18 +40,18 @@ public class ScreenSettings extends ScreenObject {
 			}
 		});
 
-		// Toggle Start Help.
-		GuiButtonText toggleStartHelp = new GuiButtonText(paneLeft, new Vector2f(0.25f, 0.34f), "Startup Help: ", GuiAlign.CENTRE);
-		FlounderEvents.get().addEvent(new EventChange<Boolean>(((PolyGuis) FlounderGuis.get().getGuiMaster())::isStarthelp) {
+		// Toggle Game Help.
+		GuiButtonText toggleGameHelp = new GuiButtonText(paneLeft, new Vector2f(0.25f, 0.34f), "Game Help: ", GuiAlign.CENTRE);
+		FlounderEvents.get().addEvent(new EventChange<Boolean>(((PolyGuis) FlounderGuis.get().getGuiMaster())::isGameHelp) {
 			@Override
 			public void onEvent(Boolean newValue) {
-				toggleStartHelp.setText("Startup Help: " + newValue);
+				toggleGameHelp.setText("Game Help: " + newValue);
 			}
 		});
-		toggleStartHelp.addLeftListener(new ScreenListener() {
+		toggleGameHelp.addLeftListener(new ScreenListener() {
 			@Override
 			public void eventOccurred() {
-				((PolyGuis) FlounderGuis.get().getGuiMaster()).setStarthelp(!((PolyGuis) FlounderGuis.get().getGuiMaster()).isStarthelp());
+				((PolyGuis) FlounderGuis.get().getGuiMaster()).setGamehelp(!((PolyGuis) FlounderGuis.get().getGuiMaster()).isGameHelp());
 			}
 		});
 

@@ -6,6 +6,7 @@ import flounder.guis.*;
 import flounder.maths.*;
 import flounder.maths.vectors.*;
 import flounder.visual.*;
+import polyorbis.*;
 import polyorbis.uis.*;
 
 public class ScreenPause extends ScreenObject {
@@ -22,6 +23,15 @@ public class ScreenPause extends ScreenObject {
 
 		float yPosition = 0.30f;
 		float ySpacing = 0.07f;
+
+		// Resume.
+		GuiButtonText resumeToMenu = new GuiButtonText(this, new Vector2f(0.5f, yPosition += 1.2f * ySpacing), "Resume Game", GuiAlign.CENTRE);
+		resumeToMenu.addLeftListener(new ScreenListener() {
+			@Override
+			public void eventOccurred() {
+				((PolyGuis) FlounderGuis.get().getGuiMaster()).togglePause(false);
+			}
+		});
 
 		// Settings.
 		ScreenSettings screenSettings = new ScreenSettings(slider);
@@ -46,7 +56,7 @@ public class ScreenPause extends ScreenObject {
 		});
 
 		// Exit.
-		GuiButtonText exitToMenu = new GuiButtonText(this, new Vector2f(0.5f, yPosition += 1.2f * ySpacing), "Quit Game", GuiAlign.CENTRE);
+		GuiButtonText exitToMenu = new GuiButtonText(this, new Vector2f(0.5f, yPosition += 1.2f * ySpacing), "Exit To Desktop", GuiAlign.CENTRE);
 		exitToMenu.addLeftListener(new ScreenListener() {
 			@Override
 			public void eventOccurred() {

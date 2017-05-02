@@ -98,7 +98,7 @@ public class PolyRenderer extends RendererMaster {
 
 		// Clears and renders.
 		Camera camera = FlounderCamera.get().getCamera();
-		OpenGlUtils.prepareNewRenderParse(0.0f, 0.0f, 0.0f);
+		FlounderOpenGL.get().prepareNewRenderParse(0.0f, 0.0f, 0.0f);
 
 		particleRenderer.render(clipPlane, camera);
 

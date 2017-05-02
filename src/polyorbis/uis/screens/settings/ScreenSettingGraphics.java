@@ -115,7 +115,7 @@ public class ScreenSettingGraphics extends ScreenObject {
 		});
 
 		// Slider Shadowmap Size.
-		GuiSliderText sliderShadowSize = new GuiSliderText(paneRight, new Vector2f(0.75f, 0.20f), "Shadowmap Size: ", 512.0f, FBO.getMaxFBOSize(), FlounderShadows.get().getShadowSize(), GuiAlign.CENTRE);
+		GuiSliderText sliderShadowSize = new GuiSliderText(paneRight, new Vector2f(0.75f, 0.20f), "Shadowmap Size: ", 512.0f, FlounderFBOs.get().getMaxFBOSize(), FlounderShadows.get().getShadowSize(), GuiAlign.CENTRE);
 		FlounderEvents.get().addEvent(new EventChange<Integer>(FlounderShadows.get()::getShadowSize) {
 			@Override
 			public void onEvent(Integer newValue) {

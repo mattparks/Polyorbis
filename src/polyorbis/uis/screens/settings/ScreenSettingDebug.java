@@ -30,7 +30,7 @@ public class ScreenSettingDebug extends ScreenObject {
 
 		// Toggle Wireframe.
 		GuiButtonText toggleWireframe = new GuiButtonText(this, new Vector2f(0.5f, 0.27f), "Wireframe Mode: ", GuiAlign.CENTRE);
-		FlounderEvents.get().addEvent(new EventChange<Boolean>(OpenGlUtils::isInWireframe) {
+		FlounderEvents.get().addEvent(new EventChange<Boolean>(() -> FlounderOpenGL.get().isInWireframe()) {
 			@Override
 			public void onEvent(Boolean newValue) {
 				toggleWireframe.setText("Wireframe Mode: " + newValue);
@@ -39,7 +39,7 @@ public class ScreenSettingDebug extends ScreenObject {
 		toggleWireframe.addLeftListener(new ScreenListener() {
 			@Override
 			public void eventOccurred() {
-				OpenGlUtils.goWireframe(!OpenGlUtils.isInWireframe());
+				FlounderOpenGL.get().goWireframe(!FlounderOpenGL.get().isInWireframe());
 			}
 		});
 
