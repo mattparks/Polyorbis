@@ -22,10 +22,10 @@ public class OverlayHelp extends ScreenObject {
 		title.setBorderColour(new Colour(0.0f, 0.0f, 0.0f));
 		title.setBorder(new ConstantDriver(0.022f));
 
-		TextObject textShare = new TextObject(this, new Vector2f(0.5f, 0.47f),
+		TextObject textShare = new TextObject(this, new Vector2f(0.5f, 0.49f),
 				"This game was developed by Mattparks & Decaxon for the Ludum Dare 38 Jam: A Small World. " +
-						"Controls: WASD + Space to move. 1-2-3 cycles the selected attacks (highlighted in the bottom left corner in the HUD), the mouse is used to aim, and left click to fire the selected attack. " +
-						"F1 toggles this help menu, F2 takes a screenshot to a roaming/home folder, F3 toggles a debug overlay, F4 toggles the HUD, F11 fullscreen, and Escape opens a pause menu with settings. " +
+						"Controls: Escape opens a pause menu with settings, F1 toggles this help menu, F2 takes a screenshot to a roaming/home folder, F3 toggles a debug overlay, and F4 toggles the HUD, F11 fullscreen. " +
+						"The mouse is used to aim your attacks, and left click to fire the selected attack. WASD + Space to move. 1-2-3 cycles the selected attacks (highlighted in the bottom left corner in the HUD). " +
 						"To zoom the camera use the scroll wheel, and to orientate hold right mouse and move the mouse to a new angle." +
 						"Your goal is to pickup pink hearts for health and yellow boxes for ammunition, red enemies will spawn and try to kill you, touching them will damage you! " +
 						"Your score will increase the longer you survive and with the amount of enemies you kill. " +
@@ -35,7 +35,7 @@ public class OverlayHelp extends ScreenObject {
 		textShare.setColour(new Colour(1.0f, 1.0f, 1.0f));
 
 		// Restart.
-		GuiButtonText exitToMenu = new GuiButtonText(this, new Vector2f(0.5f, 0.84f), "Start Game", GuiAlign.CENTRE);
+		GuiButtonText exitToMenu = new GuiButtonText(this, new Vector2f(0.5f, 0.87f), "Start Game", GuiAlign.CENTRE);
 		exitToMenu.addLeftListener(new ScreenListener() {
 			@Override
 			public void eventOccurred() {
