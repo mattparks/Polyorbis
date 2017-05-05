@@ -89,7 +89,6 @@ public class PolyPost extends Module {
 		this.grainEnabled = grainEnabled;
 	}
 
-
 	@Handler.Function(Handler.FLAG_DISPOSE)
 	public void dispose() {
 	}

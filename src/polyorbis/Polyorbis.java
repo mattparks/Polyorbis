@@ -2,9 +2,7 @@ package polyorbis;
 
 import flounder.framework.*;
 import flounder.framework.updater.*;
-import flounder.lwjgl3.*;
 import flounder.profiling.*;
-import flounder.resources.*;
 import polyorbis.camera.*;
 
 public class Polyorbis extends Framework {
@@ -16,7 +14,7 @@ public class Polyorbis extends Framework {
 	public Polyorbis() {
 		super("polyorbis", new UpdaterDefault(null), -1,
 				new Extension[]{new PolyInterface(), new PolyRenderer(), new PolyCamera(), new PolyPlayer(), new PolyGuis()},
-				new Module[]{new PlatformLwjgl(
+				new Module[]{/*new PlatformLwjgl(
 						PolyConfigs.DISPLAY_WIDTH.getInteger(),
 						PolyConfigs.DISPLAY_HEIGHT.getInteger(),
 						"Polyorbis", new MyFile[]{new MyFile(MyFile.RES_FOLDER, "icon", "icon.png")},
@@ -27,7 +25,7 @@ public class Polyorbis extends Framework {
 						false,
 						PolyConfigs.WIREFRAME_ENABLED.getBoolean(),
 						PolyConfigs.TEXTURES_ANISOTROPY_MAX.getFloat()
-				)});
+				)*/});
 		Framework.setFpsLimit(PolyConfigs.FRAMEWORK_FPS_LIMIT.getInteger());
 		FlounderProfiler.get().toggle(PolyConfigs.PROFILER_ENABLED.getBoolean());
 	}
