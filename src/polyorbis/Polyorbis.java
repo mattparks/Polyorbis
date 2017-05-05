@@ -5,7 +5,6 @@ import flounder.framework.updater.*;
 import flounder.lwjgl3.*;
 import flounder.profiling.*;
 import flounder.resources.*;
-import org.lwjgl.glfw.*;
 import polyorbis.camera.*;
 
 public class Polyorbis extends Framework {
@@ -15,7 +14,7 @@ public class Polyorbis extends Framework {
 	}
 
 	public Polyorbis() {
-		super("polyorbis", new UpdaterDefault(GLFW::glfwGetTime), -1,
+		super("polyorbis", new UpdaterDefault(null), -1,
 				new Extension[]{new PolyInterface(), new PolyRenderer(), new PolyCamera(), new PolyPlayer(), new PolyGuis()},
 				new Module[]{new PlatformLwjgl(
 						PolyConfigs.DISPLAY_WIDTH.getInteger(),

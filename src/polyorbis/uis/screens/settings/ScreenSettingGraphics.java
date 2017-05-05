@@ -7,13 +7,11 @@ import flounder.framework.*;
 import flounder.guis.*;
 import flounder.maths.*;
 import flounder.maths.vectors.*;
+import flounder.platform.*;
 import flounder.shadows.*;
 import flounder.textures.*;
 import polyorbis.uis.*;
 import polyorbis.uis.screens.*;
-
-import static org.lwjgl.opengl.EXTTextureFilterAnisotropic.*;
-import static org.lwjgl.opengl.GL11.*;
 
 public class ScreenSettingGraphics extends ScreenObject {
 	public ScreenSettingGraphics(OverlaySlider slider, ScreenSettings settings) {
@@ -85,7 +83,7 @@ public class ScreenSettingGraphics extends ScreenObject {
 		});
 
 		// Slider Texture Anisotropy.
-		GuiSliderText sliderTextureAnisotropy = new GuiSliderText(paneLeft, new Vector2f(0.25f, 0.48f), "Texture Anisotropy: ", 0.0f, glGetFloat(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT), FlounderTextures.get().getAnisotropyLevel(), GuiAlign.CENTRE);
+		GuiSliderText sliderTextureAnisotropy = new GuiSliderText(paneLeft, new Vector2f(0.25f, 0.48f), "Texture Anisotropy: ", 0.0f, FlounderPlatform.get().getMaxAnisotropy(), FlounderTextures.get().getAnisotropyLevel(), GuiAlign.CENTRE);
 		FlounderEvents.get().addEvent(new EventChange<Float>(FlounderTextures.get()::getAnisotropyLevel) {
 			@Override
 			public void onEvent(Float newValue) {

@@ -59,16 +59,6 @@ public class ComponentSpawn extends IComponentEntity implements IComponentEditor
 
 			int maxAllowed = 1;
 
-			if (PolyWorld.get().calculateScore(PolyWorld.get().getEntityPlayer()) > 4000) {
-				maxAllowed = 5;
-			} else if (PolyWorld.get().calculateScore(PolyWorld.get().getEntityPlayer()) > 2000) {
-				maxAllowed = 4;
-			} else if (PolyWorld.get().calculateScore(PolyWorld.get().getEntityPlayer()) > 700) {
-				maxAllowed = 3;
-			} else if (PolyWorld.get().calculateScore(PolyWorld.get().getEntityPlayer()) > 100) {
-				maxAllowed = 2;
-			}
-
 			this.targetTime = Framework.getTimeSec() + Maths.randomInRange(3.0f, 10.0f / (float) maxAllowed);
 
 			switch ((int) Maths.randomInRange(0.0f, 3.0f)) {
@@ -80,7 +70,13 @@ public class ComponentSpawn extends IComponentEntity implements IComponentEditor
 						}
 					}
 
-					if (current < 1) {
+					if (PolyWorld.get().calculateScore(PolyWorld.get().getEntityPlayer()) > 3800) {
+						maxAllowed = 3;
+					} else if (PolyWorld.get().calculateScore(PolyWorld.get().getEntityPlayer()) > 900) {
+						maxAllowed = 2;
+					}
+
+					if (current < maxAllowed) {
 						Entity e = new InstanceHealth(FlounderEntities.get().getEntities(), randomEntityRotation(), radius);
 						spawned.add(e);
 					}
@@ -106,6 +102,16 @@ public class ComponentSpawn extends IComponentEntity implements IComponentEditor
 						if (!entity.isRemoved() && entity instanceof InstanceEnemy) {
 							current++;
 						}
+					}
+
+					if (PolyWorld.get().calculateScore(PolyWorld.get().getEntityPlayer()) > 3800) {
+						maxAllowed = 5;
+					} else if (PolyWorld.get().calculateScore(PolyWorld.get().getEntityPlayer()) > 1800) {
+						maxAllowed = 4;
+					} else if (PolyWorld.get().calculateScore(PolyWorld.get().getEntityPlayer()) > 900) {
+						maxAllowed = 3;
+					} else if (PolyWorld.get().calculateScore(PolyWorld.get().getEntityPlayer()) > 450) {
+						maxAllowed = 2;
 					}
 
 					if (current < maxAllowed) {
