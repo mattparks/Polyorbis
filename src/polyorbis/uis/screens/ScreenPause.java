@@ -60,7 +60,7 @@ public class ScreenPause extends ScreenObject {
 		exitToMenu.addLeftListener(new ScreenListener() {
 			@Override
 			public void eventOccurred() {
-				Framework.requestClose();
+				Framework.requestClose(false);
 			}
 		});
 	}
