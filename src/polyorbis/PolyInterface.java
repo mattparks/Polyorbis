@@ -21,7 +21,7 @@ public class PolyInterface extends Standard {
 	private Playlist gamePlaylist;
 
 	public PolyInterface() {
-		super(FlounderDisplay.class, FlounderKeyboard.class, FlounderMouse.class, FlounderJoysticks.class, FlounderNetwork.class, FlounderShadows.class, FlounderParticles.class, FlounderSkybox.class, PolyPost.class, PolyWorld.class);
+		super(FlounderEvents.class, FlounderNetwork.class, FlounderShadows.class, FlounderParticles.class, FlounderSkybox.class, PolyPost.class, PolyWorld.class);
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class PolyInterface extends Standard {
 			}
 		});
 
-		/*FlounderEvents.addEvent(new IEvent() {
+		/*FlounderEvents.get().addEvent(new IEvent() {
 			KeyButton closeWindow = new KeyButton(GLFW_KEY_DELETE);
 
 			@Override
