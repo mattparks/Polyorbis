@@ -15,6 +15,7 @@ public class PolyGuis extends GuiMaster {
 
 	public static final float SLIDE_TIME = 0.5f;
 
+	private OverlayStartup overlayStartup;
 	private OverlayHelp overlayHelp;
 	private OverlayDebug overlayDebug;
 	private OverlayHUD overlayHUD;
@@ -29,6 +30,7 @@ public class PolyGuis extends GuiMaster {
 
 	@Override
 	public void init() {
+		this.overlayStartup = new OverlayStartup(FlounderGuis.get().getContainer());
 		this.overlayHelp = new OverlayHelp(FlounderGuis.get().getContainer());
 		this.overlayDebug = new OverlayDebug(FlounderGuis.get().getContainer());
 		this.overlayHUD = new OverlayHUD(FlounderGuis.get().getContainer());
@@ -37,21 +39,9 @@ public class PolyGuis extends GuiMaster {
 
 		this.overlayHelp.setAlphaDriver(new ConstantDriver(0.0f));
 		this.overlayDebug.setAlphaDriver(new ConstantDriver(0.0f));
-		this.overlayHUD.setAlphaDriver(new ConstantDriver(1.0f));
+		this.overlayHUD.setAlphaDriver(new ConstantDriver(0.0f));
 		this.overlaySlider.setAlphaDriver(new ConstantDriver(0.0f));
 		this.overlayDeath.setAlphaDriver(new ConstantDriver(0.0f));
-
-		new java.util.Timer().schedule(
-				new java.util.TimerTask() {
-					@Override
-					public void run() {
-						if (gamehelp = PolyConfigs.GAMEHELP_ENABLED.setReference(() -> gamehelp).getBoolean()) {
-							toggleHelp();
-						}
-					}
-				},
-				500
-		);
 
 		FlounderGuis.get().getSelector().initJoysticks(0, 0, 1, 0, 1);
 
@@ -114,6 +104,18 @@ public class PolyGuis extends GuiMaster {
 
 	@Override
 	public void update() {
+		if (overlayStartup.getAlpha() == 0.0f && overlayStartup.isStarting()) {
+			// Enable other GUI things.
+			this.overlayHUD.setAlphaDriver(new SlideDriver(overlayHUD.getAlpha(), 1.0f, SLIDE_TIME));
+
+			if (gamehelp = PolyConfigs.GAMEHELP_ENABLED.setReference(() -> gamehelp).getBoolean()) {
+				toggleHelp();
+			}
+
+			overlayStartup.setAlphaDriver(new ConstantDriver(0.0f));
+			overlayStartup.setStarting(false);
+		}
+
 		toggleDeath(PolyWorld.get().getEndGameData() != null);
 	}
 
@@ -123,7 +125,7 @@ public class PolyGuis extends GuiMaster {
 
 	@Override
 	public boolean isGamePaused() {
-		return overlaySlider.getAlpha() > 0.1f || overlayDeath.getAlpha() != 0.0f || overlayHelp.getAlpha() != 0.0f;
+		return overlayStartup.isStarting() || overlaySlider.getAlpha() > 0.1f || overlayDeath.getAlpha() != 0.0f || overlayHelp.getAlpha() != 0.0f;
 	}
 
 	@Override
