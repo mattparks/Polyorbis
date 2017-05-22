@@ -85,17 +85,11 @@ public class PolyRenderer extends RendererMaster {
 	}
 
 	private void renderShadows() {
-		// Sets the player model to render.
-		entitiesRenderer.setRenderPlayer(true);
-
 		// Renders the shadows.
 		shadowRenderer.render(POSITIVE_INFINITY, FlounderCamera.get().getCamera());
 	}
 
 	private void renderScene(Vector4f clipPlane) {
-		// Sets the player model to render in first person view.
-		entitiesRenderer.setRenderPlayer(true);
-
 		// Clears and renders.
 		Camera camera = FlounderCamera.get().getCamera();
 		FlounderOpenGL.get().prepareNewRenderParse(0.0f, 0.0f, 0.0f);

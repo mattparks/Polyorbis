@@ -125,7 +125,7 @@ public class PolyGuis extends GuiMaster {
 
 	@Override
 	public boolean isGamePaused() {
-		return overlayStartup.isStarting() || overlaySlider.getAlpha() > 0.1f || overlayDeath.getAlpha() != 0.0f || overlayHelp.getAlpha() != 0.0f;
+		return overlayStartup.isStarting() || overlaySlider.getAlpha() != 0.0f || overlayDeath.getAlpha() != 0.0f || overlayHelp.getAlpha() != 0.0f;
 	}
 
 	@Override

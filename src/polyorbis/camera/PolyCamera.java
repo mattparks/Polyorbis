@@ -124,6 +124,8 @@ public class PolyCamera extends Camera {
 
 	@Override
 	public void update(Player player) {
+		float delta = Math.min(1.0f / 60.0f, Framework.getDelta());
+
 		calculateHorizontalAngle();
 		calculateVerticalAngle();
 		calculateZoom();
@@ -134,9 +136,9 @@ public class PolyCamera extends Camera {
 			this.targetRotation.z = 0.4f * this.targetRotation.z; // Vertical movement scaled back.
 		}
 
-		updateActualZoom();
-		updateHorizontalAngle();
-		updatePitchAngle();
+		updateActualZoom(delta);
+		updateHorizontalAngle(delta);
+		updatePitchAngle(delta);
 		calculateDistances();
 		calculatePosition();
 
@@ -233,13 +235,13 @@ public class PolyCamera extends Camera {
 		}
 	}
 
-	private void updateActualZoom() {
+	private void updateActualZoom(float delta) {
 		float offset = targetZoom - actualDistanceFromPoint;
-		float change = offset * Framework.getDelta() * ZOOM_AGILITY;
+		float change = offset * delta * ZOOM_AGILITY;
 		actualDistanceFromPoint += change;
 	}
 
-	private void updateHorizontalAngle() {
+	private void updateHorizontalAngle(float delta) {
 		float offset = targetRotationAngle - angleAroundPlayer;
 
 		if (Math.abs(offset) > Maths.DEGREES_IN_HALF_CIRCLE) {
@@ -250,7 +252,7 @@ public class PolyCamera extends Camera {
 			}
 		}
 
-		angleAroundPlayer += offset * Framework.getDelta() * ROTATE_AGILITY;
+		angleAroundPlayer += offset * delta * ROTATE_AGILITY;
 
 		if (angleAroundPlayer >= Maths.DEGREES_IN_HALF_CIRCLE) {
 			angleAroundPlayer -= Maths.DEGREES_IN_CIRCLE;
@@ -259,7 +261,7 @@ public class PolyCamera extends Camera {
 		}
 	}
 
-	private void updatePitchAngle() {
+	private void updatePitchAngle(float delta) {
 		float offset = targetElevation - angleOfElevation;
 
 		if (Math.abs(offset) > Maths.DEGREES_IN_HALF_CIRCLE) {
@@ -270,7 +272,7 @@ public class PolyCamera extends Camera {
 			}
 		}
 
-		angleOfElevation += offset * Framework.getDelta() * PITCH_AGILITY;
+		angleOfElevation += offset * delta * PITCH_AGILITY;
 
 		if (angleOfElevation >= Maths.DEGREES_IN_HALF_CIRCLE) {
 			angleOfElevation -= Maths.DEGREES_IN_CIRCLE;

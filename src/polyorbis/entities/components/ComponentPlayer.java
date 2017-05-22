@@ -104,6 +104,8 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 			return;
 		}
 
+		float delta = Math.min(1.0f / 60.0f, Framework.getDelta());
+
 		// Kill the player!
 		if (health <= 0.0f && !dead) {
 			FlounderSound.get().playSystemSound(SOUND_GAMEOVER);
@@ -126,30 +128,30 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 		float planetRadius = PolyWorld.get().getEntityPlanet() == null ? 0.0f : PolyWorld.get().getEntityPlanet().getScale();
 
 		if (inputY.getAmount() == 0.0f) {
-			currentSpeedY += (currentSpeedY <= 0.0f ? 1.0f : -1.0f) * Math.abs(currentSpeedY) * PLAYER_ACCELERATION * Framework.getDelta();
+			currentSpeedY += (currentSpeedY <= 0.0f ? 1.0f : -1.0f) * Math.abs(currentSpeedY) * PLAYER_ACCELERATION * delta;
 		} else {
-			currentSpeedY += inputY.getAmount() * PLAYER_SPEED * PLAYER_ACCELERATION * Framework.getDelta();
+			currentSpeedY += inputY.getAmount() * PLAYER_SPEED * PLAYER_ACCELERATION * delta;
 			currentSpeedY = Maths.clamp(currentSpeedY, -PLAYER_SPEED, PLAYER_SPEED);
 		}
 
 		if (inputZ.getAmount() == 0.0f) {
-			currentSpeedZ += (currentSpeedZ <= 0.0f ? 1.0f : -1.0f) * Math.abs(currentSpeedZ) * PLAYER_ACCELERATION * Framework.getDelta();
+			currentSpeedZ += (currentSpeedZ <= 0.0f ? 1.0f : -1.0f) * Math.abs(currentSpeedZ) * PLAYER_ACCELERATION * delta;
 		} else {
-			currentSpeedZ += -inputZ.getAmount() * PLAYER_SPEED * PLAYER_ACCELERATION * Framework.getDelta();
+			currentSpeedZ += -inputZ.getAmount() * PLAYER_SPEED * PLAYER_ACCELERATION * delta;
 			currentSpeedZ = Maths.clamp(currentSpeedZ, -PLAYER_SPEED, PLAYER_SPEED);
 		}
 
 		// Move player current positions.
-		currentY += currentSpeedY * 100.0f * Framework.getDelta();
-		currentZ += currentSpeedZ * 100.0f * Framework.getDelta();
+		currentY += currentSpeedY * 100.0f * delta;
+		currentZ += currentSpeedZ * 100.0f * delta;
 
 		if (inputJump.isDown() && currentSpeedUp == 0.0f && currentRadius <= planetRadius + PLAYER_HEIGHT) {
 			FlounderSound.get().playSystemSound(SOUND_JUMP);
 			currentSpeedUp = PLAYER_JUMP;
 		}
 
-		currentSpeedUp += PLAYER_GRAVITY * Framework.getDelta();
-		currentRadius += currentSpeedUp * 100.0f * Framework.getDelta();
+		currentSpeedUp += PLAYER_GRAVITY * delta;
+		currentRadius += currentSpeedUp * 100.0f * delta;
 
 		// Collision with the planet.
 		if (currentRadius < planetRadius + PLAYER_HEIGHT) {

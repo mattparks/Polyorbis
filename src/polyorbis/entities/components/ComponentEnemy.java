@@ -59,6 +59,8 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 			return;
 		}
 
+		float delta = Math.min(1.0f / 60.0f, Framework.getDelta());
+
 		if (health <= 0.0f && !killed) {
 			ComponentPlayer player = PolyWorld.get().getEntityPlayer() == null ? null : (ComponentPlayer) PolyWorld.get().getEntityPlayer().getComponent(ComponentPlayer.class);
 
@@ -117,7 +119,7 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 			float rz = as * 15.0f * (float) (Math.cos(0.25 * 15.0f * Framework.getTimeSec()) - Math.cos(1.2 * 15.0f * Framework.getTimeSec()) + Math.sin(0.5 * 15.0f * Framework.getTimeSec()));
 
 			// Moves and rotates the player.
-			Vector3f right = new Vector3f(direction).scale((reverse ? -1.0f : 1.0f) * SPEED * Framework.getDelta());
+			Vector3f right = new Vector3f(direction).scale((reverse ? -1.0f : 1.0f) * SPEED * delta);
 			Vector3f.add(rotation, right, rotation);
 
 			reverseTime += Framework.getDelta();
