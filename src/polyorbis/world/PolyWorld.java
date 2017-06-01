@@ -100,10 +100,6 @@ public class PolyWorld extends Module {
 		this.endGameData = null;
 	}
 
-	@Handler.Function(Handler.FLAG_PROFILE)
-	public void profile() {
-	}
-
 	public Entity getEntityPlayer() {
 		return this.entityPlayer;
 	}

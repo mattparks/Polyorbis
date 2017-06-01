@@ -3,7 +3,6 @@ package polyorbis;
 import flounder.framework.*;
 import flounder.framework.updater.*;
 import flounder.lwjgl3.*;
-import flounder.profiling.*;
 import flounder.resources.*;
 import org.lwjgl.glfw.*;
 import polyorbis.camera.*;
@@ -26,10 +25,9 @@ public class Polyorbis extends Framework {
 						0,
 						PolyConfigs.DISPLAY_FULLSCREEN.getBoolean(),
 						false,
-						PolyConfigs.WIREFRAME_ENABLED.getBoolean(),
+						false,
 						PolyConfigs.TEXTURES_ANISOTROPY_MAX.getFloat()
 				)});
 		Framework.setFpsLimit(PolyConfigs.FRAMEWORK_FPS_LIMIT.getInteger());
-		FlounderProfiler.get().toggle(PolyConfigs.PROFILER_ENABLED.getBoolean());
 	}
 }

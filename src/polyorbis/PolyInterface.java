@@ -12,6 +12,7 @@ import flounder.shadows.*;
 import flounder.skybox.*;
 import flounder.sounds.*;
 import flounder.standards.*;
+import flounder.tasks.*;
 import polyorbis.post.*;
 import polyorbis.world.*;
 
@@ -21,7 +22,7 @@ public class PolyInterface extends Standard {
 	private Playlist gamePlaylist;
 
 	public PolyInterface() {
-		super(FlounderEvents.class, FlounderNetwork.class, FlounderShadows.class, FlounderParticles.class, FlounderSkybox.class, PolyPost.class, PolyWorld.class);
+		super(FlounderEvents.class, FlounderTasks.class, FlounderNetwork.class, FlounderShadows.class, FlounderParticles.class, FlounderSkybox.class, PolyPost.class, PolyWorld.class);
 	}
 
 	@Override
@@ -80,7 +81,7 @@ public class PolyInterface extends Standard {
 			}
 		});
 
-		/*FlounderEvents.get().addEvent(new IEvent() {
+		/*FlounderTasks.get().addTask(new IEvent() {
 			KeyButton closeWindow = new KeyButton(GLFW_KEY_DELETE);
 
 			@Override

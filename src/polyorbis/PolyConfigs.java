@@ -2,9 +2,7 @@ package polyorbis;
 
 import flounder.devices.*;
 import flounder.framework.*;
-import flounder.helpers.*;
 import flounder.parsing.*;
-import flounder.profiling.*;
 import flounder.resources.*;
 import flounder.shadows.*;
 import flounder.textures.*;
@@ -19,8 +17,6 @@ import static flounder.platform.Constants.*;
 public class PolyConfigs {
 	// Main configs.
 	private static final Config CONFIG_MAIN = new Config(new MyFile(Framework.getRoamingFolder("polyorbis"), "configs", "settings.conf"));
-	public static final ConfigData PROFILER_ENABLED = CONFIG_MAIN.getData(ConfigSection.DEBUG, "profilerEnabled", false, () -> FlounderProfiler.get().isOpen());
-	public static final ConfigData WIREFRAME_ENABLED = CONFIG_MAIN.getData(ConfigSection.DEBUG, "wireframeEnabled", false, () -> FlounderOpenGL.get().isInWireframe());
 
 	public static final ConfigData ATMOSPHERE_ENABLED = CONFIG_MAIN.getData(ConfigSection.GRAPHICS, "atmosphereEnabled", true);
 	public static final ConfigData GAMEHELP_ENABLED = CONFIG_MAIN.getData(ConfigSection.DEBUG, "gamehelpEnabled", true);

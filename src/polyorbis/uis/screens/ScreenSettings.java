@@ -18,21 +18,10 @@ public class ScreenSettings extends ScreenObject {
 		ScreenObject paneLeft = new ScreenObjectEmpty(this, new Vector2f(0.25f, 0.5f), new Vector2f(0.5f, 1.0f), true);
 		ScreenObject paneRight = new ScreenObjectEmpty(this, new Vector2f(0.75f, 0.5f), new Vector2f(0.5f, 1.0f), true);
 
-		// Screen Debug.
-		ScreenSettingDebug screenDebug = new ScreenSettingDebug(slider, this);
-		screenDebug.setAlphaDriver(new ConstantDriver(0.0f));
-		GuiButtonText debug = new GuiButtonText(paneLeft, new Vector2f(0.25f, 0.2f), "Debug", GuiAlign.CENTRE);
-		debug.addLeftListener(new ScreenListener() {
-			@Override
-			public void eventOccurred() {
-				slider.setNewSecondaryScreen(screenDebug);
-			}
-		});
-
 		// Screen Controls.
 		ScreenSettingControls screenControls = new ScreenSettingControls(slider, this);
 		screenControls.setAlphaDriver(new ConstantDriver(0.0f));
-		GuiButtonText controls = new GuiButtonText(paneLeft, new Vector2f(0.25f, 0.27f), "Controls", GuiAlign.CENTRE);
+		GuiButtonText controls = new GuiButtonText(paneLeft, new Vector2f(0.25f, 0.2f), "Controls", GuiAlign.CENTRE);
 		controls.addLeftListener(new ScreenListener() {
 			@Override
 			public void eventOccurred() {
@@ -41,7 +30,7 @@ public class ScreenSettings extends ScreenObject {
 		});
 
 		// Toggle Game Help.
-		GuiButtonText toggleGameHelp = new GuiButtonText(paneLeft, new Vector2f(0.25f, 0.34f), "Game Help: ", GuiAlign.CENTRE);
+		GuiButtonText toggleGameHelp = new GuiButtonText(paneLeft, new Vector2f(0.25f, 0.27f), "Game Help: ", GuiAlign.CENTRE);
 		FlounderEvents.get().addEvent(new EventChange<Boolean>(((PolyGuis) FlounderGuis.get().getGuiMaster())::isGameHelp) {
 			@Override
 			public void onEvent(Boolean newValue) {
@@ -56,7 +45,7 @@ public class ScreenSettings extends ScreenObject {
 		});
 
 		// Toggle Atmosphere.
-		GuiButtonText toggleAtmosphere = new GuiButtonText(paneLeft, new Vector2f(0.25f, 0.41f), "Atmosphere: ", GuiAlign.CENTRE);
+		GuiButtonText toggleAtmosphere = new GuiButtonText(paneLeft, new Vector2f(0.25f, 0.34f), "Atmosphere: ", GuiAlign.CENTRE);
 		FlounderEvents.get().addEvent(new EventChange<Boolean>(PolyWorld.get()::hasAtmosphere) {
 			@Override
 			public void onEvent(Boolean newValue) {
