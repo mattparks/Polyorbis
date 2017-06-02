@@ -89,9 +89,7 @@ public class PolyWorld extends Module {
 	}
 
 	public void reset() {
-		for (Entity entity : FlounderEntities.get().getEntities().getAll()) {
-			entity.forceRemove();
-		}
+		FlounderEntities.get().getEntities().foreach(Entity::forceRemove);
 
 		FlounderParticles.get().clear();
 

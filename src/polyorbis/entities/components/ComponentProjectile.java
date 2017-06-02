@@ -71,7 +71,7 @@ public class ComponentProjectile extends IComponentEntity implements IComponentE
 
 		ComponentPlayer realPlayer = PolyWorld.get().getEntityPlayer() == null ? null : (ComponentPlayer) PolyWorld.get().getEntityPlayer().getComponent(ComponentPlayer.class);
 
-		for (Entity entity : FlounderEntities.get().getEntities().getAll()) {
+		for (Entity entity : FlounderEntities.get().getEntities().getAll(null)) {
 			if (entity != null) {
 				ComponentEnemy enemy = (ComponentEnemy) entity.getComponent(ComponentEnemy.class);
 				ComponentPlayer player = (ComponentPlayer) entity.getComponent(ComponentPlayer.class);
