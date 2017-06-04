@@ -136,6 +136,7 @@ public class PolyRenderer extends RendererMaster {
 			// Render Lens Flare Filter.
 			if (PolyPost.get().isLensFlareEnabled() && PolyWorld.get().getEntitySun() != null) {
 				filterLensFlare.setSunPosition(PolyWorld.get().getEntitySun().getPosition());
+				filterLensFlare.setWorldHeight(128.0f); // High enough to always show lens flare.
 				filterLensFlare.applyFilter(output.getColourTexture(0));
 				output = filterLensFlare.fbo;
 			}
