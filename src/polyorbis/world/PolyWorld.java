@@ -193,9 +193,4 @@ public class PolyWorld extends Module {
 	public static PolyWorld get() {
 		return (PolyWorld) Framework.get().getInstance(PolyWorld.class);
 	}
-
-	@Module.TabName
-	public static String getTab() {
-		return "Poly World";
-	}
 }
