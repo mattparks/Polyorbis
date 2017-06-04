@@ -2,7 +2,7 @@ package polyorbis;
 
 import flounder.devices.*;
 import flounder.framework.*;
-import flounder.parsing.*;
+import flounder.parsing.config.*;
 import flounder.resources.*;
 import flounder.shadows.*;
 import flounder.textures.*;
@@ -30,7 +30,7 @@ public class PolyConfigs {
 	public static final ConfigData DISPLAY_VSYNC = CONFIG_MAIN.getData(ConfigSection.GRAPHICS, "displayVSync", false, () -> FlounderDisplay.get().isVSync());
 	public static final ConfigData DISPLAY_ANTIALIAS = CONFIG_MAIN.getData(ConfigSection.GRAPHICS, "displayAntialias", true, () -> FlounderDisplay.get().isAntialiasing());
 	public static final ConfigData DISPLAY_FULLSCREEN = CONFIG_MAIN.getData(ConfigSection.GRAPHICS, "displayFullscreen", false, () -> FlounderDisplay.get().isFullscreen());
-	public static final ConfigData FRAMEWORK_FPS_LIMIT = CONFIG_MAIN.getData(ConfigSection.GRAPHICS, "frameworkFpsLimit", 100, () -> Framework.getFpsLimit());
+	public static final ConfigData FRAMEWORK_FPS_LIMIT = CONFIG_MAIN.getData(ConfigSection.GRAPHICS, "frameworkFpsLimit", 100, () -> Framework.get().getFpsLimit());
 	public static final ConfigData TEXTURES_ANISOTROPY_MAX = CONFIG_MAIN.getData(ConfigSection.GRAPHICS, "texturesAnisotropyMax", 4.0f, () -> FlounderTextures.get().getAnisotropyLevel());
 
 	public static final ConfigData BRIGHTNESS_BOOST = CONFIG_MAIN.getData(ConfigSection.GRAPHICS, "brightnessBoost", 0.25f, () -> FlounderShadows.get().getBrightnessBoost());

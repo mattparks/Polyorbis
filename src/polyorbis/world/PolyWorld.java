@@ -77,7 +77,7 @@ public class PolyWorld extends Module {
 	@Handler.Function(Handler.FLAG_UPDATE_PRE)
 	public void update() {
 		// Update the sky colours and sun position.
-		dayFactor = dayDriver.update(Framework.getDelta()) / 100.0f;
+		dayFactor = dayDriver.update(Framework.get().getDelta()) / 100.0f;
 		Vector3f.rotate(LIGHT_DIRECTION, FlounderSkybox.get().getRotation().set(0.0f, dayFactor * 360.0f, 0.0f), FlounderShadows.get().getLightPosition()).normalize();
 		FlounderSkybox.get().setBlendFactor(1.0f);
 
@@ -191,7 +191,7 @@ public class PolyWorld extends Module {
 
 	@Module.Instance
 	public static PolyWorld get() {
-		return (PolyWorld) Framework.getInstance(PolyWorld.class);
+		return (PolyWorld) Framework.get().getInstance(PolyWorld.class);
 	}
 
 	@Module.TabName

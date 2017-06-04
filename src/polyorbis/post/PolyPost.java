@@ -85,7 +85,7 @@ public class PolyPost extends Module {
 
 	@Module.Instance
 	public static PolyPost get() {
-		return (PolyPost) Framework.getInstance(PolyPost.class);
+		return (PolyPost) Framework.get().getInstance(PolyPost.class);
 	}
 
 	@Module.TabName

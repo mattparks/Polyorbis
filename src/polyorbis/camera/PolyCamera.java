@@ -123,7 +123,7 @@ public class PolyCamera extends Camera {
 
 	@Override
 	public void update(Player player) {
-		float delta = Math.min(1.0f / 60.0f, Framework.getDelta());
+		float delta = Math.min(1.0f / 60.0f, Framework.get().getDelta());
 
 		calculateHorizontalAngle();
 		calculateVerticalAngle();

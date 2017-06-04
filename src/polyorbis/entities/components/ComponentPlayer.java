@@ -104,7 +104,7 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 			return;
 		}
 
-		float delta = Math.min(1.0f / 60.0f, Framework.getDelta());
+		float delta = Math.min(1.0f / 60.0f, Framework.get().getDelta());
 
 		// Kill the player!
 		if (health <= 0.0f && !dead) {
@@ -162,10 +162,10 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 		// Updates attacks, health, experience and survival time.
 		if (survivalTime == 0.0f) {
 			if (currentSpeedY != 0.0f || currentSpeedZ != 0.0f || currentSpeedUp != 0.0f) {
-				survivalTime += Framework.getDelta();
+				survivalTime += Framework.get().getDelta();
 			}
 		} else {
-			survivalTime += Framework.getDelta();
+			survivalTime += Framework.get().getDelta();
 		}
 
 		if (inputSelect1.wasDown()) {
@@ -252,8 +252,8 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 
 		// The wacky rotation effect on run.
 		float as = Math.min((Math.abs(currentSpeedY) + Math.abs(currentSpeedZ)) / PLAYER_SPEED, 1.0f) + Math.min(9.0f * Math.abs(currentSpeedUp), 1.0f);
-		float rx = as * 15.0f * (float) (Math.sin(0.25 * 15.0f * Framework.getTimeSec()) - Math.sin(1.2 * 15.0f * Framework.getTimeSec()) + Math.cos(0.5 * 15.0f * Framework.getTimeSec()));
-		float rz = as * 15.0f * (float) (Math.cos(0.25 * 15.0f * Framework.getTimeSec()) - Math.cos(1.2 * 15.0f * Framework.getTimeSec()) + Math.sin(0.5 * 15.0f * Framework.getTimeSec()));
+		float rx = as * 15.0f * (float) (Math.sin(0.25 * 15.0f * Framework.get().getTimeSec()) - Math.sin(1.2 * 15.0f * Framework.get().getTimeSec()) + Math.cos(0.5 * 15.0f * Framework.get().getTimeSec()));
+		float rz = as * 15.0f * (float) (Math.cos(0.25 * 15.0f * Framework.get().getTimeSec()) - Math.cos(1.2 * 15.0f * Framework.get().getTimeSec()) + Math.sin(0.5 * 15.0f * Framework.get().getTimeSec()));
 
 		// Moves and rotates the player.
 		Vector3f.rotate(new Vector3f(0.0f, currentRadius, 0.0f), new Vector3f(0.0f, currentY, currentZ), getEntity().getPosition());

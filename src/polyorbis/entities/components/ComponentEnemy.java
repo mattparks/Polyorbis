@@ -59,7 +59,7 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 			return;
 		}
 
-		float delta = Math.min(1.0f / 60.0f, Framework.getDelta());
+		float delta = Math.min(1.0f / 60.0f, Framework.get().getDelta());
 
 		if (health <= 0.0f && !killed) {
 			ComponentPlayer player = PolyWorld.get().getEntityPlayer() == null ? null : (ComponentPlayer) PolyWorld.get().getEntityPlayer().getComponent(ComponentPlayer.class);
@@ -73,7 +73,7 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 		}
 
 		if (!killed) {
-			shootTime += Framework.getDelta();
+			shootTime += Framework.get().getDelta();
 
 			if (shootTime > 3.2f) {
 				if (PolyWorld.get().getEntityPlayer() != null) {
@@ -115,14 +115,14 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 
 			// The wacky rotation effect on run.
 			float as = Math.min(Math.abs(direction.y) + Math.abs(direction.z), 1.0f);
-			float rx = as * 15.0f * (float) (Math.sin(0.25 * 15.0f * Framework.getTimeSec()) - Math.sin(1.2 * 15.0f * Framework.getTimeSec()) + Math.cos(0.5 * 15.0f * Framework.getTimeSec()));
-			float rz = as * 15.0f * (float) (Math.cos(0.25 * 15.0f * Framework.getTimeSec()) - Math.cos(1.2 * 15.0f * Framework.getTimeSec()) + Math.sin(0.5 * 15.0f * Framework.getTimeSec()));
+			float rx = as * 15.0f * (float) (Math.sin(0.25 * 15.0f * Framework.get().getTimeSec()) - Math.sin(1.2 * 15.0f * Framework.get().getTimeSec()) + Math.cos(0.5 * 15.0f * Framework.get().getTimeSec()));
+			float rz = as * 15.0f * (float) (Math.cos(0.25 * 15.0f * Framework.get().getTimeSec()) - Math.cos(1.2 * 15.0f * Framework.get().getTimeSec()) + Math.sin(0.5 * 15.0f * Framework.get().getTimeSec()));
 
 			// Moves and rotates the player.
 			Vector3f right = new Vector3f(direction).scale((reverse ? -1.0f : 1.0f) * SPEED * delta);
 			Vector3f.add(rotation, right, rotation);
 
-			reverseTime += Framework.getDelta();
+			reverseTime += Framework.get().getDelta();
 
 			if (rotation.z <= 20.0f || rotation.z >= 160.0f) {
 				if (reverseTime > 3.0f) {

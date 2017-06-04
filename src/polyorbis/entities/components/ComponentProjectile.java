@@ -63,7 +63,7 @@ public class ComponentProjectile extends IComponentEntity implements IComponentE
 			return;
 		}
 
-		spentTime += Framework.getDelta();
+		spentTime += Framework.get().getDelta();
 
 		if (spentTime > timeout) {
 			getEntity().remove();
@@ -96,9 +96,9 @@ public class ComponentProjectile extends IComponentEntity implements IComponentE
 			}
 		}
 
-		Vector3f right = new Vector3f(direction).scale(360.0f * Framework.getDelta());
-		right.y -= deviation * 100.0f * Math.cos(Math.PI * randomness * Framework.getTimeSec()) * Framework.getDelta();
-		right.z += deviation * 100.0f * Math.sin(Math.PI * randomness * Framework.getTimeSec()) * Framework.getDelta();
+		Vector3f right = new Vector3f(direction).scale(360.0f * Framework.get().getDelta());
+		right.y -= deviation * 100.0f * Math.cos(Math.PI * randomness * Framework.get().getTimeSec()) * Framework.get().getDelta();
+		right.z += deviation * 100.0f * Math.sin(Math.PI * randomness * Framework.get().getTimeSec()) * Framework.get().getDelta();
 
 		if (rotation.z <= 20.0f || rotation.z >= 160.0f) {
 			getEntity().remove();

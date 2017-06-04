@@ -41,7 +41,7 @@ public class ComponentRotate extends IComponentEntity implements IComponentEdito
 			return;
 		}
 
-		Vector3f.add(getEntity().getRotation(), new Vector3f(axis).scale(speed * 360.0f * Framework.getDelta()), getEntity().getRotation());
+		Vector3f.add(getEntity().getRotation(), new Vector3f(axis).scale(speed * 360.0f * Framework.get().getDelta()), getEntity().getRotation());
 		getEntity().setMoved();
 	}
 

@@ -47,8 +47,8 @@ public class OverlayDebug extends ScreenObject {
 	@Override
 	public void updateObject() {
 		if (updateText) {
-			fpsText.setText("FPS: " + Maths.roundToPlace(1.0f / Framework.getDeltaRender(), 1));
-			upsText.setText("UPS: " + Maths.roundToPlace(1.0f / Framework.getDelta(), 1));
+			fpsText.setText("FPS: " + Maths.roundToPlace(1.0f / Framework.get().getDeltaRender(), 1));
+			upsText.setText("UPS: " + Maths.roundToPlace(1.0f / Framework.get().getDelta(), 1));
 
 			rotationText.setText("ROTATION: [" + (PolyWorld.get().getEntityPlayer() == null ? "NULL" : "0.0, " + Maths.roundToPlace(((ComponentPlayer) PolyWorld.get().getEntityPlayer().getComponent(ComponentPlayer.class)).getCurrentY(), 1) + ", " + Maths.roundToPlace(((ComponentPlayer) PolyWorld.get().getEntityPlayer().getComponent(ComponentPlayer.class)).getCurrentZ(), 1) + "]"));
 			updateText = false;

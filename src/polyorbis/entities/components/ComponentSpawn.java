@@ -51,15 +51,15 @@ public class ComponentSpawn extends IComponentEntity implements IComponentEditor
 
 		// After waiting for the player to make the first move...
 		if (targetTime == -1.0f && ((ComponentPlayer) PolyWorld.get().getEntityPlayer().getComponent(ComponentPlayer.class)).getSurvivalTime() != 0.0f) {
-			this.targetTime = Framework.getTimeSec() + Maths.randomInRange(2.0f, 4.0f);
+			this.targetTime = Framework.get().getTimeSec() + Maths.randomInRange(2.0f, 4.0f);
 		}
 
-		if (targetTime != -1.0f && Framework.getTimeSec() - targetTime > 0.0f) {
+		if (targetTime != -1.0f && Framework.get().getTimeSec() - targetTime > 0.0f) {
 			int current = 0;
 
 			int maxAllowed = 1;
 
-			this.targetTime = Framework.getTimeSec() + Maths.randomInRange(3.0f, 10.0f / (float) maxAllowed);
+			this.targetTime = Framework.get().getTimeSec() + Maths.randomInRange(3.0f, 10.0f / (float) maxAllowed);
 
 			switch ((int) Maths.randomInRange(0.0f, 3.0f)) {
 				case 0:
