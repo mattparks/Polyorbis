@@ -63,16 +63,16 @@ public class InstancePlanet extends Entity {
 		new ComponentModel(this, 6.3f, false, MODEL, TEXTURE, 1);
 		new ComponentSurface(this, 1.0f, 0.0f, false, false, true);
 
-		for (int i = 0; i < PINE_SPAWNS.length; i++) {
-			new InstancePine(structure, PINE_SPAWNS[i], 6.3f);
+		for (Vector3f PINE_SPAWN : PINE_SPAWNS) {
+			new InstancePine(structure, PINE_SPAWN, 6.3f);
 		}
 
-		for (int i = 0; i < BIRCH_SPAWNS.length; i++) {
-			new InstanceBirch(structure, BIRCH_SPAWNS[i], 6.3f);
+		for (Vector3f BIRCH_SPAWN : BIRCH_SPAWNS) {
+			new InstanceBirch(structure, BIRCH_SPAWN, 6.3f);
 		}
 
-		for (int i = 0; i < CACTUS_SPAWNS.length; i++) {
-			new InstanceCactus(structure, CACTUS_SPAWNS[i], 6.3f);
+		for (Vector3f CACTUS_SPAWN : CACTUS_SPAWNS) {
+			new InstanceCactus(structure, CACTUS_SPAWN, 6.3f);
 		}
 	}
 }

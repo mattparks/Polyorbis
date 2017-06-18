@@ -20,12 +20,7 @@ public class ScreenSettingPost extends ScreenObject {
 				toggleEffects.setText("Post Enabled: " + newValue);
 			}
 		});
-		toggleEffects.addLeftListener(new ScreenListener() {
-			@Override
-			public void eventOccurred() {
-				PolyPost.get().setEffectsEnabled(!PolyPost.get().isEffectsEnabled());
-			}
-		});
+		toggleEffects.addLeftListener(() -> PolyPost.get().setEffectsEnabled(!PolyPost.get().isEffectsEnabled()));
 
 		// Toggle Bloom.
 		GuiButtonText toggleBloom = new GuiButtonText(this, new Vector2f(0.5f, 0.27f), "Bloom Enabled: ", GuiAlign.CENTRE);
@@ -35,12 +30,7 @@ public class ScreenSettingPost extends ScreenObject {
 				toggleBloom.setText("Bloom Enabled: " + newValue);
 			}
 		});
-		toggleBloom.addLeftListener(new ScreenListener() {
-			@Override
-			public void eventOccurred() {
-				PolyPost.get().setBloomEnabled(!PolyPost.get().isBloomEnabled());
-			}
-		});
+		toggleBloom.addLeftListener(() -> PolyPost.get().setBloomEnabled(!PolyPost.get().isBloomEnabled()));
 
 		// Toggle Motion Blur.
 		GuiButtonText toggleMotionBlur = new GuiButtonText(this, new Vector2f(0.5f, 0.34f), "Motion Blur Enabled: ", GuiAlign.CENTRE);
@@ -50,12 +40,7 @@ public class ScreenSettingPost extends ScreenObject {
 				toggleMotionBlur.setText("Motion Blur Enabled: " + newValue);
 			}
 		});
-		toggleMotionBlur.addLeftListener(new ScreenListener() {
-			@Override
-			public void eventOccurred() {
-				PolyPost.get().setMotionBlurEnabled(!PolyPost.get().isMotionBlurEnabled());
-			}
-		});
+		toggleMotionBlur.addLeftListener(() -> PolyPost.get().setMotionBlurEnabled(!PolyPost.get().isMotionBlurEnabled()));
 
 		// Toggle Tilt Shift.
 		GuiButtonText toggleTiltShift = new GuiButtonText(this, new Vector2f(0.5f, 0.41f), "Tilt Shift Enabled: ", GuiAlign.CENTRE);
@@ -65,12 +50,7 @@ public class ScreenSettingPost extends ScreenObject {
 				toggleTiltShift.setText("Tilt Shift Enabled: " + newValue);
 			}
 		});
-		toggleTiltShift.addLeftListener(new ScreenListener() {
-			@Override
-			public void eventOccurred() {
-				PolyPost.get().setTiltShiftEnabled(!PolyPost.get().isTiltShiftEnabled());
-			}
-		});
+		toggleTiltShift.addLeftListener(() -> PolyPost.get().setTiltShiftEnabled(!PolyPost.get().isTiltShiftEnabled()));
 
 		// Toggle Lens Flare.
 		GuiButtonText toggleLensFlare = new GuiButtonText(this, new Vector2f(0.5f, 0.48f), "Lens Flare Enabled: ", GuiAlign.CENTRE);
@@ -80,12 +60,7 @@ public class ScreenSettingPost extends ScreenObject {
 				toggleLensFlare.setText("Lens Flare Enabled: " + newValue);
 			}
 		});
-		toggleLensFlare.addLeftListener(new ScreenListener() {
-			@Override
-			public void eventOccurred() {
-				PolyPost.get().setLensFlareEnabled(!PolyPost.get().isLensFlareEnabled());
-			}
-		});
+		toggleLensFlare.addLeftListener(() -> PolyPost.get().setLensFlareEnabled(!PolyPost.get().isLensFlareEnabled()));
 
 		// Toggle Effect Grain.
 		GuiButtonText toggleGrain = new GuiButtonText(this, new Vector2f(0.5f, 0.55f), "Grain Enabled: ", GuiAlign.CENTRE);
@@ -95,21 +70,11 @@ public class ScreenSettingPost extends ScreenObject {
 				toggleGrain.setText("Grain Enabled: " + newValue);
 			}
 		});
-		toggleGrain.addLeftListener(new ScreenListener() {
-			@Override
-			public void eventOccurred() {
-				PolyPost.get().setGrainEnabled(!PolyPost.get().isGrainEnabled());
-			}
-		});
+		toggleGrain.addLeftListener(() -> PolyPost.get().setGrainEnabled(!PolyPost.get().isGrainEnabled()));
 
 		// Back.
 		GuiButtonText back = new GuiButtonText(this, new Vector2f(0.5f, 0.9f), "Back", GuiAlign.CENTRE);
-		back.addLeftListener(new ScreenListener() {
-			@Override
-			public void eventOccurred() {
-				slider.setNewSecondaryScreen(settings);
-			}
-		});
+		back.addLeftListener(() -> slider.setNewSecondaryScreen(settings));
 	}
 
 	@Override

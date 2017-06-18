@@ -21,23 +21,13 @@ public class ScreenSettingControls extends ScreenObject {
 				sliderSensitivity.setText("Sensitivity: " + Maths.roundToPlace(newValue, 2));
 			}
 		});
-		sliderSensitivity.addChangeListener(new ScreenListener() {
-			@Override
-			public void eventOccurred() {
-				PolyCamera.setSensitivity(sliderSensitivity.getProgress());
-			}
-		});
+		sliderSensitivity.addChangeListener(() -> PolyCamera.setSensitivity(sliderSensitivity.getProgress()));
 
 		// Key Select Mouse Reangle.
 
 		// Back.
 		GuiButtonText back = new GuiButtonText(this, new Vector2f(0.5f, 0.9f), "Back", GuiAlign.CENTRE);
-		back.addLeftListener(new ScreenListener() {
-			@Override
-			public void eventOccurred() {
-				slider.setNewSecondaryScreen(settings);
-			}
-		});
+		back.addLeftListener(() -> slider.setNewSecondaryScreen(settings));
 	}
 
 	@Override

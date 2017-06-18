@@ -48,12 +48,7 @@ public class OverlayDeath extends ScreenObject {
 
 		// Restart.
 		GuiButtonText exitToMenu = new GuiButtonText(this, new Vector2f(0.5f, 0.60f), "Try Again", GuiAlign.CENTRE);
-		exitToMenu.addLeftListener(new ScreenListener() {
-			@Override
-			public void eventOccurred() {
-				PolyWorld.get().reset();
-			}
-		});
+		exitToMenu.addLeftListener(() -> PolyWorld.get().reset());
 
 		this.lastData = null;
 	}

@@ -26,43 +26,23 @@ public class ScreenPause extends ScreenObject {
 
 		// Resume.
 		GuiButtonText resumeToMenu = new GuiButtonText(this, new Vector2f(0.5f, yPosition += 1.2f * ySpacing), "Resume Game", GuiAlign.CENTRE);
-		resumeToMenu.addLeftListener(new ScreenListener() {
-			@Override
-			public void eventOccurred() {
-				((PolyGuis) FlounderGuis.get().getGuiMaster()).togglePause(false);
-			}
-		});
+		resumeToMenu.addLeftListener(() -> ((PolyGuis) FlounderGuis.get().getGuiMaster()).togglePause(false));
 
 		// Settings.
 		ScreenSettings screenSettings = new ScreenSettings(slider);
 		screenSettings.setAlphaDriver(new ConstantDriver(0.0f));
 		GuiButtonText settings = new GuiButtonText(this, new Vector2f(0.5f, yPosition += ySpacing), "Settings", GuiAlign.CENTRE);
-		settings.addLeftListener(new ScreenListener() {
-			@Override
-			public void eventOccurred() {
-				slider.setNewSecondaryScreen(screenSettings);
-			}
-		});
+		settings.addLeftListener(() -> slider.setNewSecondaryScreen(screenSettings));
 
 		// About.
 		ScreenAbout screenAbout = new ScreenAbout(slider);
 		screenAbout.setAlphaDriver(new ConstantDriver(0.0f));
 		GuiButtonText about = new GuiButtonText(this, new Vector2f(0.5f, yPosition += ySpacing), "About", GuiAlign.CENTRE);
-		about.addLeftListener(new ScreenListener() {
-			@Override
-			public void eventOccurred() {
-				slider.setNewSecondaryScreen(screenAbout);
-			}
-		});
+		about.addLeftListener(() -> slider.setNewSecondaryScreen(screenAbout));
 
 		// Exit.
 		GuiButtonText exitToMenu = new GuiButtonText(this, new Vector2f(0.5f, yPosition += 1.2f * ySpacing), "Exit To Desktop", GuiAlign.CENTRE);
-		exitToMenu.addLeftListener(new ScreenListener() {
-			@Override
-			public void eventOccurred() {
-				Framework.get().requestClose(false);
-			}
-		});
+		exitToMenu.addLeftListener(() -> Framework.get().requestClose(false));
 	}
 
 	@Override

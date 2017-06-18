@@ -70,7 +70,7 @@ public class ComponentCollect extends IComponentEntity implements IComponentEdit
 	public void dispose() {
 	}
 
-	public static interface Collected {
+	public interface Collected {
 		void action(ComponentPlayer pc);
 	}
 }

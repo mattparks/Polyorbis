@@ -36,12 +36,7 @@ public class OverlayHelp extends ScreenObject {
 
 		// Restart.
 		GuiButtonText exitToMenu = new GuiButtonText(this, new Vector2f(0.5f, 0.87f), "Start Game", GuiAlign.CENTRE);
-		exitToMenu.addLeftListener(new ScreenListener() {
-			@Override
-			public void eventOccurred() {
-				((PolyGuis) FlounderGuis.get().getGuiMaster()).toggleHelp();
-			}
-		});
+		exitToMenu.addLeftListener(() -> ((PolyGuis) FlounderGuis.get().getGuiMaster()).toggleHelp());
 
 		this.lastData = null;
 	}
