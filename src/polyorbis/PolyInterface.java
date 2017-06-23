@@ -39,7 +39,7 @@ public class PolyInterface extends Standard {
 			FlounderSound.get().getMusicPlayer().unpauseTrack();
 		}
 
-		FlounderEvents.get().addEvent(new IEvent() {
+		FlounderEvents.get().addEvent(new EventStandard() {
 			KeyButton screenshot = new KeyButton(GLFW_KEY_F2);
 
 			@Override
@@ -53,7 +53,7 @@ public class PolyInterface extends Standard {
 			}
 		});
 
-		FlounderEvents.get().addEvent(new IEvent() {
+		FlounderEvents.get().addEvent(new EventStandard() {
 			KeyButton fullscreen = new KeyButton(GLFW_KEY_F11);
 
 			@Override
@@ -67,7 +67,7 @@ public class PolyInterface extends Standard {
 			}
 		});
 
-		FlounderEvents.get().addEvent(new IEvent() {
+		FlounderEvents.get().addEvent(new EventStandard() {
 			KeyButton wireframe = new KeyButton(GLFW_KEY_P);
 
 			@Override
@@ -81,7 +81,7 @@ public class PolyInterface extends Standard {
 			}
 		});
 
-		/*FlounderTasks.get().addTask(new IEvent() {
+		/*FlounderTasks.get().addTask(new EventStandard() {
 			KeyButton closeWindow = new KeyButton(GLFW_KEY_DELETE);
 
 			@Override
