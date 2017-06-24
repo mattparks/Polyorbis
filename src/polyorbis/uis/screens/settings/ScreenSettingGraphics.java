@@ -28,6 +28,7 @@ public class ScreenSettingGraphics extends ScreenObject {
 			@Override
 			public void onEvent(Boolean newValue) {
 				toggleAntialiasing.setText("Is Antialiasing: " + newValue);
+			//	toggleAntialiasing.setProgress(newValue);
 			}
 		});
 		toggleAntialiasing.addLeftListener(() -> FlounderDisplay.get().setAntialiasing(!FlounderDisplay.get().isAntialiasing()));
@@ -38,6 +39,7 @@ public class ScreenSettingGraphics extends ScreenObject {
 			@Override
 			public void onEvent(Boolean newValue) {
 				toggleFullscreen.setText("Is Fullscreen: " + newValue);
+			//	toggleFullscreen.setProgress(newValue);
 			}
 		});
 		toggleFullscreen.addLeftListener(() -> FlounderDisplay.get().setFullscreen(!FlounderDisplay.get().isFullscreen()));
@@ -48,6 +50,7 @@ public class ScreenSettingGraphics extends ScreenObject {
 			@Override
 			public void onEvent(Boolean newValue) {
 				toggleVsync.setText("VSync Enabled: " + newValue);
+			//	toggleVsync.setProgress(newValue);
 			}
 		});
 		toggleVsync.addLeftListener(() -> FlounderDisplay.get().setVSync(!FlounderDisplay.get().isVSync()));
@@ -58,6 +61,7 @@ public class ScreenSettingGraphics extends ScreenObject {
 			@Override
 			public void onEvent(Integer newValue) {
 				sliderLimitFPS.setText("FPS Limit: " + (newValue > 1000.0f ? "infinite" : newValue));
+				sliderLimitFPS.setProgress(newValue);
 			}
 		});
 		sliderLimitFPS.addChangeListener(() -> Framework.get().setFpsLimit((int) sliderLimitFPS.getProgress()));
@@ -68,6 +72,7 @@ public class ScreenSettingGraphics extends ScreenObject {
 			@Override
 			public void onEvent(Float newValue) {
 				sliderTextureAnisotropy.setText("Texture Anisotropy: " + Maths.roundToPlace(newValue, 1));
+				sliderTextureAnisotropy.setProgress(newValue);
 			}
 		});
 		sliderTextureAnisotropy.addChangeListener(() -> FlounderTextures.get().setAnisotropyLevel(sliderTextureAnisotropy.getProgress()));
@@ -78,6 +83,7 @@ public class ScreenSettingGraphics extends ScreenObject {
 			@Override
 			public void onEvent(Float newValue) {
 				sliderBrightnessBoost.setText("Brightness Boost: " + Maths.roundToPlace(newValue, 3));
+				sliderBrightnessBoost.setProgress(newValue);
 			}
 		});
 		sliderBrightnessBoost.addChangeListener(() -> FlounderShadows.get().setBrightnessBoost(sliderBrightnessBoost.getProgress()));
@@ -88,6 +94,7 @@ public class ScreenSettingGraphics extends ScreenObject {
 			@Override
 			public void onEvent(Integer newValue) {
 				sliderShadowSize.setText("Shadowmap Size: " + newValue);
+				sliderShadowSize.setProgress(newValue);
 			}
 		});
 		sliderShadowSize.addChangeListener(() -> FlounderShadows.get().setShadowSize((int) sliderShadowSize.getProgress()));
@@ -98,6 +105,7 @@ public class ScreenSettingGraphics extends ScreenObject {
 			@Override
 			public void onEvent(Integer newValue) {
 				sliderShadowPCFs.setText("Shadow PCF Count: " + newValue);
+				sliderShadowPCFs.setProgress(newValue);
 			}
 		});
 		sliderShadowPCFs.addChangeListener(() -> FlounderShadows.get().setShadowPCF((int) sliderShadowPCFs.getProgress()));
@@ -108,6 +116,7 @@ public class ScreenSettingGraphics extends ScreenObject {
 			@Override
 			public void onEvent(Float newValue) {
 				sliderShadowDarkness.setText("Shadow Darkness: " + Maths.roundToPlace(newValue, 2));
+				sliderShadowDarkness.setProgress(newValue);
 			}
 		});
 		sliderShadowDarkness.addChangeListener(() -> FlounderShadows.get().setShadowDarkness(sliderShadowDarkness.getProgress()));
@@ -118,6 +127,7 @@ public class ScreenSettingGraphics extends ScreenObject {
 			@Override
 			public void onEvent(Boolean newValue) {
 				toggleShadowsUnlimited.setText("Shadows Unlimited: " + newValue);
+			//	toggleShadowsUnlimited.setProgress(newValue);
 			}
 		});
 		toggleShadowsUnlimited.addLeftListener(() -> FlounderShadows.get().setRenderUnlimited(!FlounderShadows.get().isRenderUnlimited()));

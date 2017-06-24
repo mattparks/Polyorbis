@@ -19,6 +19,7 @@ public class ScreenSettingAudio extends ScreenObject {
 			@Override
 			public void onEvent(Boolean newValue) {
 				toggleMusic.setText("Music Enabled: " + !newValue);
+			//	toggleMusic.setProgress(newValue);
 			}
 		});
 		toggleMusic.addLeftListener(() -> {
@@ -35,6 +36,7 @@ public class ScreenSettingAudio extends ScreenObject {
 			@Override
 			public void onEvent(Float newValue) {
 				sliderMusicVolume.setText("Music Volume: " + Maths.roundToPlace(newValue, 3));
+				sliderMusicVolume.setProgress(newValue);
 			}
 		});
 		sliderMusicVolume.addChangeListener(() -> FlounderSound.get().getMusicPlayer().setVolume(sliderMusicVolume.getProgress()));
@@ -45,6 +47,7 @@ public class ScreenSettingAudio extends ScreenObject {
 			@Override
 			public void onEvent(Float newValue) {
 				sliderSoundVolume.setText("Sound Volume: " + Maths.roundToPlace(newValue, 3));
+				sliderSoundVolume.setProgress(newValue);
 			}
 		});
 		sliderSoundVolume.addChangeListener(() -> FlounderSound.get().getSourcePool().setSystemVolume(sliderSoundVolume.getProgress()));

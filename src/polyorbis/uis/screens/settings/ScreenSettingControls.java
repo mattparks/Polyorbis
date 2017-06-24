@@ -19,6 +19,7 @@ public class ScreenSettingControls extends ScreenObject {
 			@Override
 			public void onEvent(Float newValue) {
 				sliderSensitivity.setText("Sensitivity: " + Maths.roundToPlace(newValue, 2));
+				sliderSensitivity.setProgress(newValue);
 			}
 		});
 		sliderSensitivity.addChangeListener(() -> PolyCamera.setSensitivity(sliderSensitivity.getProgress()));

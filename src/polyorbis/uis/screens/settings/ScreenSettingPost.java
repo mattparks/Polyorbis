@@ -18,6 +18,7 @@ public class ScreenSettingPost extends ScreenObject {
 			@Override
 			public void onEvent(Boolean newValue) {
 				toggleEffects.setText("Post Enabled: " + newValue);
+			//	toggleEffects.setProgress(newValue);
 			}
 		});
 		toggleEffects.addLeftListener(() -> PolyPost.get().setEffectsEnabled(!PolyPost.get().isEffectsEnabled()));
@@ -28,6 +29,7 @@ public class ScreenSettingPost extends ScreenObject {
 			@Override
 			public void onEvent(Boolean newValue) {
 				toggleBloom.setText("Bloom Enabled: " + newValue);
+			//	toggleBloom.setProgress(newValue);
 			}
 		});
 		toggleBloom.addLeftListener(() -> PolyPost.get().setBloomEnabled(!PolyPost.get().isBloomEnabled()));
@@ -38,6 +40,7 @@ public class ScreenSettingPost extends ScreenObject {
 			@Override
 			public void onEvent(Boolean newValue) {
 				toggleMotionBlur.setText("Motion Blur Enabled: " + newValue);
+			//	toggleMotionBlur.setProgress(newValue);
 			}
 		});
 		toggleMotionBlur.addLeftListener(() -> PolyPost.get().setMotionBlurEnabled(!PolyPost.get().isMotionBlurEnabled()));
@@ -48,6 +51,7 @@ public class ScreenSettingPost extends ScreenObject {
 			@Override
 			public void onEvent(Boolean newValue) {
 				toggleTiltShift.setText("Tilt Shift Enabled: " + newValue);
+			//	toggleTiltShift.setProgress(newValue);
 			}
 		});
 		toggleTiltShift.addLeftListener(() -> PolyPost.get().setTiltShiftEnabled(!PolyPost.get().isTiltShiftEnabled()));
@@ -58,6 +62,7 @@ public class ScreenSettingPost extends ScreenObject {
 			@Override
 			public void onEvent(Boolean newValue) {
 				toggleLensFlare.setText("Lens Flare Enabled: " + newValue);
+			//	toggleLensFlare.setProgress(newValue);
 			}
 		});
 		toggleLensFlare.addLeftListener(() -> PolyPost.get().setLensFlareEnabled(!PolyPost.get().isLensFlareEnabled()));
@@ -68,6 +73,7 @@ public class ScreenSettingPost extends ScreenObject {
 			@Override
 			public void onEvent(Boolean newValue) {
 				toggleGrain.setText("Grain Enabled: " + newValue);
+			//	toggleGrain.setProgress(newValue);
 			}
 		});
 		toggleGrain.addLeftListener(() -> PolyPost.get().setGrainEnabled(!PolyPost.get().isGrainEnabled()));
