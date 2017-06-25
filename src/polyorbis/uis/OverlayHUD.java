@@ -1,5 +1,6 @@
 package polyorbis.uis;
 
+import flounder.events.*;
 import flounder.fonts.*;
 import flounder.guis.*;
 import flounder.maths.*;
@@ -57,13 +58,12 @@ public class OverlayHUD extends ScreenObject {
 		this.statusPower2 = new HudStatus(this, hudTexture, hudProgress, 4, 0.23f, new Colour(0.8f, 0.8f, 0.8f));
 		this.statusPower3 = new HudStatus(this, hudTexture, hudProgress, 5, 0.33f, new Colour(0.8f, 0.8f, 0.8f));
 
-		java.util.Timer timer = new java.util.Timer();
-		timer.schedule(new TimerTask() {
+		FlounderEvents.get().addEvent(new EventTime(1.0f, true) {
 			@Override
-			public void run() {
+			public void onEvent() {
 				updateText = true;
 			}
-		}, 0, 100);
+		});
 	}
 
 	@Override

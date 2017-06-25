@@ -1,5 +1,6 @@
 package polyorbis.uis;
 
+import flounder.events.*;
 import flounder.fonts.*;
 import flounder.framework.*;
 import flounder.guis.*;
@@ -26,13 +27,12 @@ public class OverlayDebug extends ScreenObject {
 		upsText = createStatus("UPS: 0", 0.16f);
 		rotationText = createStatus("ROTATION: [0, 0, 0]", 0.19f);
 
-		Timer timer = new Timer();
-		timer.schedule(new TimerTask() {
+		FlounderEvents.get().addEvent(new EventTime(1.0f, true) {
 			@Override
-			public void run() {
+			public void onEvent() {
 				updateText = true;
 			}
-		}, 0, 100);
+		});
 	}
 
 	private TextObject createStatus(String content, float yPos) {
