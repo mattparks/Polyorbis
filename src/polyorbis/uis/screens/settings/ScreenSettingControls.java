@@ -19,10 +19,10 @@ public class ScreenSettingControls extends ScreenObject {
 			@Override
 			public void onEvent(Float newValue) {
 				sliderSensitivity.setText("Sensitivity: " + Maths.roundToPlace(newValue, 2));
-				sliderSensitivity.setProgress(newValue);
+				sliderSensitivity.setValue(newValue);
 			}
 		});
-		sliderSensitivity.addChangeListener(() -> PolyCamera.setSensitivity(sliderSensitivity.getProgress()));
+		sliderSensitivity.addChangeListener(() -> PolyCamera.setSensitivity(sliderSensitivity.getValue()));
 
 		// Key Select Mouse Reangle.
 

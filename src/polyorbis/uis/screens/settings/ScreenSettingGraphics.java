@@ -28,7 +28,7 @@ public class ScreenSettingGraphics extends ScreenObject {
 			@Override
 			public void onEvent(Boolean newValue) {
 				toggleAntialiasing.setText("Is Antialiasing: " + newValue);
-			//	toggleAntialiasing.setProgress(newValue);
+			//	toggleAntialiasing.setValue(newValue);
 			}
 		});
 		toggleAntialiasing.addLeftListener(() -> FlounderDisplay.get().setAntialiasing(!FlounderDisplay.get().isAntialiasing()));
@@ -39,7 +39,7 @@ public class ScreenSettingGraphics extends ScreenObject {
 			@Override
 			public void onEvent(Boolean newValue) {
 				toggleFullscreen.setText("Is Fullscreen: " + newValue);
-			//	toggleFullscreen.setProgress(newValue);
+			//	toggleFullscreen.setValue(newValue);
 			}
 		});
 		toggleFullscreen.addLeftListener(() -> FlounderDisplay.get().setFullscreen(!FlounderDisplay.get().isFullscreen()));
@@ -50,7 +50,7 @@ public class ScreenSettingGraphics extends ScreenObject {
 			@Override
 			public void onEvent(Boolean newValue) {
 				toggleVsync.setText("VSync Enabled: " + newValue);
-			//	toggleVsync.setProgress(newValue);
+			//	toggleVsync.setValue(newValue);
 			}
 		});
 		toggleVsync.addLeftListener(() -> FlounderDisplay.get().setVSync(!FlounderDisplay.get().isVSync()));
@@ -61,10 +61,10 @@ public class ScreenSettingGraphics extends ScreenObject {
 			@Override
 			public void onEvent(Integer newValue) {
 				sliderLimitFPS.setText("FPS Limit: " + (newValue > 1000.0f ? "infinite" : newValue));
-				sliderLimitFPS.setProgress(newValue);
+				sliderLimitFPS.setValue(newValue);
 			}
 		});
-		sliderLimitFPS.addChangeListener(() -> Framework.get().setFpsLimit((int) sliderLimitFPS.getProgress()));
+		sliderLimitFPS.addChangeListener(() -> Framework.get().setFpsLimit((int) sliderLimitFPS.getValue()));
 
 		// Slider Texture Anisotropy.
 		GuiSliderText sliderTextureAnisotropy = new GuiSliderText(paneLeft, new Vector2f(0.25f, 0.48f), "Texture Anisotropy: ", 0.0f, FlounderPlatform.get().getMaxAnisotropy(), FlounderTextures.get().getAnisotropyLevel(), GuiAlign.CENTRE);
@@ -72,10 +72,10 @@ public class ScreenSettingGraphics extends ScreenObject {
 			@Override
 			public void onEvent(Float newValue) {
 				sliderTextureAnisotropy.setText("Texture Anisotropy: " + Maths.roundToPlace(newValue, 1));
-				sliderTextureAnisotropy.setProgress(newValue);
+				sliderTextureAnisotropy.setValue(newValue);
 			}
 		});
-		sliderTextureAnisotropy.addChangeListener(() -> FlounderTextures.get().setAnisotropyLevel(sliderTextureAnisotropy.getProgress()));
+		sliderTextureAnisotropy.addChangeListener(() -> FlounderTextures.get().setAnisotropyLevel(sliderTextureAnisotropy.getValue()));
 
 		// Slider Brightness Boost.
 		GuiSliderText sliderBrightnessBoost = new GuiSliderText(paneLeft, new Vector2f(0.25f, 0.55f), "Brightness Boost: ", -0.3f, 0.8f, FlounderShadows.get().getBrightnessBoost(), GuiAlign.CENTRE);
@@ -83,10 +83,10 @@ public class ScreenSettingGraphics extends ScreenObject {
 			@Override
 			public void onEvent(Float newValue) {
 				sliderBrightnessBoost.setText("Brightness Boost: " + Maths.roundToPlace(newValue, 3));
-				sliderBrightnessBoost.setProgress(newValue);
+				sliderBrightnessBoost.setValue(newValue);
 			}
 		});
-		sliderBrightnessBoost.addChangeListener(() -> FlounderShadows.get().setBrightnessBoost(sliderBrightnessBoost.getProgress()));
+		sliderBrightnessBoost.addChangeListener(() -> FlounderShadows.get().setBrightnessBoost(sliderBrightnessBoost.getValue()));
 
 		// Slider Shadowmap Size.
 		GuiSliderText sliderShadowSize = new GuiSliderText(paneRight, new Vector2f(0.75f, 0.20f), "Shadowmap Size: ", 512.0f, FlounderFBOs.get().getMaxFBOSize(), FlounderShadows.get().getShadowSize(), GuiAlign.CENTRE);
@@ -94,10 +94,10 @@ public class ScreenSettingGraphics extends ScreenObject {
 			@Override
 			public void onEvent(Integer newValue) {
 				sliderShadowSize.setText("Shadowmap Size: " + newValue);
-				sliderShadowSize.setProgress(newValue);
+				sliderShadowSize.setValue(newValue);
 			}
 		});
-		sliderShadowSize.addChangeListener(() -> FlounderShadows.get().setShadowSize((int) sliderShadowSize.getProgress()));
+		sliderShadowSize.addChangeListener(() -> FlounderShadows.get().setShadowSize((int) sliderShadowSize.getValue()));
 
 		// Slider Shadowmap PCFs.
 		GuiSliderText sliderShadowPCFs = new GuiSliderText(paneRight, new Vector2f(0.75f, 0.27f), "Shadow PCF Count: ", 0.0f, 8.0f, FlounderShadows.get().getShadowPCF(), GuiAlign.CENTRE);
@@ -105,10 +105,10 @@ public class ScreenSettingGraphics extends ScreenObject {
 			@Override
 			public void onEvent(Integer newValue) {
 				sliderShadowPCFs.setText("Shadow PCF Count: " + newValue);
-				sliderShadowPCFs.setProgress(newValue);
+				sliderShadowPCFs.setValue(newValue);
 			}
 		});
-		sliderShadowPCFs.addChangeListener(() -> FlounderShadows.get().setShadowPCF((int) sliderShadowPCFs.getProgress()));
+		sliderShadowPCFs.addChangeListener(() -> FlounderShadows.get().setShadowPCF((int) sliderShadowPCFs.getValue()));
 
 		// Slider Shadowmap Darkness.
 		GuiSliderText sliderShadowDarkness = new GuiSliderText(paneRight, new Vector2f(0.75f, 0.34f), "Shadow Darkness: ", 0.0f, 1.0f, FlounderShadows.get().getShadowDarkness(), GuiAlign.CENTRE);
@@ -116,10 +116,10 @@ public class ScreenSettingGraphics extends ScreenObject {
 			@Override
 			public void onEvent(Float newValue) {
 				sliderShadowDarkness.setText("Shadow Darkness: " + Maths.roundToPlace(newValue, 2));
-				sliderShadowDarkness.setProgress(newValue);
+				sliderShadowDarkness.setValue(newValue);
 			}
 		});
-		sliderShadowDarkness.addChangeListener(() -> FlounderShadows.get().setShadowDarkness(sliderShadowDarkness.getProgress()));
+		sliderShadowDarkness.addChangeListener(() -> FlounderShadows.get().setShadowDarkness(sliderShadowDarkness.getValue()));
 
 		// Toggle Shadowmaps Unlimited.
 		GuiButtonText toggleShadowsUnlimited = new GuiButtonText(paneRight, new Vector2f(0.75f, 0.41f), "Shadows Unlimited: ", GuiAlign.CENTRE);
@@ -127,7 +127,7 @@ public class ScreenSettingGraphics extends ScreenObject {
 			@Override
 			public void onEvent(Boolean newValue) {
 				toggleShadowsUnlimited.setText("Shadows Unlimited: " + newValue);
-			//	toggleShadowsUnlimited.setProgress(newValue);
+			//	toggleShadowsUnlimited.setValue(newValue);
 			}
 		});
 		toggleShadowsUnlimited.addLeftListener(() -> FlounderShadows.get().setRenderUnlimited(!FlounderShadows.get().isRenderUnlimited()));
