@@ -269,6 +269,10 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 		//	getEntity().setMoved();
 	}
 
+	@Override
+	public void dispose() {
+	}
+
 	public Vector2f getRotation() {
 		return new Vector2f(currentY, currentZ);
 	}
@@ -355,9 +359,5 @@ public class ComponentPlayer extends IComponentEntity implements IComponentEdito
 				new String[]{}, // Static variables
 				new String[]{} // Class constructor
 		);
-	}
-
-	@Override
-	public void dispose() {
 	}
 }

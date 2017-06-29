@@ -11,10 +11,8 @@ import polyorbis.world.*;
 import static flounder.platform.Constants.*;
 
 public class PolyGuis extends GuiMaster {
-	private static final Colour COLOUR_PRIMARY = new Colour(0.1f, 0.8f, 0.2f); // Neon Green.
-
 	public static final float SLIDE_TIME = 0.5f;
-
+	private static final Colour COLOUR_PRIMARY = new Colour(0.1f, 0.8f, 0.2f); // Neon Green.
 	private OverlayStartup overlayStartup;
 	private OverlayHelp overlayHelp;
 	private OverlayDebug overlayDebug;
@@ -144,6 +142,34 @@ public class PolyGuis extends GuiMaster {
 		return COLOUR_PRIMARY;
 	}
 
+	@Override
+	public void dispose() {
+
+	}
+
+	@Override
+	public boolean isActive() {
+		return true;
+	}
+
+	public void toggleDeath(boolean open) {
+		if (open) {
+			if (overlayDeath.getAlpha() == 0.0f) {
+				overlayHUD.setAlphaDriver(new SlideDriver(overlayHUD.getAlpha(), 0.0f, SLIDE_TIME));
+				overlayDebug.setAlphaDriver(new SlideDriver(overlayDebug.getAlpha(), 0.0f, SLIDE_TIME));
+				overlaySlider.setAlphaDriver(new SlideDriver(overlaySlider.getAlpha(), 0.0f, SLIDE_TIME));
+				overlayDeath.setAlphaDriver(new SlideDriver(overlayDeath.getAlpha(), 1.0f, SLIDE_TIME));
+			}
+		} else {
+			if (overlayDeath.getAlpha() == 1.0f) {
+				overlayHUD.setAlphaDriver(new SlideDriver(overlayHUD.getAlpha(), 1.0f, SLIDE_TIME));
+				overlayDebug.setAlphaDriver(new SlideDriver(overlayDebug.getAlpha(), 0.0f, SLIDE_TIME));
+				overlaySlider.setAlphaDriver(new SlideDriver(overlaySlider.getAlpha(), 0.0f, SLIDE_TIME));
+				overlayDeath.setAlphaDriver(new SlideDriver(overlayDeath.getAlpha(), 0.0f, SLIDE_TIME));
+			}
+		}
+	}
+
 	public void toggleHelp() {
 		if (overlayDeath.getAlpha() != 0.0f) {
 			return;
@@ -209,24 +235,6 @@ public class PolyGuis extends GuiMaster {
 		}
 	}
 
-	public void toggleDeath(boolean open) {
-		if (open) {
-			if (overlayDeath.getAlpha() == 0.0f) {
-				overlayHUD.setAlphaDriver(new SlideDriver(overlayHUD.getAlpha(), 0.0f, SLIDE_TIME));
-				overlayDebug.setAlphaDriver(new SlideDriver(overlayDebug.getAlpha(), 0.0f, SLIDE_TIME));
-				overlaySlider.setAlphaDriver(new SlideDriver(overlaySlider.getAlpha(), 0.0f, SLIDE_TIME));
-				overlayDeath.setAlphaDriver(new SlideDriver(overlayDeath.getAlpha(), 1.0f, SLIDE_TIME));
-			}
-		} else {
-			if (overlayDeath.getAlpha() == 1.0f) {
-				overlayHUD.setAlphaDriver(new SlideDriver(overlayHUD.getAlpha(), 1.0f, SLIDE_TIME));
-				overlayDebug.setAlphaDriver(new SlideDriver(overlayDebug.getAlpha(), 0.0f, SLIDE_TIME));
-				overlaySlider.setAlphaDriver(new SlideDriver(overlaySlider.getAlpha(), 0.0f, SLIDE_TIME));
-				overlayDeath.setAlphaDriver(new SlideDriver(overlayDeath.getAlpha(), 0.0f, SLIDE_TIME));
-			}
-		}
-	}
-
 	public OverlayHUD getOverlayHUD() {
 		return overlayHUD;
 	}
@@ -249,15 +257,5 @@ public class PolyGuis extends GuiMaster {
 
 	public void setGamehelp(boolean gamehelp) {
 		this.gamehelp = gamehelp;
-	}
-
-	@Override
-	public void dispose() {
-
-	}
-
-	@Override
-	public boolean isActive() {
-		return true;
 	}
 }

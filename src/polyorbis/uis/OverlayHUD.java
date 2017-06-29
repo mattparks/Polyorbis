@@ -11,8 +11,6 @@ import flounder.visual.*;
 import polyorbis.entities.components.*;
 import polyorbis.world.*;
 
-import java.util.*;
-
 public class OverlayHUD extends ScreenObject {
 	private static final Colour POWER_DISABLED = new Colour(0.8f, 0.8f, 0.8f);
 	private static final Colour POWER1_ENABLED = new Colour(0.9f, 1.0f, 0.1f);
@@ -109,10 +107,6 @@ public class OverlayHUD extends ScreenObject {
 		}
 	}
 
-	@Override
-	public void deleteObject() {
-	}
-
 	private static class HudStatus extends ScreenObject {
 		private GuiObject background;
 		private GuiObject foreground;
@@ -147,19 +141,19 @@ public class OverlayHUD extends ScreenObject {
 			this.persentage = newPer;
 		}
 
+		private void bounce() {
+			this.background.setScaleDriver(new BounceDriver(1.0f, 1.2f, 0.8f));
+			this.foreground.setScaleDriver(new BounceDriver(1.0f, 1.2f, 0.8f));
+			this.progress.setScaleDriver(new BounceDriver(1.0f, 1.2f, 0.8f));
+			this.mainIcon.setScaleDriver(new BounceDriver(1.0f, 1.2f, 0.8f));
+		}
+
 		private void setColour(Colour newColour) {
 			if (progress.getColourOffset().lengthSquared() > newColour.lengthSquared()) {
 				bounce();
 			}
 
 			this.progress.getColourOffset().set(newColour);
-		}
-
-		private void bounce() {
-			this.background.setScaleDriver(new BounceDriver(1.0f, 1.2f, 0.8f));
-			this.foreground.setScaleDriver(new BounceDriver(1.0f, 1.2f, 0.8f));
-			this.progress.setScaleDriver(new BounceDriver(1.0f, 1.2f, 0.8f));
-			this.mainIcon.setScaleDriver(new BounceDriver(1.0f, 1.2f, 0.8f));
 		}
 
 		@Override
@@ -171,5 +165,9 @@ public class OverlayHUD extends ScreenObject {
 		@Override
 		public void deleteObject() {
 		}
+	}	@Override
+	public void deleteObject() {
 	}
+
+
 }

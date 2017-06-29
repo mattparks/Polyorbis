@@ -138,6 +138,10 @@ public class ComponentSpawn extends IComponentEntity implements IComponentEditor
 	}
 
 	@Override
+	public void dispose() {
+	}
+
+	@Override
 	public void addToPanel(JPanel panel) {
 	}
 
@@ -151,9 +155,5 @@ public class ComponentSpawn extends IComponentEntity implements IComponentEditor
 				new String[]{}, // Static variables
 				new String[]{} // Class constructor
 		);
-	}
-
-	@Override
-	public void dispose() {
 	}
 }

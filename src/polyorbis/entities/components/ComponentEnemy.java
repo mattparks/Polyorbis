@@ -141,6 +141,10 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 		}
 	}
 
+	@Override
+	public void dispose() {
+	}
+
 	public float getHealth() {
 		return health;
 	}
@@ -164,9 +168,5 @@ public class ComponentEnemy extends IComponentEntity implements IComponentEditor
 				new String[]{}, // Static variables
 				new String[]{} // Class constructor
 		);
-	}
-
-	@Override
-	public void dispose() {
 	}
 }

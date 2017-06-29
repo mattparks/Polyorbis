@@ -42,36 +42,46 @@ public class PolyCamera extends Camera {
 	private static final float MINIMUM_ZOOM = 5.0f;
 	private static final float MAXIMUM_ZOOM = 18.0f;
 	private static final float NORMAL_ZOOM = 8.0f;
-
+	private static float sensitivity;
+	private static int reangleButton;
 	private Vector3f position;
 	private Vector3f rotation;
-
 	private Frustum viewFrustum;
 	private Ray viewRay;
 	private Matrix4f viewMatrix;
 	private Matrix4f projectionMatrix;
-
 	private float angleOfElevation;
 	private float angleAroundPlayer;
-
 	private Vector3f targetPosition;
 	private Vector3f targetRotation;
 	private float targetZoom;
 	private float targetElevation;
 	private float targetRotationAngle;
-
 	private float actualDistanceFromPoint;
 	private float horizontalDistanceFromFocus;
 	private float verticalDistanceFromFocus;
-
-	private static float sensitivity;
-	private static int reangleButton;
 	private JoystickAxis joystickVertical;
 	private JoystickAxis joystickHorizontal;
 	private JoystickButton joystickZoom;
 
 	public PolyCamera() {
 		super(FlounderJoysticks.class, FlounderKeyboard.class, FlounderMouse.class);
+	}
+
+	public static float getSensitivity() {
+		return sensitivity;
+	}
+
+	public static void setSensitivity(float sensitivity) {
+		PolyCamera.sensitivity = sensitivity;
+	}
+
+	public static int getReangleButton() {
+		return reangleButton;
+	}
+
+	public static void setReangleButton(int reangleButton) {
+		PolyCamera.reangleButton = reangleButton;
 	}
 
 	@Handler.Function(Handler.FLAG_INIT)
@@ -270,11 +280,6 @@ public class PolyCamera extends Camera {
 		}
 	}
 
-	private void calculateDistances() {
-		horizontalDistanceFromFocus = (float) (actualDistanceFromPoint * Math.cos(Math.toRadians(angleOfElevation - targetRotation.z)));
-		verticalDistanceFromFocus = (float) (actualDistanceFromPoint * Math.sin(Math.toRadians(angleOfElevation - targetRotation.z)));
-	}
-
 	private void calculatePosition() {
 		double theta = Math.toRadians(angleAroundPlayer + targetRotation.y);
 		position.x = targetPosition.x - (float) (horizontalDistanceFromFocus * Math.sin(theta));
@@ -284,26 +289,6 @@ public class PolyCamera extends Camera {
 		rotation.x = angleOfElevation - targetRotation.z;
 		rotation.y = angleAroundPlayer + targetRotation.y + Maths.DEGREES_IN_HALF_CIRCLE;
 		rotation.z = 0.0f;
-	}
-
-	private void updateViewMatrix() {
-		viewMatrix.setIdentity();
-		position.negate();
-		Matrix4f.rotate(viewMatrix, Matrix4f.REUSABLE_VECTOR.set(1.0f, 0.0f, 0.0f), (float) Math.toRadians(rotation.x), viewMatrix);
-		Matrix4f.rotate(viewMatrix, Matrix4f.REUSABLE_VECTOR.set(0.0f, 1.0f, 0.0f), (float) Math.toRadians(-rotation.y), viewMatrix);
-		Matrix4f.rotate(viewMatrix, Matrix4f.REUSABLE_VECTOR.set(0.0f, 0.0f, 1.0f), (float) Math.toRadians(rotation.z), viewMatrix);
-		Matrix4f.translate(viewMatrix, position, viewMatrix);
-		position.negate();
-	}
-
-	private void updateProjectionMatrix() {
-		Matrix4f.perspectiveMatrix(getFOV(), FlounderDisplay.get().getAspectRatio(), getNearPlane(), getFarPlane(), projectionMatrix);
-	}
-
-	@Override
-	public Matrix4f getViewMatrix() {
-		updateViewMatrix();
-		return viewMatrix;
 	}
 
 	@Override
@@ -319,9 +304,29 @@ public class PolyCamera extends Camera {
 	}
 
 	@Override
+	public Matrix4f getViewMatrix() {
+		updateViewMatrix();
+		return viewMatrix;
+	}
+
+	private void updateViewMatrix() {
+		viewMatrix.setIdentity();
+		position.negate();
+		Matrix4f.rotate(viewMatrix, Matrix4f.REUSABLE_VECTOR.set(1.0f, 0.0f, 0.0f), (float) Math.toRadians(rotation.x), viewMatrix);
+		Matrix4f.rotate(viewMatrix, Matrix4f.REUSABLE_VECTOR.set(0.0f, 1.0f, 0.0f), (float) Math.toRadians(-rotation.y), viewMatrix);
+		Matrix4f.rotate(viewMatrix, Matrix4f.REUSABLE_VECTOR.set(0.0f, 0.0f, 1.0f), (float) Math.toRadians(rotation.z), viewMatrix);
+		Matrix4f.translate(viewMatrix, position, viewMatrix);
+		position.negate();
+	}
+
+	@Override
 	public Matrix4f getProjectionMatrix() {
 		updateProjectionMatrix();
 		return projectionMatrix;
+	}
+
+	private void updateProjectionMatrix() {
+		Matrix4f.perspectiveMatrix(getFOV(), FlounderDisplay.get().getAspectRatio(), getNearPlane(), getFarPlane(), projectionMatrix);
 	}
 
 	@Override
@@ -346,24 +351,13 @@ public class PolyCamera extends Camera {
 		this.rotation.set(rotation);
 	}
 
-	public static float getSensitivity() {
-		return sensitivity;
-	}
-
-	public static void setSensitivity(float sensitivity) {
-		PolyCamera.sensitivity = sensitivity;
-	}
-
-	public static int getReangleButton() {
-		return reangleButton;
-	}
-
-	public static void setReangleButton(int reangleButton) {
-		PolyCamera.reangleButton = reangleButton;
-	}
-
 	@Override
 	public boolean isActive() {
 		return true;
+	}
+
+	private void calculateDistances() {
+		horizontalDistanceFromFocus = (float) (actualDistanceFromPoint * Math.cos(Math.toRadians(angleOfElevation - targetRotation.z)));
+		verticalDistanceFromFocus = (float) (actualDistanceFromPoint * Math.sin(Math.toRadians(angleOfElevation - targetRotation.z)));
 	}
 }

@@ -7,11 +7,6 @@ import flounder.resources.*;
 import polyorbis.camera.*;
 
 public class Polyorbis extends Framework {
-	public static void main(String[] args) {
-		new Polyorbis().run();
-		System.exit(0);
-	}
-
 	public Polyorbis() {
 		super(
 				"polyorbis", new UpdaterDefault(), -1,
@@ -30,5 +25,10 @@ public class Polyorbis extends Framework {
 				PolyConfigs.TEXTURES_ANISOTROPY_MAX.getFloat()
 		));
 		Framework.get().setFpsLimit(PolyConfigs.FRAMEWORK_FPS_LIMIT.getInteger());
+	}
+
+	public static void main(String[] args) {
+		new Polyorbis().run();
+		System.exit(0);
 	}
 }
