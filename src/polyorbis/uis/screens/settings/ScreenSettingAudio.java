@@ -19,7 +19,7 @@ public class ScreenSettingAudio extends ScreenObject {
 			@Override
 			public void onEvent(Boolean newValue) {
 				toggleMusic.setText("Music Enabled: " + !newValue);
-				//	toggleMusic.setValue(newValue);
+			//	toggleMusic.setValue(newValue);
 			}
 		});
 		toggleMusic.addLeftListener(() -> {

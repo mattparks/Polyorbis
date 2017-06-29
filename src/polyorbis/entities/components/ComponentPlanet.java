@@ -64,29 +64,6 @@ public class ComponentPlanet extends IComponentEntity implements IComponentEdito
 		}
 	}
 
-	@Override
-	public void dispose() {
-		if (star != null) {
-			star.forceRemove();
-		}
-
-		if (atmosphere != null) {
-			atmosphere.forceRemove();
-		}
-
-		if (moons != null) {
-			for (Entity moon : moons) {
-				moon.forceRemove();
-			}
-		}
-
-		if (spawnEntities != null) {
-			for (Entity spawn : spawnEntities) {
-				spawn.forceRemove();
-			}
-		}
-	}
-
 	public Entity getStar() {
 		return star;
 	}
@@ -121,5 +98,28 @@ public class ComponentPlanet extends IComponentEntity implements IComponentEdito
 				new String[]{}, // Static variables
 				new String[]{} // Class constructor
 		);
+	}
+
+	@Override
+	public void dispose() {
+		if (star != null) {
+			star.forceRemove();
+		}
+
+		if (atmosphere != null) {
+			atmosphere.forceRemove();
+		}
+
+		if (moons != null) {
+			for (Entity moon : moons) {
+				moon.forceRemove();
+			}
+		}
+
+		if (spawnEntities != null) {
+			for (Entity spawn : spawnEntities) {
+				spawn.forceRemove();
+			}
+		}
 	}
 }

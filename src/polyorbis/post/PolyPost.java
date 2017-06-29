@@ -16,11 +16,6 @@ public class PolyPost extends Module {
 		super();
 	}
 
-	@Module.Instance
-	public static PolyPost get() {
-		return (PolyPost) Framework.get().getInstance(PolyPost.class);
-	}
-
 	@Handler.Function(Handler.FLAG_INIT)
 	public void init() {
 		this.effectsEnabled = PolyConfigs.POST_EFFECTS_ENABLED.getBoolean();
@@ -86,5 +81,10 @@ public class PolyPost extends Module {
 
 	@Handler.Function(Handler.FLAG_DISPOSE)
 	public void dispose() {
+	}
+
+	@Module.Instance
+	public static PolyPost get() {
+		return (PolyPost) Framework.get().getInstance(PolyPost.class);
 	}
 }

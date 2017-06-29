@@ -51,10 +51,6 @@ public class ComponentCollect extends IComponentEntity implements IComponentEdit
 	}
 
 	@Override
-	public void dispose() {
-	}
-
-	@Override
 	public void addToPanel(JPanel panel) {
 	}
 
@@ -68,6 +64,10 @@ public class ComponentCollect extends IComponentEntity implements IComponentEdit
 				new String[]{}, // Static variables
 				new String[]{} // Class constructor
 		);
+	}
+
+	@Override
+	public void dispose() {
 	}
 
 	public interface Collected {

@@ -34,10 +34,6 @@ public class OverlaySlider extends ScreenObject {
 		}
 	}
 
-	@Override
-	public void deleteObject() {
-	}
-
 	public void setNewSecondaryScreen(ScreenObject secondScreen) {
 		if (secondaryScreen == secondScreen || newSecondaryScreen == secondScreen) {
 			return;
@@ -71,5 +67,9 @@ public class OverlaySlider extends ScreenObject {
 
 	public float getBlurFactor() {
 		return getAlpha();
+	}
+
+	@Override
+	public void deleteObject() {
 	}
 }

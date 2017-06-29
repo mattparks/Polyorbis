@@ -28,7 +28,7 @@ public class ScreenSettingGraphics extends ScreenObject {
 			@Override
 			public void onEvent(Boolean newValue) {
 				toggleAntialiasing.setText("Is Antialiasing: " + newValue);
-				//	toggleAntialiasing.setValue(newValue);
+			//	toggleAntialiasing.setValue(newValue);
 			}
 		});
 		toggleAntialiasing.addLeftListener(() -> FlounderDisplay.get().setAntialiasing(!FlounderDisplay.get().isAntialiasing()));
@@ -39,7 +39,7 @@ public class ScreenSettingGraphics extends ScreenObject {
 			@Override
 			public void onEvent(Boolean newValue) {
 				toggleFullscreen.setText("Is Fullscreen: " + newValue);
-				//	toggleFullscreen.setValue(newValue);
+			//	toggleFullscreen.setValue(newValue);
 			}
 		});
 		toggleFullscreen.addLeftListener(() -> FlounderDisplay.get().setFullscreen(!FlounderDisplay.get().isFullscreen()));
@@ -50,7 +50,7 @@ public class ScreenSettingGraphics extends ScreenObject {
 			@Override
 			public void onEvent(Boolean newValue) {
 				toggleVsync.setText("VSync Enabled: " + newValue);
-				//	toggleVsync.setValue(newValue);
+			//	toggleVsync.setValue(newValue);
 			}
 		});
 		toggleVsync.addLeftListener(() -> FlounderDisplay.get().setVSync(!FlounderDisplay.get().isVSync()));
@@ -127,7 +127,7 @@ public class ScreenSettingGraphics extends ScreenObject {
 			@Override
 			public void onEvent(Boolean newValue) {
 				toggleShadowsUnlimited.setText("Shadows Unlimited: " + newValue);
-				//	toggleShadowsUnlimited.setValue(newValue);
+			//	toggleShadowsUnlimited.setValue(newValue);
 			}
 		});
 		toggleShadowsUnlimited.addLeftListener(() -> FlounderShadows.get().setRenderUnlimited(!FlounderShadows.get().isRenderUnlimited()));

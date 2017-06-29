@@ -110,10 +110,6 @@ public class ComponentProjectile extends IComponentEntity implements IComponentE
 	}
 
 	@Override
-	public void dispose() {
-	}
-
-	@Override
 	public void addToPanel(JPanel panel) {
 	}
 
@@ -127,5 +123,9 @@ public class ComponentProjectile extends IComponentEntity implements IComponentE
 				new String[]{}, // Static variables
 				new String[]{} // Class constructor
 		);
+	}
+
+	@Override
+	public void dispose() {
 	}
 }

@@ -16,10 +16,6 @@ import polyorbis.entities.components.*;
 import polyorbis.entities.instances.*;
 
 public class PolyWorld extends Module {
-	public static final Colour SUN_COLOUR = new Colour(0.75f, 0.75f, 0.75f);
-	public static final Colour MOON_COLOUR = new Colour(0.2f, 0.2f, 0.4f);
-	public static final float DAY_NIGHT_CYCLE = 175.0f; // The day/night length (sec).
-	private static final Vector3f LIGHT_DIRECTION = new Vector3f(0.3f, 0.05f, 0.3f); // The starting light direction.
 	private static MyFile[] SKYBOX_TEXTURE_FILES = {
 			new MyFile(FlounderSkybox.SKYBOX_FOLDER, "starsRight.png"),
 			new MyFile(FlounderSkybox.SKYBOX_FOLDER, "starsLeft.png"),
@@ -28,6 +24,15 @@ public class PolyWorld extends Module {
 			new MyFile(FlounderSkybox.SKYBOX_FOLDER, "starsBack.png"),
 			new MyFile(FlounderSkybox.SKYBOX_FOLDER, "starsFront.png")
 	};
+
+	public static final Colour SUN_COLOUR = new Colour(0.75f, 0.75f, 0.75f);
+
+	public static final Colour MOON_COLOUR = new Colour(0.2f, 0.2f, 0.4f);
+
+	public static final float DAY_NIGHT_CYCLE = 175.0f; // The day/night length (sec).
+
+	private static final Vector3f LIGHT_DIRECTION = new Vector3f(0.3f, 0.05f, 0.3f); // The starting light direction.
+
 	private Entity entityPlayer;
 	private Entity entityPlanet;
 
@@ -41,11 +46,6 @@ public class PolyWorld extends Module {
 
 	public PolyWorld() {
 		super(FlounderEntities.class);
-	}
-
-	@Module.Instance
-	public static PolyWorld get() {
-		return (PolyWorld) Framework.get().getInstance(PolyWorld.class);
 	}
 
 	@Handler.Function(Handler.FLAG_INIT)
@@ -74,16 +74,6 @@ public class PolyWorld extends Module {
 		reset();
 	}
 
-	public void reset() {
-		FlounderEntities.get().getEntities().foreach(Entity::forceRemove);
-
-		FlounderParticles.get().clear();
-
-		this.entityPlayer = new InstancePlayer(FlounderEntities.get().getEntities(), new Vector3f(0.0f, 0.0f, 0.0f), new Vector3f());
-		this.entityPlanet = new InstancePlanet(FlounderEntities.get().getEntities(), new Vector3f(0.0f, 0.0f, 0.0f), new Vector3f());
-		this.endGameData = null;
-	}
-
 	@Handler.Function(Handler.FLAG_UPDATE_PRE)
 	public void update() {
 		// Update the sky colours and sun position.
@@ -98,22 +88,14 @@ public class PolyWorld extends Module {
 		}
 	}
 
-	public int calculateScore(Entity player) {
-		if (player == null) {
-			return -1;
-		}
+	public void reset() {
+		FlounderEntities.get().getEntities().foreach(Entity::forceRemove);
 
-		ComponentPlayer p = (ComponentPlayer) player.getComponent(ComponentPlayer.class);
+		FlounderParticles.get().clear();
 
-		if (p != null) {
-			return calculateScore(p.getExperience(), p.getSurvivalTime());
-		}
-
-		return -1;
-	}
-
-	public int calculateScore(int experience, float survivalTime) {
-		return experience + (int) (0.1862f * survivalTime);
+		this.entityPlayer = new InstancePlayer(FlounderEntities.get().getEntities(), new Vector3f(0.0f, 0.0f, 0.0f), new Vector3f());
+		this.entityPlanet = new InstancePlanet(FlounderEntities.get().getEntities(), new Vector3f(0.0f, 0.0f, 0.0f), new Vector3f());
+		this.endGameData = null;
 	}
 
 	public Entity getEntityPlayer() {
@@ -164,6 +146,24 @@ public class PolyWorld extends Module {
 		}
 	}
 
+	public int calculateScore(Entity player) {
+		if (player == null) {
+			return -1;
+		}
+
+		ComponentPlayer p = (ComponentPlayer) player.getComponent(ComponentPlayer.class);
+
+		if (p != null) {
+			return calculateScore(p.getExperience(), p.getSurvivalTime());
+		}
+
+		return -1;
+	}
+
+	public int calculateScore(int experience, float survivalTime) {
+		return experience + (int) (0.1862f * survivalTime);
+	}
+
 	public PlayData getEndGameData() {
 		return this.endGameData;
 	}
@@ -184,7 +184,13 @@ public class PolyWorld extends Module {
 		this.atmosphere = atmosphere;
 	}
 
+
 	@Handler.Function(Handler.FLAG_DISPOSE)
 	public void dispose() {
+	}
+
+	@Module.Instance
+	public static PolyWorld get() {
+		return (PolyWorld) Framework.get().getInstance(PolyWorld.class);
 	}
 }

@@ -10,6 +10,9 @@ import flounder.visual.*;
 import polyorbis.entities.components.*;
 import polyorbis.world.*;
 
+import java.util.Timer;
+import java.util.*;
+
 public class OverlayDebug extends ScreenObject {
 	private TextObject fpsText;
 	private TextObject upsText;

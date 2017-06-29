@@ -14,10 +14,10 @@ import flounder.textures.*;
 import polyorbis.entities.components.*;
 
 public class InstanceEnemy extends Entity {
-	protected final static Sound SOUND_DAMAGE = Sound.loadSoundInBackground(new MyFile(FlounderSound.SOUND_FOLDER, "damage.wav"), 0.8f, 1.0f);
 	private static final ModelObject MODEL = ModelFactory.newBuilder().setFile(new MyFile(FlounderEntities.ENTITIES_FOLDER, "enemy", "model.obj")).create();
 	private static final TextureObject TEXTURE = TextureFactory.newBuilder().setFile(new MyFile(FlounderEntities.ENTITIES_FOLDER, "enemy", "diffuse.png")).setNumberOfRows(1).create();
 	private static final TextureObject TEXTURE_GLOW = TextureFactory.newBuilder().setFile(new MyFile(FlounderEntities.ENTITIES_FOLDER, "enemy", "glow.png")).setNumberOfRows(1).create();
+	protected final static Sound SOUND_DAMAGE = Sound.loadSoundInBackground(new MyFile(FlounderSound.SOUND_FOLDER, "damage.wav"), 0.8f, 1.0f);
 
 	public InstanceEnemy(ISpatialStructure<Entity> structure, Vector3f rotation, float radius) {
 		super(structure, Vector3f.rotate(new Vector3f(0.0f, radius, 0.0f), rotation, null), new Vector3f(0.0f, rotation.y, rotation.z));

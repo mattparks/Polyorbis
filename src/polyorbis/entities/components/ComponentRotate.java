@@ -45,10 +45,6 @@ public class ComponentRotate extends IComponentEntity implements IComponentEdito
 		getEntity().setMoved();
 	}
 
-	@Override
-	public void dispose() {
-	}
-
 	public float getSpeed() {
 		return speed;
 	}
@@ -67,5 +63,9 @@ public class ComponentRotate extends IComponentEntity implements IComponentEdito
 				new String[]{}, // Static variables
 				new String[]{} // Class constructor
 		);
+	}
+
+	@Override
+	public void dispose() {
 	}
 }
