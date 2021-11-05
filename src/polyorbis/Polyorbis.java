@@ -1,9 +1,11 @@
 package polyorbis;
 
+import flounder.devices.FlounderDisplay;
 import flounder.framework.*;
 import flounder.framework.updater.*;
-import flounder.lwjgl3.*;
 import flounder.resources.*;
+import flounder.textures.*;
+import org.lwjgl.glfw.GLFW;
 import polyorbis.camera.*;
 
 public class Polyorbis extends Framework {
@@ -14,21 +16,8 @@ public class Polyorbis extends Framework {
 
 	public Polyorbis() {
 		super(
-				"polyorbis", new UpdaterDefault(), -1,
+				"polyorbis", new UpdaterDefault(GLFW::glfwGetTime), -1,
 				new Extension[]{new PolyInterface(), new PolyRenderer(), new PolyCamera(), new PolyPlayer(), new PolyGuis()}
 		);
-		Framework.get().addOverrides(new PlatformLwjgl(
-				PolyConfigs.DISPLAY_WIDTH.getInteger(),
-				PolyConfigs.DISPLAY_HEIGHT.getInteger(),
-				"Polyorbis", new MyFile[]{new MyFile(MyFile.RES_FOLDER, "icon", "icon.png")},
-				PolyConfigs.DISPLAY_VSYNC.getBoolean(),
-				PolyConfigs.DISPLAY_ANTIALIAS.getBoolean(),
-				0,
-				PolyConfigs.DISPLAY_FULLSCREEN.getBoolean(),
-				false,
-				false,
-				PolyConfigs.TEXTURES_ANISOTROPY_MAX.getFloat()
-		));
-		Framework.get().setFpsLimit(PolyConfigs.FRAMEWORK_FPS_LIMIT.getInteger());
 	}
 }

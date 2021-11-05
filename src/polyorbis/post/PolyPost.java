@@ -3,7 +3,7 @@ package polyorbis.post;
 import flounder.framework.*;
 import polyorbis.*;
 
-public class PolyPost extends Module {
+public class PolyPost extends flounder.framework.Module {
 	private boolean effectsEnabled;
 
 	private boolean bloomEnabled;
@@ -83,8 +83,8 @@ public class PolyPost extends Module {
 	public void dispose() {
 	}
 
-	@Module.Instance
+	@flounder.framework.Module.Instance
 	public static PolyPost get() {
-		return (PolyPost) Framework.get().getInstance(PolyPost.class);
+		return (PolyPost) Framework.get().getModule(PolyPost.class);
 	}
 }

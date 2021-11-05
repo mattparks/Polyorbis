@@ -15,7 +15,7 @@ import polyorbis.*;
 import polyorbis.entities.components.*;
 import polyorbis.entities.instances.*;
 
-public class PolyWorld extends Module {
+public class PolyWorld extends flounder.framework.Module {
 	private static MyFile[] SKYBOX_TEXTURE_FILES = {
 			new MyFile(FlounderSkybox.SKYBOX_FOLDER, "starsRight.png"),
 			new MyFile(FlounderSkybox.SKYBOX_FOLDER, "starsLeft.png"),
@@ -191,8 +191,8 @@ public class PolyWorld extends Module {
 	public void dispose() {
 	}
 
-	@Module.Instance
+	@flounder.framework.Module.Instance
 	public static PolyWorld get() {
-		return (PolyWorld) Framework.get().getInstance(PolyWorld.class);
+		return (PolyWorld) Framework.get().getModule(PolyWorld.class);
 	}
 }

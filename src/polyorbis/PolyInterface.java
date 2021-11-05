@@ -2,17 +2,19 @@ package polyorbis;
 
 import flounder.devices.*;
 import flounder.events.*;
+import flounder.framework.*;
 import flounder.guis.*;
-import flounder.helpers.*;
 import flounder.inputs.*;
 import flounder.networking.*;
 import flounder.particles.*;
+import flounder.renderer.*;
 import flounder.resources.*;
 import flounder.shadows.*;
 import flounder.skybox.*;
 import flounder.sounds.*;
 import flounder.standards.*;
 import flounder.tasks.*;
+import flounder.textures.*;
 import polyorbis.post.*;
 import polyorbis.world.*;
 
@@ -27,6 +29,17 @@ public class PolyInterface extends Standard {
 
 	@Override
 	public void init() {
+		Framework.get().setFpsLimit(PolyConfigs.FRAMEWORK_FPS_LIMIT.getInteger());
+		FlounderTextures.get().setAnisotropyLevel(PolyConfigs.TEXTURES_ANISOTROPY_MAX.getFloat());
+		FlounderDisplay.get().setWindowSize(PolyConfigs.DISPLAY_WIDTH.getInteger(), PolyConfigs.DISPLAY_HEIGHT.getInteger());
+		FlounderDisplay.get().setTitle("Polyorbis");
+		FlounderDisplay.get().setIcons(new MyFile[]{new MyFile(MyFile.RES_FOLDER, "icon", "icon.png")});
+		FlounderDisplay.get().setVSync(PolyConfigs.DISPLAY_VSYNC.getBoolean());
+		FlounderDisplay.get().setAntialiasing(PolyConfigs.DISPLAY_ANTIALIAS.getBoolean());
+		FlounderDisplay.get().setSamples(0);
+		FlounderDisplay.get().setFullscreen(PolyConfigs.DISPLAY_FULLSCREEN.getBoolean());
+		FlounderDisplay.get().setHidden(false);
+
 		FlounderSound.get().getMusicPlayer().setVolume(PolyConfigs.MUSIC_VOLUME.setReference(() -> FlounderSound.get().getMusicPlayer().getVolume()).getFloat());
 		FlounderSound.get().getSourcePool().setSystemVolume(PolyConfigs.SOUND_VOLUME.setReference(() -> FlounderSound.get().getSourcePool().getSystemVolume()).getFloat());
 
