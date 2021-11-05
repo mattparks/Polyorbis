@@ -1,5 +1,10 @@
-.idea/
 out/
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
 *.class
 
 # Mobile Tools for Java (J2ME)
